@@ -6,7 +6,7 @@ export default class RestaurantsDAO {
       return
     }
     try {
-      restaurants = await conn.db(pross.env.REVIEWS_NS).collection("restaurants");
+      restaurants = await conn.db(process.env.REVIEWS_NS).collection("restaurants");
     } catch (err) {
       console.error(`Unable to establish a collection handle in restaurantsDAO: ${err}`);
     };
