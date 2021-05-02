@@ -10,7 +10,7 @@
     "server:debug": "nodemon --inspect index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "TJ Taylor",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
