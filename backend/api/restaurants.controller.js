@@ -48,5 +48,14 @@ export default class RestaurantsController {
     };
   };
 
-  
+  static async apiGetRestaurantCuisines(req, res, next) {
+    try {
+      const cuisines = await RestaurantsDAO.getCuisines();
+
+      res.json(cuisines);
+    } catch (err) {
+      console.error(`api, ${err}`);
+      res.status(500).json({ error: err });
+    };
+  };
 };
