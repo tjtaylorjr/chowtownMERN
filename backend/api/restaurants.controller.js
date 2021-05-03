@@ -30,4 +30,23 @@ export default class RestaurantsController {
 
     res.json(response);
   };
+
+  static async apiGetRestaurantsById(req, res, next) {
+    try {
+      const id = req.params.id || {};
+      const restaurant = await RestaurantsDAO.getRestaurantsById(id);
+
+      if(!restaurant) {
+        res.status(404).json({ error: "Not found" });
+        return;
+      }
+
+      res.json(restaurant);
+    } catch (err) {
+      console.error(`api, ${err}`);
+      res.status(500).json({ error: err });
+    };
+  };
+
+  
 };
