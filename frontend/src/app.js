@@ -42,6 +42,38 @@ const App = () => {
           </li>
         </div>
       </nav>
+      <div className="main-page">
+        <Switch>
+          <Route
+            exact path={["/", "/restaurants"]}
+            component={RestaurantsList}
+          />
+          <Route
+            path="/restaurants/:id/review"
+            render={(props) => (
+              <Review {...props} user={user} />
+            )}
+          />
+          <Route
+            path="/restaurants/:id"
+            render={(props) => (
+              <Restaurant {...props} user={user} />
+            )}
+          />
+          <Route
+            path="/login"
+            render={(props) => (
+              <Login {...props} user={user} />
+            )}
+          />
+          <Route
+            path="/signup"
+            render={(props) => (
+              <Signup {...props} user={user} />
+            )}
+          />
+        </Switch>
+      </div>
     </div>
   );
 }
