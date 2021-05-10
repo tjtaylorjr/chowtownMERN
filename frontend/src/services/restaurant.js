@@ -4,6 +4,9 @@ export const getAllRestaurants = async(page = 0) => {
     const res = await fetch(`/api/v1/restaurants?page=${page}`,{
       "Content-type": "application/json",
     });
+    if (!res.ok) {
+      throw res;
+    }
     const payload = await res.json();
     return payload;
   } catch (err) {
@@ -16,6 +19,9 @@ export const getRestaurantById = async (id) => {
     const res = await fetch(`/api/v1/restaurants/id/${id}`, {
       "Content-type": "application/json",
     });
+    if (!res.ok) {
+      throw res;
+    }
     const payload = await res.json();
     return payload;
   } catch (err) {
@@ -28,6 +34,9 @@ export const findRestaurants = async (query, by, page = 0) => {
     const res = await fetch(`/api/v1/restaurants?${by}=${query}&page=${page}`, {
       "Content-type": "application/json",
     });
+    if (!res.ok) {
+      throw res;
+    }
     const payload = await res.json();
     return payload;
   } catch (err) {
@@ -45,6 +54,9 @@ export const addReview = async (data) => {
         //placeholder: placeholder,
       },
     });
+    if (!res.ok) {
+      throw res;
+    }
     const payload = await res.json();
     return payload;
   } catch (err) {
@@ -62,6 +74,9 @@ export const updateReview = async (data) => {
         //placeholder: placeholder,
       },
     });
+    if (!res.ok) {
+      throw res;
+    }
     const payload = await res.json();
     return payload;
   } catch (err) {
@@ -75,6 +90,9 @@ export const deleteReview = async (id) => {
       method: "DELETE",
       "Content-type": "application/json",
     });
+    if (!res.ok) {
+      throw res;
+    }
     const payload = await res.json();
     return payload;
   } catch (err) {
@@ -87,6 +105,9 @@ export const getCuisines = async (id) => {
     const res = await fetch(`/api/v1/restaurants/cuisines`, {
       "Content-type": "application/json",
     });
+    if (!res.ok) {
+      throw res;
+    }
     const payload = await res.json();
     return payload;
   } catch (err) {

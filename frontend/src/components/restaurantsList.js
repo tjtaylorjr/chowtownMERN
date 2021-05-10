@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAllRestaurants, getCuisines } from '../services/restaurant.js';
+import { getAllRestaurants, getCuisines, findRestaurants } from '../services/restaurant.js';
 import { NavLink } from 'react-router-dom';
 
 const RestaurantsList = (props) => {
@@ -14,16 +14,16 @@ const RestaurantsList = (props) => {
     fetchCuisines();
   }, []);
 
-  const fetchRestaurants = () => {
-    const allRestaurants = getAllRestaurants();
+  const fetchRestaurants = async () => {
+    const allRestaurants = await getAllRestaurants();
     //console.log(allRestaurants);
     if(allRestaurants) {
       setRestaurants(allRestaurants);
     };
   };
 
-  const fetchCuisines = () => {
-    const restaurantCuisines = getCuisines();
+  const fetchCuisines = async () => {
+    const restaurantCuisines = await getCuisines();
     //console.log(restaurantCuisines);
     if (restaurantCuisines) {
       setCuisines(["All Cuisines"].concat(restaurantCuisines));
@@ -48,7 +48,27 @@ const RestaurantsList = (props) => {
   const updateList = () => {
     fetchRestaurants();
   };
-  
+
+  const search = async (query, by) => {
+    const payload = await findRestaurants();
+    if(payload) {
+      //console.log(payload);
+      setRestaurants(payload);
+    };
+  };
+
+  const searchByName = () => {
+    search(nameQuery, "name");
+  };
+
+  const searchByZip = () => {
+    search(zipcodeQuery, "zipcode");
+  };
+
+  const searchByCuisine = () => {
+    search(cuisineQuery, "cuisine");
+  };
+
   return (
     <div className="restaurants-list">
       This is a list of restaurants.
