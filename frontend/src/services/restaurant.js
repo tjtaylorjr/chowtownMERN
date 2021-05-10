@@ -7,7 +7,7 @@ export const getAllRestaurants = async(page = 0) => {
     const payload = await res.json();
     return payload;
   } catch (err) {
-    console.error(err);
+    console.log(`Unable to locate any restaurants. ${err}`);
   };
 }
 
@@ -19,7 +19,7 @@ export const getRestaurantById = async (id) => {
     const payload = await res.json();
     return payload;
   } catch (err) {
-    console.error(err);
+    console.log(`Unable to locate restaurant. ${err}`);
   };
 }
 
@@ -90,6 +90,6 @@ export const getCuisines = async (id) => {
     const payload = await res.json();
     return payload;
   } catch (err) {
-    console.error(err);
+    console.log(`Unable to find cuisines. ${err}`);
   };
 }
