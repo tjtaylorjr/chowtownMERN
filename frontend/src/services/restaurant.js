@@ -1,5 +1,5 @@
 
-export const getAllRestaurants = async(page = 0) => {
+const getAllRestaurants = async(page = 0) => {
   const res = await fetch(`/api/v1/restaurants?page=${page}`,{
     "Content-type": "application/json",
   });
@@ -7,7 +7,7 @@ export const getAllRestaurants = async(page = 0) => {
   return payload;
 }
 
-export const getRestaurantById = async (id) => {
+const getRestaurantById = async (id) => {
   const res = await fetch(`/api/v1/restaurants/id/${id}`, {
     "Content-type": "application/json",
   });
@@ -15,7 +15,7 @@ export const getRestaurantById = async (id) => {
   return payload;
 }
 
-export const findRestaurants = async (query, by, page = 0) => {
+const findRestaurants = async (query, by, page = 0) => {
   const res = await fetch(`/api/v1/restaurants?${by}=${query}&page=${page}`, {
     "Content-type": "application/json",
   });
@@ -23,7 +23,7 @@ export const findRestaurants = async (query, by, page = 0) => {
   return payload;
 }
 
-export const postReview = async (data) => {
+const addReview = async (data) => {
   const { placeholder } = data;
   const res = await fetch(`/api/v1/restaurants/review`, {
     method: "POST",
@@ -36,7 +36,7 @@ export const postReview = async (data) => {
   return payload;
 }
 
-export const updateReview = async (data) => {
+const updateReview = async (data) => {
   const { placeholder } = data;
   const res = await fetch(`/api/v1/restaurants/review`, {
     method: "PUT",
@@ -49,7 +49,7 @@ export const updateReview = async (data) => {
   return payload;
 }
 
-export const deleteReview = async (id) => {
+const deleteReview = async (id) => {
   const res = await fetch(`/api/v1/restaurants/review?id=${id}`, {
     method: "DELETE",
     "Content-type": "application/json",
@@ -58,10 +58,14 @@ export const deleteReview = async (id) => {
   return payload;
 }
 
-export const getCuisines = async (id) => {
+const getCuisines = async (id) => {
   const res = await fetch(`/api/v1/restaurants/cuisines`, {
     "Content-type": "application/json",
   });
   const payload = await res.json();
   return payload;
 }
+
+const services = { addReview, deleteReview, findRestaurants, getCuisines, getAllRestaurants, getRestaurantById, updateReview }
+
+export default services;
