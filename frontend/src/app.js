@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, NavLink } from 'react-router-dom';
 import Login from './components/login';
 import Restaurant from './components/restaurant';
 import RestaurantsList from './components/restaurantsList';
@@ -25,9 +25,9 @@ const App = () => {
         </a>
         <div className="navbar__links">
           <li className="navbar__item">
-            <Link to={"/restaurants"} className="navbar__nav-link">
+            <NavLink to={"/restaurants"} className="navbar__nav-link">
               Restaurants
-            </Link>
+            </NavLink>
           </li>
           <li className="navbar__item">
             { user ? (
@@ -35,9 +35,18 @@ const App = () => {
                 Logout {user.name}
               </a>
             ) : (
-              <Link to={'/login'} className="navbar__nav-link">
+              <NavLink to={'/login'} className="navbar__nav-link">
                 Login
-              </Link>
+              </NavLink>
+            )}
+          </li>
+          <li className="navbar__item">
+            {user ? (
+              <div></div>
+            ) : (
+              <NavLink to={'/signup'} className="navbar__nav-link">
+                Signup
+              </NavLink>
             )}
           </li>
         </div>
