@@ -135,11 +135,11 @@ const RestaurantsList = (props) => {
         </form>
       </div>
       <div className="restaurant-list__row">
-        {restaurants.map((restaurant) => {
+        {restaurants.map((restaurant, i) => {
           {/* this will end up being a component */}
           const address = `${restaurant.address.building} ${restaurant.address.street}, ${restaurant.address.zipcode}`;
           return (
-            <div className="restaurant-card">
+            <div className="restaurant-card" key={i}>
               <div className="restaurant-card__wrapper">
                 <div className="restaurant-card__data-container">
                   <h5 className="restaurant-card__location-name">{restaurant.name}</h5>

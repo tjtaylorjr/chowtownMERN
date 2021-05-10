@@ -8,10 +8,11 @@ export const getAllRestaurants = async(page=0) => {
       throw res;
     }
     const payload = await res.json();
-    return payload;
+    // return payload;
+    // console.log(payload);
     // console.log(res.json());
     // const payload = res.data.restaurants;
-    // return payload;
+    return payload.restaurants;
   } catch (err) {
     console.log(`Unable to locate any restaurants. ${err}`);
   };
