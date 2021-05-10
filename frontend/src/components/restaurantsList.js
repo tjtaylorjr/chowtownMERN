@@ -1,4 +1,5 @@
 import React from 'react';
+import { placeholder } from '../services/restaurant.js';
 
 const RestaurantsList = () => {
   return (
