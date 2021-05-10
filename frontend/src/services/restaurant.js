@@ -1,7 +1,7 @@
 
-export const getAllRestaurants = async(page = 0) => {
+export const getAllRestaurants = async(page=0) => {
   try {
-    const res = await fetch(`/api/v1/restaurants?page=${page}`,{
+    const res = await fetch(`/api/v1/restaurants?page=${page}`, {
       "Content-type": "application/json",
     });
     if (!res.ok) {
@@ -9,6 +9,9 @@ export const getAllRestaurants = async(page = 0) => {
     }
     const payload = await res.json();
     return payload;
+    // console.log(res.json());
+    // const payload = res.data.restaurants;
+    // return payload;
   } catch (err) {
     console.log(`Unable to locate any restaurants. ${err}`);
   };

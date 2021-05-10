@@ -1,11 +1,11 @@
 //import { ObjectId } from "bson";
-import mongodb from "mongodb";
+const mongodb = require('mongodb');
 
 const ObjectId = mongodb.ObjectID;
 
 let restaurants;
 
-export default class RestaurantsDAO {
+class RestaurantsDAO {
   static async injectDB(conn) {
     if (restaurants) {
       return
@@ -127,3 +127,5 @@ export default class RestaurantsDAO {
     };
   };
 };
+
+module.exports = RestaurantsDAO;

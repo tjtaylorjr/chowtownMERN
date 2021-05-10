@@ -1,10 +1,10 @@
-import mongodb from "mongodb";
+const mongodb =require('mongodb');
 
 const ObjectId = mongodb.ObjectID;
 
 let reviews;
 
-export default class ReviewsDAO {
+class ReviewsDAO {
   static async injectDB(conn) {
     if (reviews) {
       return;
@@ -73,3 +73,5 @@ export default class ReviewsDAO {
     };
   };
 };
+
+module.exports = ReviewsDAO;

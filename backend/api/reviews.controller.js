@@ -1,6 +1,6 @@
-import ReviewsDAO from "../dao/reviewsDAO.js";
+const ReviewsDAO = require('../dao/reviewsDAO.js');
 
-export default class ReviewsController {
+class ReviewsController {
   static async apiPostReview(req, res, next) {
     try {
       const restaurantId = req.body.restaurant_id;
@@ -68,3 +68,5 @@ export default class ReviewsController {
     };
   };
 };
+
+module.exports = ReviewsController;
