@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Switch, Route, NavLink } from 'react-router-dom';
-import Login from './components/login';
-import Restaurant from './components/restaurant';
-import RestaurantsList from './components/restaurantsList';
-import Review from './components/review';
-import Signup from './components/signup';
+import Login from './components/Login';
+import Restaurant from './components/Restaurant';
+import RestaurantsList from './components/RestaurantsList';
+import Review from './components/Review';
+import Signup from './components/Signup';
 
 const App = () => {
   const [user, setUser] = useState(null);
