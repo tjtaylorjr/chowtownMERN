@@ -18,7 +18,7 @@ const Login = (props) => {
   };
 
   const login = () => {
-    props.login(user);
+    props.mockLogin(user);
     history.push('/');
   }
 

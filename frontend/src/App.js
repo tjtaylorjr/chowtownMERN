@@ -9,8 +9,12 @@ import Signup from './components/Signup';
 const App = () => {
   const [user, setUser] = useState(null);
 
-  const login = async(user = null) => {
+  const mockLogin = async(user = null) => {
     setUser(user);
+  };
+
+  const signup = async() => {
+    console.log("on TODO list");
   };
 
   const logout = async() => {
@@ -72,13 +76,13 @@ const App = () => {
           <Route
             path="/login"
             render={(props) => (
-              <Login {...props} user={user} />
+              <Login {...props} mockLogin={mockLogin} />
             )}
           />
           <Route
             path="/signup"
             render={(props) => (
-              <Signup {...props} user={user} />
+              <Signup {...props} signup={signup} />
             )}
           />
         </Switch>
