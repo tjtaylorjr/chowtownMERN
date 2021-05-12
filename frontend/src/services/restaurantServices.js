@@ -88,11 +88,14 @@ export const updateReview = async (data) => {
   };
 }
 
-export const deleteReview = async (id) => {
+export const deleteReview = async (id, userId) => {
   try {
     const res = await fetch(`/api/v1/restaurants/review?id=${id}`, {
       method: "DELETE",
       "Content-type": "application/json",
+      body: {
+        user_Id: userId,
+      },
     });
     if (!res.ok) {
       throw res;

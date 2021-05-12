@@ -26,7 +26,7 @@ const Restaurant = (props) => {
   };
 
   const removeReview = async (reviewId, i) => {
-    await deleteReview(reviewId);
+    await deleteReview(reviewId, props.user.id);
     setRestaurantProfile((prevState) => {
       prevState.reviews.splice(i, 1)
       return({
@@ -44,7 +44,7 @@ const Restaurant = (props) => {
             <strong>Cuisine: </strong>{restaurantProfile.cuisine}<br/>
             <strong>Address: </strong>{restaurantProfile.address.building} {restaurantProfile.address.street}, {restaurantProfile.address.zipcode}
           </p>
-          <NavLink to={"/restaurants" + props.match.params.id + "/review"}>
+          <NavLink to={"/restaurants/" + props.match.params.id + "/review"}>
             Add Review
           </NavLink>
           <h4>Reviews</h4>
