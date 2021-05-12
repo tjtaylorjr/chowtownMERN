@@ -57,7 +57,7 @@ class RestaurantsDAO {
     };
   } };
 
-  static async getRestaurantsByID(id) {
+  static async getRestaurantById(id) {
     try {
       const pipeline =
         [

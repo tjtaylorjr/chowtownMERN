@@ -31,10 +31,10 @@ class RestaurantsController {
     res.json(response);
   };
 
-  static async apiGetRestaurantsById(req, res, next) {
+  static async apiGetRestaurantById(req, res, next) {
     try {
       const id = req.params.id || {};
-      const restaurant = await RestaurantsDAO.getRestaurantsById(id);
+      const restaurant = await RestaurantsDAO.getRestaurantById(id);
 
       if(!restaurant) {
         res.status(404).json({ error: "Not found" });
