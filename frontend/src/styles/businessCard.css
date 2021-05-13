@@ -1,5 +1,8 @@
 .restaurant-card {
-  width: 300px;
-  height: 300px;
-  background-color: pink;
+  width: 250px;
+  height: 225px;
+  background-color: #EFEFEF;
+  margin: 10px;
+  border: 1px solid #CDCDCD;
+  text-align: center;
 }

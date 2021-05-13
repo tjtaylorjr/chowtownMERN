@@ -83,7 +83,7 @@ const RestaurantsList = (props) => {
         <form className="search-form">
           <input
             type="text"
-            className="search-form__name-input"
+            className="search-form__input"
             placeholder="Search by name"
             value={nameQuery}
             onChange={onChangeNameQuery}
@@ -101,7 +101,7 @@ const RestaurantsList = (props) => {
         <form className="search-form">
           <input
             type="text"
-            className="search-form__name-input"
+            className="search-form__input"
             placeholder="Search by zipcode"
             value={zipcodeQuery}
             onChange={onChangeZipcodeQuery}
@@ -117,7 +117,7 @@ const RestaurantsList = (props) => {
           </div>
         </form>
         <form className="search-form">
-          <select onChange={onChangeCuisineQuery}>
+          <select onChange={onChangeCuisineQuery} className="search-form__select-box">
             {cuisines.map((cuisine, i) => {
               return (
                 <option value={cuisine} key={i}>
@@ -137,8 +137,8 @@ const RestaurantsList = (props) => {
           </div>
         </form>
       </div>
-      <div className="restaurant-list__results-container">
-        <div className="restaurant-list__row">
+      <div className="restaurants-list__results-wrapper">
+        <div className="restaurants-list__results-container">
           {restaurants.map((restaurant, i) => {
             //console.log(restaurant);
             //const {_id, name, address, cuisine} = restaurant;
