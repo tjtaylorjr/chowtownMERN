@@ -19,7 +19,7 @@ const Restaurant = (props) => {
 
   const fetchRestaurant = async (id) => {
     const resInfo = await getRestaurantById(id);
-    //console.log resInfo
+    //console.log(resInfo);
     if(resInfo) {
       setRestaurantProfile(resInfo);
     };
@@ -60,7 +60,7 @@ const Restaurant = (props) => {
                           <strong>User: </strong>{review.name}<br/>
                           <strong>Date: </strong>{review.date}<br/>
                         </p>
-                        {props.user & props.user.id === review.user_id &&
+                        {props.user && props.user.id === review.user_id &&
                           <div>
                             <a onClick={() => removeReview(review._id, i)}>Delete</a>
                             <NavLink to={{
