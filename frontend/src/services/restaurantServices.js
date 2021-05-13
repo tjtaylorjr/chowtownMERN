@@ -42,7 +42,7 @@ export const findRestaurants = async (query, by, page = 0) => {
       throw res;
     }
     const payload = await res.json();
-    return payload;
+    return payload.restaurants;
   } catch (err) {
     console.error(err);
   };

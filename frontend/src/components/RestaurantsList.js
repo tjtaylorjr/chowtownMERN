@@ -9,12 +9,18 @@ const RestaurantsList = (props) => {
   const [nameQuery, setNameQuery] = useState("");
   const [zipcodeQuery, setZipcodeQuery] = useState("");
   const [cuisineQuery, setCuisineQuery] = useState("All Cuisines");
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     fetchRestaurants();
     fetchCuisines();
   }, []);
 
+  useEffect(() => {
+    if(restaurants.length > 0) {
+      setIsLoaded(true);
+    }
+  }, [restaurants]);
 
   const fetchRestaurants = async() => {
     const allRestaurants = await getAllRestaurants();
@@ -50,7 +56,7 @@ const RestaurantsList = (props) => {
   const search = async (query, by) => {
     const payload = await findRestaurants(query, by);
     if(payload) {
-      //console.log(payload);
+      console.log(payload);
       setRestaurants(payload);
     };
   };
@@ -72,6 +78,7 @@ const RestaurantsList = (props) => {
   };
 
   const updateList = () => {
+    setIsLoaded(false);
     fetchRestaurants();
   };
   // for now programming easy fields for entering different searches but will later refactor to make it a more dynamic search field that can handle all queries at the same time.
@@ -139,7 +146,7 @@ const RestaurantsList = (props) => {
       </div>
       <div className="restaurants-list__results-wrapper">
         <div className="restaurants-list__results-container">
-          {restaurants.map((restaurant, i) => {
+          {isLoaded && restaurants.map((restaurant, i) => {
             //console.log(restaurant);
             //const {_id, name, address, cuisine} = restaurant;
             //<BusinessCard restaurant={restaurant} key={i} />
