@@ -6,3 +6,29 @@
   border: 1px solid #CDCDCD;
   text-align: center;
 }
+
+.restaurant-card__wrapper {
+  height: 100%;
+}
+
+.restaurant-card__data-container {
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.restaurant-card__navigation-link,
+.restaurant-card__map-link {
+  text-decoration: none;
+  border: 1px solid #CDCDCD;
+  border-radius: 5px;
+  padding: 8px;
+  margin: 0 5px;
+  color: #333333;
+  background-color: green;
+}
+
+.restaurant-card__map-link {
+  padding: 8px 20.5px;
+}
