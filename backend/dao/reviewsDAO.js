@@ -1,4 +1,4 @@
-const mongodb =require('mongodb');
+const mongodb = require('mongodb');
 
 const ObjectId = mongodb.ObjectID;
 
@@ -17,14 +17,14 @@ class ReviewsDAO {
     };
   };
 
-  static async addReview(restaurantId, user, review, date) {
+  static async addReview(restaurantId, name, user_id, review, date) {
     try {
       const reviewDoc = {
-        name: user.name,
-        user_id: user._id,
+        name: name,
+        user_id: user_id,
         date: date,
         text: review,
-        restaurant_id: ObjectId(restaurantId),
+        restaurant_id: ObjectId(restaurantId)
       };
 
       return await reviews.insertOne(reviewDoc);

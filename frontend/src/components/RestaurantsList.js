@@ -163,6 +163,7 @@ const RestaurantsList = (props) => {
                       </NavLink>
                       <a
                         target="_blank"
+                        rel="noreferrer"
                         href={"http://www.google.com/maps/place/" + address}
                         className="restaurant-card__map-link"
                       >

@@ -57,7 +57,7 @@ class RestaurantsDAO {
     };
   } };
 
-  static async getRestaurantById(id) {
+  static async getRestaurantByID(id) {
     try {
       const pipeline =
         [
@@ -85,7 +85,7 @@ class RestaurantsDAO {
                               $eq:
                                 [
                                   "$restaurant_id",
-                                  "$$id",
+                                  "$$id"
                                 ],
                             },
                         },

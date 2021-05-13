@@ -50,19 +50,31 @@ export const findRestaurants = async (query, by, page = 0) => {
 
 export const addReview = async (data) => {
   try {
-    const { placeholder } = data;
+    const {
+      text,
+      name,
+      user_id,
+      restaurant_id
+    } = data;
+    const body = {
+      "restaurant_id": restaurant_id,
+      "name": name,
+      "user_id": user_id,
+      "text": text,
+    };
     const res = await fetch(`/api/v1/restaurants/review`, {
       method: "POST",
-      "Content-type": "application/json",
-      body: {
-        //placeholder: placeholder,
+      headers: {
+        "Content-type": "application/json"
       },
+      body: JSON.stringify(body),
     });
     if (!res.ok) {
       throw res;
     }
     const payload = await res.json();
-    return payload;
+    // console.log(payload.status);
+    return payload.status;
   } catch (err) {
     console.error(err);
   };

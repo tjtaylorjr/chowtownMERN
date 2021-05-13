@@ -44,15 +44,13 @@ const App = () => {
               </NavLink>
             )}
           </li>
-          <li className="navbar__item">
-            {user ? (
-              <div></div>
-            ) : (
+          {!user && (
+            <li className="navebar__item">
               <NavLink to={'/signup'} className="navbar__nav-link">
                 Signup
               </NavLink>
-            )}
-          </li>
+            </li>
+          )}
         </div>
       </nav>
       <div className="main-page">

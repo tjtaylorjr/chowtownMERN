@@ -28,6 +28,7 @@ const BusinessCard = (restaurant) => {
               </NavLink>
               <a
                 target="_blank"
+                rel="noreferrer"
                 href={"http://www.google.com/maps/place/" + formattedAddress}
                 className="restaurant-card__map-link"
               >

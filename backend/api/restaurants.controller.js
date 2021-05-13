@@ -34,7 +34,7 @@ class RestaurantsController {
   static async apiGetRestaurantById(req, res, next) {
     try {
       const id = req.params.id || {};
-      const restaurant = await RestaurantsDAO.getRestaurantById(id);
+      const restaurant = await RestaurantsDAO.getRestaurantByID(id);
 
       if(!restaurant) {
         res.status(404).json({ error: "Not found" });

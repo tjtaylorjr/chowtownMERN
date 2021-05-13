@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { updateReview, addReview } from '../services/restaurantServices';
 import { NavLink } from 'react-router-dom';
 
-const ReviewForm = (props) => {
-  let defaultReviewState = ""
+const Review = (props) => {
+  let defaultReviewState = "";
   let editing = false;
 
   if (props.location.state && props.location.state.currentReview) {
@@ -78,4 +78,4 @@ const ReviewForm = (props) => {
   );
 };
 
-export default ReviewForm;
+export default Review;
