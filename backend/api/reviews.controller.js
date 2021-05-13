@@ -26,13 +26,13 @@ class ReviewsController {
   static async apiUpdateReview(req, res, next) {
     try {
       const reviewId = req.body.review_id;
-      const userId = req.body.user_id;
+      const user_id = req.body.user_id;
       const text = req.body.text;
       const date = new Date();
 
       const reviewResponse = await ReviewsDAO.updateReview(
         reviewId,
-        userId,
+        user_id,
         text,
         date,
       );

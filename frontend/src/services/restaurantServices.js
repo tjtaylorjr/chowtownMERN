@@ -60,7 +60,7 @@ export const addReview = async (data) => {
       "restaurant_id": restaurant_id,
       "name": name,
       "user_id": user_id,
-      "text": text,
+      "text": text
     };
     const res = await fetch(`/api/v1/restaurants/review`, {
       method: "POST",
@@ -82,18 +82,30 @@ export const addReview = async (data) => {
 
 export const updateReview = async (data) => {
   try {
-    const { placeholder } = data;
+    const {
+      text,
+      name,
+      user_id,
+      review_id
+    } = data;
+    const body = {
+      "review_id": review_id,
+      "name": name,
+      "user_id": user_id,
+      "text": text
+    };
     const res = await fetch(`/api/v1/restaurants/review`, {
       method: "PUT",
-      "Content-type": "application/json",
-      body: {
-        //placeholder: placeholder,
+      headers: {
+        "Content-type": "application/json"
       },
+      body: JSON.stringify(body),
     });
     if (!res.ok) {
       throw res;
     }
     const payload = await res.json();
+    console.log(payload);
     return payload;
   } catch (err) {
     console.error(err);
@@ -101,13 +113,16 @@ export const updateReview = async (data) => {
 }
 
 export const deleteReview = async (id, userId) => {
+  const body ={
+    "user_id": userId
+  }
   try {
     const res = await fetch(`/api/v1/restaurants/review?id=${id}`, {
       method: "DELETE",
-      "Content-type": "application/json",
-      body: {
-        user_Id: userId,
+      headers: {
+        "Content-type": "application/json"
       },
+      body: JSON.stringify(body),
     });
     if (!res.ok) {
       throw res;
