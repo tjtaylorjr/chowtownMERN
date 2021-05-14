@@ -1,8 +1,17 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import ProfileButton from './ProfileButton';
 
 const NavBar = (props) => {
   const { user, logout } = props;
+
+  if(user) {
+    navLinks = (
+      <div>
+        <ProfileButton.js user={user} />
+      </div>
+    )
+  }
   return (
     <nav className="navbar">
       <a href="/restaurants" className="navbar__site-name">
