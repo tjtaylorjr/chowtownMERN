@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Switch, Route, NavLink } from 'react-router-dom';
 import NavBar from './components/NavBar';
-import Login from './components/Login';
+import LoginForm from './components/LoginForm';
 import Restaurant from './components/Restaurant';
 import RestaurantsList from './components/RestaurantsList';
 import Review from './components/Review';
-import Signup from './components/Signup';
+import SignupForm from './components/SignupForm';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -46,13 +46,13 @@ const App = () => {
           <Route
             path="/login"
             render={(props) => (
-              <Login {...props} mockLogin={mockLogin} />
+              <LoginForm {...props} mockLogin={mockLogin} />
             )}
           />
           <Route
             path="/signup"
             render={(props) => (
-              <Signup {...props} signup={signup} />
+              <SignupForm {...props} signup={signup} />
             )}
           />
         </Switch>

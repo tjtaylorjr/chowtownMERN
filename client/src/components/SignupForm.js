@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Signup = () => {
+const SignupForm = () => {
   return (
     <div className="signup">
       This is the signup window.
@@ -8,4 +8,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignupForm;
