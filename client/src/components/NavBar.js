@@ -1,13 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import ProfileButton from './ProfileButton';
-import LoginForm from './LoginForm';
+import AuthForm from './AuthForm';
 import logo from '../assets/textless-logo.png';
 import brandName from '../assets/brand.png';
 
 const NavBar = (props) => {
 
-  const { user, logout } = props;
+  const { user, logout, mockLogin } = props;
 
   let navLinks;
 
@@ -20,9 +20,11 @@ const NavBar = (props) => {
   } else {
     navLinks = (
       <div className="navbar__buttons">
-        <LoginForm />
-        <div>
-          <NavLink className="navbar__register-button" to="/signup">Sign Up</NavLink>
+        <div className="navbar__login-button">
+          <AuthForm flag={"Login"}/>
+        </div>
+        <div className="navbar__signup-button">
+          <AuthForm flag={"Signup"}/>
         </div>
       </div>
     );
@@ -31,7 +33,7 @@ const NavBar = (props) => {
   return (
     <nav className="navbar">
       <div className="navbar__site-brand">
-        <NavLink exact to="/restaurants" className="navbar__site-brand-link">
+        <NavLink exact to="/" className="navbar__site-brand-link">
           <img
             className="navbar__site-brand-logo"
             src={logo}
@@ -45,13 +47,13 @@ const NavBar = (props) => {
         </NavLink>
       </div>
       <div className="navbar__links">
-        {/* {isLoaded && navLinks} */}
         <li className="navbar__item">
           <NavLink to={"/restaurants"} className="navbar__nav-link">
             Search
           </NavLink>
         </li>
-        <li className="navbar__item">
+        {navLinks}
+        {/* <li className="navbar__item">
           {user ? (
             <a
               onClick={logout}
@@ -72,7 +74,7 @@ const NavBar = (props) => {
               Signup
               </NavLink>
           </li>
-        )}
+        )} */}
       </div>
     </nav>
   );

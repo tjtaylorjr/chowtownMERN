@@ -1,9 +1,17 @@
 @import "app.css";
+@import "authForm.css";
 @import "businessCard.css";
+@import "footer.css";
+@import "home.css";
+@import "loginForm.css";
 @import "navbar.css";
+@import "modal.css";
 @import "restaurantsList.css";
 
 
+html {
+  min-height: 100%;
+}
 
 body {
   margin: 0;
@@ -17,4 +25,10 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#root {
+  height: 100%;
+  background-color: #FFFBF1;
+  color: #2D333F;
 }

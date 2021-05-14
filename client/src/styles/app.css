@@ -1,7 +1,5 @@
-
-
-
-
 .main-page {
-  height: 100%;
+  display: block;
+  outline: 0;
+  padding-bottom: 200px;
 }

@@ -1,0 +1,13 @@
+.login-form__container {
+  width: 40%;
+  animation: fadeIn .3s linear;
+};
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  };
+  100%{
+    opacity: 1;
+  };
+};

@@ -36,7 +36,7 @@
   list-style-type: none;
   margin: 10px;
   padding: 10px;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   width: 20%;
 }
@@ -44,4 +44,36 @@
 .navbar__nav-link {
   text-decoration: none;
   color: #2D333F;
+}
+
+.navbar__buttons {
+  display: flex;
+  flex-direction: row;
+
+}
+.navbar__login-button,
+.navbar__signup-button {
+  margin: 0 5px;
+}
+
+.navbar__login-button button{
+  color: #2D333F;
+  background-color: transparent;
+  border: 2px solid #2D333F;
+  font-size: 16px;
+  padding: 0 10.34px;
+  cursor: pointer;
+  line-height: 1.75rem;
+  border-radius: 4px;
+}
+
+.navbar__signup-button button {
+  color: #FFFBF1;
+  background-color: #FF0800;
+  font-size: 16px;
+  padding: 0 5px;
+  border: 2px solid #FF0800;
+  border-radius: 4px;
+  cursor: pointer;
+  line-height: 1.75rem;
 }

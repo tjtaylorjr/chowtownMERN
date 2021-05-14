@@ -1,0 +1,35 @@
+.home__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-size: cover;
+  background-position: 50%;
+  min-height: 26rem;
+  position: relative;
+}
+
+.home__header-image {
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: linear-gradient(
+    90deg,
+    rgba(47, 45, 65, .7),
+    rgba(47, 45, 65, .7)
+  ), url(../assets/main-header.jpg);
+  background-position: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 26rem;
+  position: absolute;
+  opacity: 1;
+}
+
+.home__content-body {
+  padding-top: .0625rem;
+  margin-top: .0625rem;
+  width: 100%;
+  background-color: #FFF3D7;
+}
