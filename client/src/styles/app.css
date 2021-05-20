@@ -1,5 +1,6 @@
 .main-page {
   display: block;
   outline: 0;
-  padding-bottom: 200px;
+  min-height: 780px;
+  padding-bottom: 55px;
 }
