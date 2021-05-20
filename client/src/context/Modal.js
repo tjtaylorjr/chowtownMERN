@@ -32,7 +32,7 @@ export const Modal = ({ onClose, children }) => {
       <div className="modal-background" onClick={onClose} />
       <div className="modal-content">
         <div className="modal-content__inner-container">
-          <button className="modal-content__close-button">
+          <button className="modal-content__close-button" onClick={onClose}>
             <span className="close-button__icon-container">
               <svg className="close-button__icon" viewBox="0 0 24 24" focusable="false" >
                 <g fill="none" fillRule="evenodd">

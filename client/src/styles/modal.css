@@ -25,3 +25,28 @@
   -webkit-overflow-scrolling: touch;
   background-color: #FFFFFF;
 }
+
+.modal-content__inner-container {
+  padding: 0;
+  max-height: 90vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.modal-content__close-button {
+  position: static;
+  align-self: end;
+  height: 1.5rem;
+  width: 1.5rem;
+  padding: 0;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  z-index: 1;
+  right: 16px;
+}

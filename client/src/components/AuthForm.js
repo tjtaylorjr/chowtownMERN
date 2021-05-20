@@ -4,8 +4,10 @@ import { Modal } from '../context/Modal';
 
 const AuthForm = (props) => {
   const defaultUserState = {
-    name: "",
-    id: "",
+    firstname: "",
+    lastname: "",
+    username: "",
+    password: "",
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -38,26 +40,52 @@ const AuthForm = (props) => {
         <Modal onClose={() => setShowModal(false)}>
           <div className="login-form__container">
             <form className="login-form" onSubmit={handleSubmit}>
+              {flag === "Signup" && (
+                <>
+                  <div>
+                    <label htmlFor="firstname">First Name</label>
+                    <input
+                      type="text"
+                      id="firstname"
+                      required
+                      value={user.firstname}
+                      onChange={handleInputChange}
+                      name="firstname"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="lastname">Last Name</label>
+                    <input
+                      type="text"
+                      id="lastname"
+                      required
+                      value={user.lastname}
+                      onChange={handleInputChange}
+                      name="lastname"
+                    />
+                  </div>
+                </>
+              )}
               <div>
-                <label htmlFor="user">Username</label>
+                <label htmlFor="username">Username</label>
                 <input
                   type="text"
-                  id="name"
+                  id="username"
                   required
-                  value={user.name}
+                  value={user.username}
                   onChange={handleInputChange}
-                  name="name"
+                  name="username"
                 />
               </div>
               <div>
-                <label htmlFor="id">ID</label>
+                <label htmlFor="password">Password</label>
                 <input
                   type="text"
-                  id="id"
+                  id="password"
                   required
-                  value={user.id}
+                  value={user.password}
                   onChange={handleInputChange}
-                  name="id"
+                  name="password"
                 />
               </div>
               <button type="submit">
