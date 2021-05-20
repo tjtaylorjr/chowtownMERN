@@ -21,10 +21,10 @@ const NavBar = (props) => {
     navLinks = (
       <div className="navbar__buttons">
         <div className="navbar__login-button">
-          <AuthForm flag={"Login"}/>
+          <AuthForm action={"Login"}/>
         </div>
         <div className="navbar__signup-button">
-          <AuthForm flag={"Signup"}/>
+          <AuthForm action={"Signup"}/>
         </div>
       </div>
     );

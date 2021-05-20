@@ -14,7 +14,7 @@ const AuthForm = (props) => {
   const [user, setUser] = useState(defaultUserState);
 
   const history = useHistory();
-  const { flag } = props;
+  const { action } = props;
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -34,13 +34,13 @@ const AuthForm = (props) => {
         className="auth__button"
         onClick={() => setShowModal(true)}
       >
-        {flag}
+        {action}
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <div className="auth-form__container">
             <form className="auth-form" onSubmit={handleSubmit}>
-              {flag === "Signup" && (
+              {action === "Signup" && (
                 <>
                   <div className="auth-form__input">
                     <label htmlFor="firstname">First Name:</label>
@@ -88,8 +88,8 @@ const AuthForm = (props) => {
                   name="password"
                 />
               </div>
-              <button type="submit">
-                {flag}
+              <button type="submit" className="auth-form__submit-button">
+                {action}
               </button>
             </form>
           </div>

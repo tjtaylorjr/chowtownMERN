@@ -10,7 +10,6 @@
   height: 100%;
   width: 80%;
   flex-direction: column;
-
 }
 
 .auth-form__input {
@@ -23,6 +22,18 @@
 
 .auth-form__input label {
   margin-right: 10px;
+}
+
+.auth-form__submit-button {
+  color: #FFFBF1;
+  background-color: #FF0800;
+  font-size: 16px;
+  padding: 0 5px;
+  border: 2px solid #FF0800;
+  border-radius: 4px;
+  cursor: pointer;
+  line-height: 1.75rem;
+  width: 100%;
 }
 
 
