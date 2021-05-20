@@ -38,12 +38,12 @@ const AuthForm = (props) => {
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <div className="login-form__container">
-            <form className="login-form" onSubmit={handleSubmit}>
+          <div className="auth-form__container">
+            <form className="auth-form" onSubmit={handleSubmit}>
               {flag === "Signup" && (
                 <>
-                  <div>
-                    <label htmlFor="firstname">First Name</label>
+                  <div className="auth-form__input">
+                    <label htmlFor="firstname">First Name:</label>
                     <input
                       type="text"
                       id="firstname"
@@ -53,8 +53,8 @@ const AuthForm = (props) => {
                       name="firstname"
                     />
                   </div>
-                  <div>
-                    <label htmlFor="lastname">Last Name</label>
+                  <div className="auth-form__input">
+                    <label htmlFor="lastname">Last Name:</label>
                     <input
                       type="text"
                       id="lastname"
@@ -66,8 +66,8 @@ const AuthForm = (props) => {
                   </div>
                 </>
               )}
-              <div>
-                <label htmlFor="username">Username</label>
+              <div className="auth-form__input">
+                <label htmlFor="username">Username:</label>
                 <input
                   type="text"
                   id="username"
@@ -77,8 +77,8 @@ const AuthForm = (props) => {
                   name="username"
                 />
               </div>
-              <div>
-                <label htmlFor="password">Password</label>
+              <div className="auth-form__input">
+                <label htmlFor="password">Password:</label>
                 <input
                   type="text"
                   id="password"

@@ -41,7 +41,9 @@ export const Modal = ({ onClose, children }) => {
               </svg>
             </span>
           </button>
-          {children}
+          <div className="modal-content__children">
+            {children}
+          </div>
         </div>
       </div>
     </div>,
