@@ -1,4 +1,3 @@
-//import { ObjectId } from "bson";
 const mongodb = require('mongodb');
 
 const ObjectId = mongodb.ObjectID;
