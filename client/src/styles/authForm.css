@@ -31,7 +31,36 @@
 }
 
 .auth-form__input input {
-  width: 65%;
+  width: 100%;
+  font-size: 18px;
+}
+
+.auth-form__input input::placeholder {
+  text-align: center;
+}
+
+.auth-form__google-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border: 2px solid #FF0800;
+  background-color: transparent;
+  line-height: 3rem;
+  margin-bottom: 2px;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #2D333F;
+  cursor: pointer;
+}
+
+.auth-form__google-button span {
+  height: 100%;
+  margin: 10px 10px -10px 0;
+}
+
+.auth-form__google-icon {
+  font-size: 29px;
+
 }
 
 .auth-form__submit-button {
@@ -44,6 +73,16 @@
   cursor: pointer;
   line-height: 3rem;
   width: 100%;
+}
+
+.auth-form__swap-link {
+  text-decoration: none;
+  margin: 0 5px;
+}
+.auth-form__terms-link {
+  font-size: 10px;
+  font-weight: bold;
+  margin: 0 5px;
 }
 
 @keyframes fadeIn {

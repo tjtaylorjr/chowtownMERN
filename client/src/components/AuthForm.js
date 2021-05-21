@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
+import { GoogleLogin } from 'react-google-login';
 import { Modal } from '../context/Modal';
+import { FcGoogle } from 'react-icons/fc';
 
 const AuthForm = (props) => {
   const defaultUserState = {
@@ -11,10 +13,19 @@ const AuthForm = (props) => {
   };
 
   const [showModal, setShowModal] = useState(false);
+  const [modalState, setModalState] = useState({type: props.action});
   const [user, setUser] = useState(defaultUserState);
 
   const history = useHistory();
-  const { action } = props;
+  const GoogleClientId = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID;
+
+  const googleSuccess = async (response) => {
+    console.info(response);
+  };
+
+  const googleFailure = (response) => {
+    console.info(`Google Sign in unsuccessful: ${response}`);
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -34,19 +45,19 @@ const AuthForm = (props) => {
         className="auth__button"
         onClick={() => setShowModal(true)}
       >
-        {action}
+        {props.action}
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <div className="auth-form__container">
             <form className="auth-form" onSubmit={handleSubmit}>
-              {action === "Signup" && (
+              {modalState.type === "Signup" && (
                 <>
                   <div className="auth-form__input">
-                    <label htmlFor="firstname">First Name:</label>
                     <input
                       type="text"
                       id="firstname"
+                      placeholder="Enter First Name"
                       required
                       value={user.firstname}
                       onChange={handleInputChange}
@@ -54,10 +65,10 @@ const AuthForm = (props) => {
                     />
                   </div>
                   <div className="auth-form__input">
-                    <label htmlFor="lastname">Last Name:</label>
                     <input
                       type="text"
                       id="lastname"
+                      placeholder="Enter Last Name"
                       required
                       value={user.lastname}
                       onChange={handleInputChange}
@@ -67,10 +78,10 @@ const AuthForm = (props) => {
                 </>
               )}
               <div className="auth-form__input">
-                <label htmlFor="username">Username:</label>
                 <input
                   type="text"
                   id="username"
+                  placeholder="Enter Username"
                   required
                   value={user.username}
                   onChange={handleInputChange}
@@ -78,19 +89,82 @@ const AuthForm = (props) => {
                 />
               </div>
               <div className="auth-form__input">
-                <label htmlFor="password">Password:</label>
                 <input
-                  type="text"
+                  type="password"
                   id="password"
+                  placeholder="Enter Password"
                   required
                   value={user.password}
                   onChange={handleInputChange}
                   name="password"
                 />
               </div>
-              <button type="submit" className="auth-form__submit-button">
-                {action}
+              {modalState.type === "Login" && (
+                <GoogleLogin
+                  clientId={GoogleClientId}
+                  render={renderProps => (
+                    <button
+                      className="auth-form__google-button"
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                    >
+                      <span>
+                        <FcGoogle className="auth-form__google-icon" />
+                      </span>
+                      {`${modalState.type} with Google`}</button>
+                    )}
+                  buttonText="Login"
+                  onSuccess={googleSuccess}
+                  onFailure={googleFailure}
+                  cookiePolicy={'single_host_origin'}
+                  isLoggedIn={true}
+                />
+              )}
+              <button
+                type="submit"
+                className="auth-form__submit-button"
+              >
+                {modalState.type}
               </button>
+              {modalState.type === "Login" ? (
+                <div>
+                  {`Don't have an account?`}
+                  <NavLink
+                    className="auth-form__swap-link"
+                    to={"#"}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      setModalState({type: "Signup"});
+                    }}
+                  >Signup.</NavLink>
+                </div>
+              ) : (
+                  <div>
+                    {`Already have an account?`}
+                    <NavLink
+                      className="auth-form__swap-link"
+                      to={"#"}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        setModalState({type: "Login"});
+                      }}
+                    >Login.</NavLink>
+                  </div>
+              )}
+              <NavLink
+                to={"/tos"}
+                className="auth-form__terms-link"
+                onClick={() => setShowModal(false)}
+              >
+                Terms of Service
+              </NavLink>
+              <NavLink
+                to={"/privacy"}
+                className="auth-form__terms-link"
+                onClick={() => setShowModal(false)}
+              >
+                Privacy Policy
+              </NavLink>
             </form>
           </div>
         </Modal>

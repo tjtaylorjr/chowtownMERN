@@ -53,28 +53,6 @@ const NavBar = (props) => {
           </NavLink>
         </li>
         {navLinks}
-        {/* <li className="navbar__item">
-          {user ? (
-            <a
-              onClick={logout}
-              className="navbar__nav-link"
-              style={{ cursor: 'pointer' }}
-            >
-              Logout {user.name}
-            </a>
-          ) : (
-            <NavLink to={'/login'} className="navbar__nav-link">
-              Login
-            </NavLink>
-          )}
-        </li>
-        {!user && (
-          <li className="navebar__item">
-            <NavLink to={'/signup'} className="navbar__nav-link">
-              Signup
-              </NavLink>
-          </li>
-        )} */}
       </div>
     </nav>
   );

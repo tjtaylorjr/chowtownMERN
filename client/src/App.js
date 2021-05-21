@@ -6,6 +6,8 @@ import NavBar from './components/NavBar';
 import Restaurant from './components/Restaurant';
 import RestaurantsList from './components/RestaurantsList';
 import Review from './components/Review';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TOS from './components/TermsOfService';
 // import SignupForm from './components/SignupForm';
 // import { placeholder } from './services/authServices.js';
 
@@ -44,6 +46,14 @@ const App = () => {
           <Route
             exact path={"/restaurants"}
             component={RestaurantsList}
+          />
+          <Route
+            exact path={"/privacy"}
+            component={PrivacyPolicy}
+          />
+          <Route
+            exact path={"/tos"}
+            component={TOS}
           />
           <Route
             exact path={"/"}
