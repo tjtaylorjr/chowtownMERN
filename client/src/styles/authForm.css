@@ -78,7 +78,9 @@
 .auth-form__swap-link {
   text-decoration: none;
   margin: 0 5px;
+  color: #FF0800;
 }
+
 .auth-form__terms-link {
   font-size: 10px;
   font-weight: bold;

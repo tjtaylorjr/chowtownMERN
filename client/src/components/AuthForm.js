@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 import { Modal } from '../context/Modal';
 import { FcGoogle } from 'react-icons/fc';
@@ -16,11 +17,20 @@ const AuthForm = (props) => {
   const [modalState, setModalState] = useState({type: props.action});
   const [user, setUser] = useState(defaultUserState);
 
+  const dispatch = useDispatch();
   const history = useHistory();
   const GoogleClientId = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID;
 
   const googleSuccess = async (response) => {
     console.info(response);
+    const result = response?.profileObj;
+    const token = response?.tokenId;
+
+    try {
+      dispatch({ type: 'SET_USER', data: { result, token } })
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const googleFailure = (response) => {
@@ -75,17 +85,28 @@ const AuthForm = (props) => {
                       name="lastname"
                     />
                   </div>
+                  <div className="auth-form__input">
+                    <input
+                      type="text"
+                      id="username"
+                      placeholder="Enter Username"
+                      required
+                      value={user.username}
+                      onChange={handleInputChange}
+                      name="username"
+                    />
+                  </div>
                 </>
               )}
               <div className="auth-form__input">
                 <input
                   type="text"
-                  id="username"
-                  placeholder="Enter Username"
+                  id="email"
+                  placeholder="Enter Email"
                   required
-                  value={user.username}
+                  value={user.email}
                   onChange={handleInputChange}
-                  name="username"
+                  name="email"
                 />
               </div>
               <div className="auth-form__input">
