@@ -5,6 +5,7 @@ const ProfileButton = (props) => {
   const [isHidden, setIsHidden] = useState(true);
 
   const { user } = props;
+  console.log(user);
 
   const showMenu = () => {
     if(!isHidden) return;

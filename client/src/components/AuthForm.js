@@ -22,12 +22,14 @@ const AuthForm = (props) => {
   const GoogleClientId = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID;
 
   const googleSuccess = async (response) => {
-    console.info(response);
+    console.info(response?.profileObj, response?.tokenId);
     const result = response?.profileObj;
     const token = response?.tokenId;
 
     try {
-      dispatch({ type: 'SET_USER', data: { result, token } })
+      dispatch({ type: 'SET_USER', data: { result, token } });
+      setShowModal(false);
+      history.push('/');
     } catch (err) {
       console.error(err);
     }
@@ -38,6 +40,7 @@ const AuthForm = (props) => {
   };
 
   const handleInputChange = (event) => {
+    //name here refers to the name property of the input field
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });
   };

@@ -7,7 +7,7 @@ import brandName from '../assets/brand.png';
 
 const NavBar = (props) => {
 
-  const { user, logout, mockLogin } = props;
+  const { user, logout, mockLogin, login } = props;
 
   let navLinks;
 
@@ -21,7 +21,7 @@ const NavBar = (props) => {
     navLinks = (
       <div className="navbar__buttons">
         <div className="navbar__login-button">
-          <AuthForm action={"Login"}/>
+          <AuthForm action={"Login"} mockLogin={mockLogin}/>
         </div>
         <div className="navbar__signup-button">
           <AuthForm action={"Signup"}/>

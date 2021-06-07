@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Switch, Route, NavLink } from 'react-router-dom';
 import Footer from './components/Footer';
 import Home from './components/Home';
@@ -13,10 +13,18 @@ import TOS from './components/TermsOfService';
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const googleAuthData = JSON.parse(localStorage.getItem('profile'));
+  console.log(googleAuthData)
 
   const mockLogin = async(user = null) => {
     setUser(user);
   };
+
+  const login = async() => {
+    const googleAuthData = JSON.parse(localStorage.getItem('profile'));
+    console.log(googleAuthData)
+
+  }
 
   const signup = async() => {
     console.log("on TODO list");
@@ -28,7 +36,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <NavBar user={user} logout={logout} mockLogin={mockLogin}/>
+      <NavBar user={user} logout={logout} mockLogin={mockLogin} login={login}/>
       <div className="main-page">
         <Switch>
           <Route
