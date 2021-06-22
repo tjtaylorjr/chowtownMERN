@@ -146,42 +146,42 @@ const RestaurantsList = (props) => {
       </div>
       <div className="restaurants-list__results-wrapper">
         <div className="restaurants-list__results-container">
-          {isLoaded && restaurants.map((restaurant, i) => {
+          {isLoaded && restaurants.map((restaurant, i) =>
             //console.log(restaurant);
             //const {_id, name, address, cuisine} = restaurant;
-            //<QueryCard restaurant={restaurant} key={i} />
-            const address = `${restaurant.address.building} ${restaurant.address.street}, ${restaurant.address.zipcode}`;
+            <QueryCard restaurant={restaurant} key={i} />
+            // const address = `${restaurant.address.building} ${restaurant.address.street}, ${restaurant.address.zipcode}`;
 
-            return (
-              <div className="query-card" key={i}>
-                <div className="query-card__wrapper">
-                  <div className="query-card__data-container">
-                    <h5 className="query-card__location-name">{restaurant.name}</h5>
-                    <p className="query-card__location-text">
-                      <strong>Cuisine: </strong>{restaurant.cuisine}<br />
-                      <strong>Address: </strong>{address}
-                    </p>
-                    <div className="query-card__link-container">
-                      <NavLink
-                        to={"/restaurants/" + restaurant._id}
-                        className="query-card__navigation-link"
-                      >
-                        Read Reviews
-                      </NavLink>
-                      <a
-                        target="_blank"
-                        rel="noreferrer"
-                        href={"http://www.google.com/maps/place/" + address}
-                        className="query-card__map-link"
-                      >
-                        View Map
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+            // return (
+            //   <div className="query-card" key={i}>
+            //     <div className="query-card__wrapper">
+            //       <div className="query-card__data-container">
+            //         <h5 className="query-card__location-name">{restaurant.name}</h5>
+            //         <p className="query-card__location-text">
+            //           <strong>Cuisine: </strong>{restaurant.cuisine}<br />
+            //           <strong>Address: </strong>{address}
+            //         </p>
+            //         <div className="query-card__link-container">
+            //           <NavLink
+            //             to={"/restaurants/" + restaurant._id}
+            //             className="query-card__navigation-link"
+            //           >
+            //             Read Reviews
+            //           </NavLink>
+            //           <a
+            //             target="_blank"
+            //             rel="noreferrer"
+            //             href={"http://www.google.com/maps/place/" + address}
+            //             className="query-card__map-link"
+            //           >
+            //             View Map
+            //           </a>
+            //         </div>
+            //       </div>
+            //     </div>
+            //   </div>
+            // );
+          )}
         </div>
       </div>
     </div>

@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-const QueryCard = (restaurant) => {
-  console.log(restaurant);
-  //const { restaurant } = props.restaurant;
-  const { address, cuisine, name, _id } = restaurant;
-  console.log(_id, name, address, cuisine);
-
-  const formattedAddress = `${address.building} ${address.street}, ${address.zipcode}`;
+const QueryCard = (props) => {
+  const { address, cuisine, name, _id } = props.restaurant;
+  const { building, street, zipcode } = address;
+  const formattedAddress = `${building} ${street}, ${zipcode}`;
+  console.log(formattedAddress);
 
   return (
     <>
