@@ -1,27 +1,50 @@
 .query-card {
-  /* width: 250px; */
   height: 225px;
-  /* background-color: #EFEFEF; */
   background-color: #FFFFFF;
-  /* margin: 10px; */
   margin: 2px;
-  /* border: 1px solid #CDCDCD; */
   border: 1px solid #D8D9DB;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .query-card__wrapper {
   height: 100%;
+  display: flex;
+}
+
+.query-card__image-container {
+  width: 30%;
+  height: 100%;
+  background: pink;
 }
 
 .query-card__data-container {
+  width: 70%;
   height: 90%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding-left: 15px;
 }
 
-.query-card__navigation-link,
+.query-card__location-details {
+  height: 70%;
+}
+
+.query-card__location-name {
+  font-size: 24px;
+  margin: 0 5px;
+}
+
+.query-card__location-text {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 5px;
+}
+
+/* .query-card__navigation-link,
 .query-card__map-link {
   text-decoration: none;
   border: 1px solid #CDCDCD;
@@ -34,4 +57,18 @@
 
 .query-card__map-link {
   padding: 8px 20.5px;
+} */
+
+.query-card__navigation-link {
+  text-decoration: none;
+  border: 1px solid #D8D9DB;
+  border-radius: 5px;
+  padding: 3px 5px;
+  margin: 0 5px;
+  color: #FFFFFF;
+  background-color: #00483D;
+}
+
+.query-card__map-link2 {
+  text-decoration: none;
 }
