@@ -17,7 +17,7 @@ const middlewares = [thunk];
 if(process.env.NODE_ENV === 'production') {
   enhancer = applyMiddleware(...middlewares);
 } else {
-  const { logger } = require(`redux-logger`);
+  const logger = require(`redux-logger`).default;
   middlewares.push(logger);
   const composeEnhancers =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

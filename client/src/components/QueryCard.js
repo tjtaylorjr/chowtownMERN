@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
@@ -6,7 +6,6 @@ const QueryCard = (props) => {
   const { address, cuisine, name, _id } = props.restaurant;
   const { building, street, zipcode } = address;
   const formattedAddress = `${building} ${street}, ${zipcode}`;
-  console.log(formattedAddress);
 
   return (
     <>

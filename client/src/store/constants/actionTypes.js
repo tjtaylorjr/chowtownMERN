@@ -1,2 +1,2 @@
-export const CLEAR_USER = "chowtown/auth/clear_user";
-export const SET_USER = "chowtown/auth/set_user";
+export const CLEAR_USER = "CLEAR_USER";
+export const SET_USER = "SET_USER";

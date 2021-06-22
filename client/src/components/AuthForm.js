@@ -22,12 +22,14 @@ const AuthForm = (props) => {
   const GoogleClientId = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID;
 
   const googleSuccess = async (response) => {
-    console.info(response?.profileObj, response?.tokenId);
+    //console.info(response?.profileObj, response?.tokenId);
     const result = response?.profileObj;
     const token = response?.tokenId;
 
     try {
-      dispatch({ type: 'SET_USER', data: { result, token } });
+      const data = { result, token }
+      //localStorage.setItem('profile', JSON.stringify({ ...data }));
+      dispatch({ type: 'SET_USER', data });
       setShowModal(false);
       history.push('/');
     } catch (err) {
