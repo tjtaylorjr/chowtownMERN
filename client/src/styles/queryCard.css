@@ -1,25 +1,28 @@
-.business-card {
-  width: 250px;
+.query-card {
+  /* width: 250px; */
   height: 225px;
-  background-color: #EFEFEF;
-  margin: 10px;
-  border: 1px solid #CDCDCD;
+  /* background-color: #EFEFEF; */
+  background-color: #FFFFFF;
+  /* margin: 10px; */
+  margin: 2px;
+  /* border: 1px solid #CDCDCD; */
+  border: 1px solid #D8D9DB;
   text-align: center;
 }
 
-.business-card__wrapper {
+.query-card__wrapper {
   height: 100%;
 }
 
-.business-card__data-container {
+.query-card__data-container {
   height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.business-card__navigation-link,
-.business-card__map-link {
+.query-card__navigation-link,
+.query-card__map-link {
   text-decoration: none;
   border: 1px solid #CDCDCD;
   border-radius: 5px;
@@ -29,6 +32,6 @@
   background-color: green;
 }
 
-.business-card__map-link {
+.query-card__map-link {
   padding: 8px 20.5px;
 }

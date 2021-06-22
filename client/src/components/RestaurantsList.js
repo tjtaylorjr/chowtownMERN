@@ -153,18 +153,18 @@ const RestaurantsList = (props) => {
             const address = `${restaurant.address.building} ${restaurant.address.street}, ${restaurant.address.zipcode}`;
 
             return (
-              <div className="restaurant-card" key={i}>
-                <div className="restaurant-card__wrapper">
-                  <div className="restaurant-card__data-container">
-                    <h5 className="restaurant-card__location-name">{restaurant.name}</h5>
-                    <p className="restaurant-card__location-text">
+              <div className="query-card" key={i}>
+                <div className="query-card__wrapper">
+                  <div className="query-card__data-container">
+                    <h5 className="query-card__location-name">{restaurant.name}</h5>
+                    <p className="query-card__location-text">
                       <strong>Cuisine: </strong>{restaurant.cuisine}<br />
                       <strong>Address: </strong>{address}
                     </p>
-                    <div className="restaurant-card__link-container">
+                    <div className="query-card__link-container">
                       <NavLink
                         to={"/restaurants/" + restaurant._id}
-                        className="restaurant-card__navigation-link"
+                        className="query-card__navigation-link"
                       >
                         Read Reviews
                       </NavLink>
@@ -172,7 +172,7 @@ const RestaurantsList = (props) => {
                         target="_blank"
                         rel="noreferrer"
                         href={"http://www.google.com/maps/place/" + address}
-                        className="restaurant-card__map-link"
+                        className="query-card__map-link"
                       >
                         View Map
                       </a>
