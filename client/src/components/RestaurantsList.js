@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getAllRestaurants, getCuisines, findRestaurants } from '../services/restaurantServices.js';
-import BusinessCard from './BusinessCard';
+import QueryCard from './QueryCard';
 import { NavLink } from 'react-router-dom';
 
 const RestaurantsList = (props) => {
@@ -149,7 +149,7 @@ const RestaurantsList = (props) => {
           {isLoaded && restaurants.map((restaurant, i) => {
             //console.log(restaurant);
             //const {_id, name, address, cuisine} = restaurant;
-            //<BusinessCard restaurant={restaurant} key={i} />
+            //<QueryCard restaurant={restaurant} key={i} />
             const address = `${restaurant.address.building} ${restaurant.address.street}, ${restaurant.address.zipcode}`;
 
             return (
