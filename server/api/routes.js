@@ -1,12 +1,12 @@
 const express = require('express');
 const RestaurantsCtrl = require('./restaurants.controller.js');
 const ReviewsCtrl = require('./reviews.controller.js');
-const AuthCtrl = require('./auth.controller.js');
+const UsersCtrl = require('./users.controller.js');
 
 const router = express.Router();
 
-router.route("/auth/login").post(AuthCtrl.apiPostLogin);
-router.route("/auth/signup").post(AuthCtrl.apiPostSignup);
+router.route("/users/login").post(UsersCtrl.apiPostLogin);
+router.route("/users/signup").post(UsersCtrl.apiPostSignup);
 
 router.route("/restaurants").get(RestaurantsCtrl.apiGetRestaurants);
 router.route("/restaurants/id/:id").get(RestaurantsCtrl.apiGetRestaurantById);

@@ -1,6 +1,6 @@
-const AuthDAO = require('../dao/authDAO.js');
+const UsersDAO = require('../dao/usersDAO.js');
 
-class AuthController {
+class UsersController {
   static async apiPostLogin(req, res, next) {
     try {
 
@@ -20,4 +20,4 @@ class AuthController {
   }
 }
 
-module.exports = AuthController;
+module.exports = UsersController;
