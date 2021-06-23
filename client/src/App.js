@@ -34,7 +34,6 @@ const App = () => {
   };
 
   const logout = async() => {
-    localStorage.removeItem('profile');
     setUser(null);
   };
 
