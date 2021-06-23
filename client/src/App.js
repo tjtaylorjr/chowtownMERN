@@ -14,7 +14,7 @@ import TOS from './components/TermsOfService';
 const App = () => {
   const [user, setUser] = useState(null);
   const googleAuthData = JSON.parse(localStorage.getItem('profile'));
-  console.log(googleAuthData)
+  //console.log(googleAuthData)
 
   const mockLogin = async(user = null) => {
     setUser(user);
@@ -22,7 +22,10 @@ const App = () => {
 
   const login = async() => {
     const googleAuthData = JSON.parse(localStorage.getItem('profile'));
-    console.log(googleAuthData)
+    //console.log(googleAuthData)
+    if (googleAuthData) {
+
+    }
 
   }
 
@@ -31,6 +34,7 @@ const App = () => {
   };
 
   const logout = async() => {
+    localStorage.removeItem('profile');
     setUser(null);
   };
 
