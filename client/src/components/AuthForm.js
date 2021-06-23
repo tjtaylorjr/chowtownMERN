@@ -15,7 +15,7 @@ const AuthForm = (props) => {
 
   const [showModal, setShowModal] = useState(false);
   const [modalState, setModalState] = useState({type: props.action});
-  const [user, setUser] = useState(defaultUserState);
+  const [userInfo, setUserInfo] = useState(defaultUserState);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -44,12 +44,12 @@ const AuthForm = (props) => {
   const handleInputChange = (event) => {
     //name here refers to the name property of the input field
     const { name, value } = event.target;
-    setUser({ ...user, [name]: value });
+    setUserInfo({ ...userInfo, [name]: value });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.mockLogin(user);
+    props.mockLogin(userInfo);
     history.push('/');
   };
 
@@ -74,7 +74,7 @@ const AuthForm = (props) => {
                       id="firstname"
                       placeholder="Enter First Name"
                       required
-                      value={user.firstname}
+                      value={userInfo.firstname}
                       onChange={handleInputChange}
                       name="firstname"
                     />
@@ -85,7 +85,7 @@ const AuthForm = (props) => {
                       id="lastname"
                       placeholder="Enter Last Name"
                       required
-                      value={user.lastname}
+                      value={userInfo.lastname}
                       onChange={handleInputChange}
                       name="lastname"
                     />
@@ -96,7 +96,7 @@ const AuthForm = (props) => {
                       id="username"
                       placeholder="Enter Username"
                       required
-                      value={user.username}
+                      value={userInfo.username}
                       onChange={handleInputChange}
                       name="username"
                     />
@@ -109,7 +109,7 @@ const AuthForm = (props) => {
                   id="email"
                   placeholder="Enter Email"
                   required
-                  value={user.email}
+                  value={userInfo.email}
                   onChange={handleInputChange}
                   name="email"
                 />
@@ -120,7 +120,7 @@ const AuthForm = (props) => {
                   id="password"
                   placeholder="Enter Password"
                   required
-                  value={user.password}
+                  value={userInfo.password}
                   onChange={handleInputChange}
                   name="password"
                 />

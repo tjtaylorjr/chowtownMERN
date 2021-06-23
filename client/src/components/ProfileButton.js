@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const ProfileButton = (props) => {
 
   const [isHidden, setIsHidden] = useState(true);
 
-  const { user } = props;
-  console.log(user);
+  const { logout, user } = props;
+  //console.log(user);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const showMenu = () => {
     if(!isHidden) return;
@@ -27,6 +31,9 @@ const ProfileButton = (props) => {
   const endSession = (event) => {
     event.preventDefault();
     //do something to cause logout
+    dispatch({ type: 'CLEAR_USER' });
+    logout();
+    history.push('/');
   };
 
   return (

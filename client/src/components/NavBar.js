@@ -14,7 +14,7 @@ const NavBar = (props) => {
   if(user) {
     navLinks = (
       <div>
-        <ProfileButton user={user} />
+        <ProfileButton user={user} logout={logout}/>
       </div>
     );
   } else {
