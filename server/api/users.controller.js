@@ -1,10 +1,12 @@
 const UsersDAO = require('../dao/usersDAO.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const secret = process.env.JWT_SECRET;
 
 class UsersController {
   static async apiPostLogin(req, res, next) {
     const { email, password } = req.body;
+    //console.log(secret);
 
     try {
       const userRecord = await UsersDAO.getUserByEmail({ email });

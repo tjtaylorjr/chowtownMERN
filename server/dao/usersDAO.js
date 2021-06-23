@@ -4,7 +4,7 @@ const ObjectId = mongodb.ObjectID;
 
 let users;
 
-class AuthDAO {
+class UsersDAO {
   static async injectDB(conn) {
     if (users) {
       return;
@@ -18,4 +18,4 @@ class AuthDAO {
   };
 };
 
-module.exports = AuthDAO;
+module.exports = UsersDAO;
