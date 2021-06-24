@@ -3,6 +3,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 import { Modal } from '../context/Modal';
+import { login } from '../store/actions/auth';
 import { FcGoogle } from 'react-icons/fc';
 
 const AuthForm = (props) => {
@@ -52,8 +53,7 @@ const AuthForm = (props) => {
     event.preventDefault();
     //props.mockLogin(userInfo);
     if(modalState.type === "Login") {
-      props.login(userInfo);
-      history.push('/');
+      login(userInfo, history);
     }
   };
 

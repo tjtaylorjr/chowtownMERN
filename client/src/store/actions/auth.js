@@ -1,11 +1,13 @@
 import { CLEAR_USER, SET_USER } from '../constants/actionTypes';
-import { authorizeUser } from '../../services/authServices';
+import { authorizeUser } from '../../services/userServices';
 
-export const login = ( formData, router ) => async (dispatch) {
+export const login = ( formData, history ) => async (dispatch) => {
   try {
     const { data } = await authorizeUser(formData);
     dispatch({ type: SET_USER, data });
 
-    router.push('/');
-  }
-}
+    history.push('/');
+  } catch (err) {
+    console.error(`Authentication failure: ${err}`);
+  };
+};
