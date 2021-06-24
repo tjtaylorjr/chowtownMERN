@@ -3,8 +3,9 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 import { Modal } from '../context/Modal';
-import { login } from '../store/actions/auth';
+import { login, signup } from '../store/actions/auth';
 import { FcGoogle } from 'react-icons/fc';
+import { apiPostSignup } from '../../../server/api/users.controller';
 
 const AuthForm = (props) => {
   const defaultUserState = {
@@ -54,6 +55,9 @@ const AuthForm = (props) => {
     //props.mockLogin(userInfo);
     if(modalState.type === "Login") {
       login(userInfo, history);
+    }
+    if(modalState.type === "Signup") {
+      signup(userInfo, history);
     }
   };
 
