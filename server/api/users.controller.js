@@ -9,7 +9,7 @@ class UsersController {
     //console.log(secret);
 
     try {
-      const userRecord = await UsersDAO.getUserByEmail({ email });
+      const userRecord = await UsersDAO.getUserByEmail( email);
 
       if(!userRecord) {
         return res.status(404).json({message: "User does not exist"});
@@ -17,9 +17,18 @@ class UsersController {
 
       const passwordMatch = await bcrypt.compare(password, userRecord.password);
 
-      if(!passwordMatch) return res.status(400).json({message: "Invalid credentials"})
+      if(!passwordMatch) {
+        return res.status(400).json({message: "Invalid credentials"});
+      };
 
-      const token = jwt.sign({email: userRecord.email, id: userRecord._id}, secret, { expiresIn: "1h" });
+      const token = jwt.sign(
+        {
+          email: userRecord.email,
+          id: userRecord._id
+        },
+        secret,
+        { expiresIn: "1h" }
+      );
 
       res.status(200).json({ result: userRecord, token });
 
@@ -31,7 +40,39 @@ class UsersController {
 
   static async apiPostSignup(req, res, next) {
     try {
+      const email = req.body.email;
 
+      const userExists = await UsersDAO.getUserByEmail(email);
+
+      if (userExists) {
+        return res.status(400).json({message: "User already exists"});
+      };
+
+      const username = req.body.username;
+      const firstname = req.body.firstname;
+      const lastname = req.body.lastname;
+      const hashedPassword = await bcrypt.hashSync(password, 12);
+
+      const userResponse = await UsersDAO.addUser(
+        email,
+        username,
+        hashedPassword,
+        firstname,
+        lastname
+      );
+
+      const userRecord = await UsersDAO.getUserByEmail( email);
+
+      const token = jwt.sign(
+        {
+          email: userRecord.email,
+          id: userRecord._id
+        },
+        secret,
+        { expiresIn: "1h"}
+      );
+
+      res.status(201).json({ result, token });
     } catch (err) {
       console.error(`api, ${err}`);
       res.status(500).json({ error: err });

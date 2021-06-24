@@ -7,6 +7,7 @@ import { FcGoogle } from 'react-icons/fc';
 
 const AuthForm = (props) => {
   const defaultUserState = {
+    email: "",
     firstname: "",
     lastname: "",
     username: "",
@@ -49,8 +50,11 @@ const AuthForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.mockLogin(userInfo);
-    history.push('/');
+    //props.mockLogin(userInfo);
+    if(modalState.type === "Login") {
+      props.login(userInfo);
+      history.push('/');
+    }
   };
 
   return (

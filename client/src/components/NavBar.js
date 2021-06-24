@@ -21,7 +21,7 @@ const NavBar = (props) => {
     navLinks = (
       <div className="navbar__buttons">
         <div className="navbar__login-button">
-          <AuthForm action={"Login"} mockLogin={mockLogin}/>
+          <AuthForm action={"Login"} mockLogin={mockLogin} login={login}/>
         </div>
         <div className="navbar__signup-button">
           <AuthForm action={"Signup"}/>

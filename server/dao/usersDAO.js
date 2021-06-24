@@ -1,5 +1,4 @@
 const mongodb = require('mongodb');
-const bcrypt = require('bcryptjs');
 
 const ObjectId = mongodb.ObjectID;
 
@@ -18,14 +17,24 @@ class UsersDAO {
     };
   };
 
-  static async addUser(firstName, lastName, username, hashedPassword, email) {
+  static async getUserByEmail(email) {
+    try {
+      return await users.findOne({email});
+
+    } catch (err) {
+      console.error(`Unable to find user: ${err}`);
+      return {error: err };
+    };
+  };
+
+  static async addUser(firstname, lastname, username, hashedPassword, email) {
     try {
       const userProfile = {
         email: email,
         password: hashedPassword,
         username: username,
-        firstName: firstName,
-        lastName: lastName
+        firstname: firstname,
+        lastname: lastname
       };
 
       return await users.insertOne(userProfile)
