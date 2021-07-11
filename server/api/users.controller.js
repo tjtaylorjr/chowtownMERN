@@ -1,10 +1,15 @@
 const UsersDAO = require('../dao/usersDAO.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-//const secret = process.env.JWT_SECRET;
+const dotenv = require('dotenv');
+dotenv.config()
+const secret = process.env.JWT_SECRET;
+
+
 
 class UsersController {
   static async apiPostLogin(req, res, next) {
+    //console.log(req.body)
     const { email, password } = req.body;
     try {
       const userRecord = await UsersDAO.getUserByEmail(email);
@@ -18,19 +23,47 @@ class UsersController {
       if(!passwordMatch) {
         return res.status(400).json({message: "Invalid credentials"});
       };
-      const secret = userRecord.secret;
-      //console.log(email, password, secret);
+      // const secret = userRecord.secret;
+      //console.log(secret);
+      const { _id, username, firstname, lastname } = userRecord.user
+
+      const user = {
+        _id,
+        email,
+        username,
+        firstname,
+        lastname
+      }
+
       const token = jwt.sign(
         {
-          email: userRecord.user.email,
-          id: userRecord.user._id
+          email: email,
+          id: _id
         },
         secret,
         { expiresIn: "1h" }
       );
 
-      res.status(200).json({ result: userRecord.user, token });
+      res.status(200).json({ result: user, token });
 
+    } catch (err) {
+      console.error(`api, ${err}`);
+      res.status(500).json({error: err});
+    }
+  }
+
+  static async apiPostRestore(req, res, next) {
+    //console.log(req.body)
+    try {
+      const jwtdata = req.body;
+      //console.log(JSON.parse(jwtdata))
+      //console.log(jwtdata.token)
+      const verified = jwt.verify(jwtdata.token, secret);
+      if (verified) {
+        res.status(200).json(jwtdata);
+      } else {
+        res.status(401).json({message: "Unauthorized"})
+      }
     } catch (err) {
       console.error(`api, ${err}`);
       res.status(500).json({error: err});

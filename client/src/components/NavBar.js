@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { restore } from '../store/actions/auth';
 import ProfileButton from './ProfileButton';
 import AuthForm from './AuthForm';
 import logo from '../assets/textless-logo.png';
@@ -8,13 +9,21 @@ import brandName from '../assets/brand.png';
 
 const NavBar = (props) => {
   // const[profile, setProfile] = useState(JSON.parse(localStorage.getItem('profile')));
-  const[profile, setProfile] = useState();
+  const[profile, setProfile] = useState(false);
   const[isLoggedIn, setIsLoggedIn] = useState(false);
   //const[loaded, setLoaded] = useState(false);
   const { setUser, logout } = props;
+  const dispatch = useDispatch();
   const history = useHistory();
-  const user = useSelector(state => state.user);
-  const token = JSON.parse(localStorage.getItem('profile'));
+  const user = useSelector(state => state.auth.user);
+  // console.log(user)
+  // if(user) {
+  //   console.log("hi")
+  // } else {
+  //   console.log("nope")
+  // }
+  let jwt = JSON.parse(localStorage.getItem('profile'));
+
 
   //setProfile(JSON.parse(localStorage.getItem('profile')));
 
@@ -34,16 +43,21 @@ const NavBar = (props) => {
 
   // }, [profile]);
   useEffect(() => {
-    if (token) {
+    if (jwt) {
+      //console.log(jwt);
+      dispatch(restore(jwt, history))
       setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+      jwt = JSON.parse(localStorage.getItem('profile'));
     }
-  },[token]);
+  },[]);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    setProfile(JSON.parse(localStorage.getItem('profile')));
-    //setLoaded(true);
-  },[isLoggedIn])
+  //   setProfile(JSON.parse(localStorage.getItem('profile')));
+  //   //setLoaded(true);
+  // },[isLoggedIn])
 
 
 
@@ -72,7 +86,7 @@ const NavBar = (props) => {
 
     navLinks = (
       <div>
-        <ProfileButton  user={user} setIsLoggedIn={setIsLoggedIn} setProfile={setProfile}/>
+        <ProfileButton  user={user} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setProfile={setProfile}/>
       </div>
     );
   } else {

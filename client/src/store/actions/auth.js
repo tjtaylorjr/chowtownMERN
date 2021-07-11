@@ -1,5 +1,5 @@
 import { CLEAR_USER, SET_USER } from '../constants/actionTypes';
-import { authorizeUser, registerUser } from '../../services/userServices';
+import { authorizeUser, registerUser, restoreUser} from '../../services/userServices';
 
 const setLoginState = (user) => {
   return {
@@ -11,9 +11,10 @@ const setLoginState = (user) => {
 export const login = ( userInfo, history, setShowModal ) => async (dispatch) => {
   try {
     //console.log(formData);
-    const { result } = await authorizeUser(userInfo);
+    const user = await authorizeUser(userInfo);
+    console.log(user)
     //dispatch({ type: SET_USER, data });
-    dispatch(setLoginState({...result}));
+    dispatch(setLoginState({...user}));
     setShowModal(false);
     history.push('/');
   } catch (err) {
@@ -29,8 +30,8 @@ export const signup = ( userInfo, history, setShowModal ) => async (dispatch) =>
       throw res
     } else {
       // reuse login function after registration
-      const { result } = await authorizeUser(userInfo);
-      dispatch(setLoginState({...result}));
+      const user = await authorizeUser(userInfo);
+      dispatch(setLoginState({...user}));
       //dispatch({ type: SET_USER, user});
       setShowModal(false);
       history.push('/');
@@ -38,6 +39,18 @@ export const signup = ( userInfo, history, setShowModal ) => async (dispatch) =>
   } catch (err) {
     console.error(`Registration failure: ${err}`);
   };
+};
+
+export const restore = ( jwt, history ) => async (dispatch) => {
+  //console.log(jwt)
+  try {
+    const user = await restoreUser(jwt);
+    //console.log(user)
+    dispatch(setLoginState({...user}));
+    history.push('/')
+  } catch(err) {
+    console.error(`User not authorized.  Please log back in. ${err}`);
+  }
 };
 
 export const logout = () => {

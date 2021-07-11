@@ -6,13 +6,14 @@ import { logout } from '../store/actions/auth';
 const ProfileButton = (props) => {
 
   const [isHidden, setIsHidden] = useState(true);
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
 
-  const { user, setIsLoggedIn, setProfile } = props;
+  const { user, isLoggedIn, setIsLoggedIn, setProfile } = props;
   //const user = useSelector(state => state.user);
+  // console.log(user)
   const dispatch = useDispatch();
   const history = useHistory();
-
-  console.log(user)
 
   const showMenu = () => {
     if(!isHidden) return;
@@ -21,15 +22,12 @@ const ProfileButton = (props) => {
 
   useEffect(() => {
     if (user) {
-      const {_id, email, username, firstname, lastname} = user;
-      const profile = {
-        _id,
-        email,
-        username,
-        firstname,
-        lastname
-      }
-      setProfile(profile);
+      console.log(user)
+      setEmail(user.result.email);
+      setUsername(user.result.username);
+      setProfile(true);
+    } else {
+      setProfile(false);
     }
   },[user]);
 
@@ -62,8 +60,8 @@ const ProfileButton = (props) => {
       </button>
       {!isHidden && (
         <ul>
-          <li>{user?.username}</li>
-          <li>{user?.email}</li>
+          <li>{username}</li>
+          <li>{email}</li>
           <li>
             <button onClick={endSession}>Log Out</button>
           </li>
