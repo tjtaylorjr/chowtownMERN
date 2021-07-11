@@ -24,7 +24,7 @@ const authReducer = (state = initialState, action) => {
       newState.user = null;
       return newState;
     case SET_USER:
-      localStorage.setItem('profile', JSON.stringify({ ...action?.data }));
+      localStorage.setItem('profile', JSON.stringify({ ...action?.user }));
       newState = { ...state };
       newState.user = action?.user;
       return newState;

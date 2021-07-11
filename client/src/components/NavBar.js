@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import AuthForm from './AuthForm';
 import logo from '../assets/textless-logo.png';
@@ -13,6 +13,8 @@ const NavBar = (props) => {
   //const[loaded, setLoaded] = useState(false);
   const { setUser, logout } = props;
   const history = useHistory();
+  const user = useSelector(state => state.user);
+  const token = JSON.parse(localStorage.getItem('profile'));
 
   //setProfile(JSON.parse(localStorage.getItem('profile')));
 
@@ -31,11 +33,11 @@ const NavBar = (props) => {
   //   setUser(userProfile);
 
   // }, [profile]);
-  // useEffect(() => {
-  //   const token = profile?.token;
-
-  // setProfile(JSON.parse(localStorage.getItem('profile')));
-  // },[props.user]);
+  useEffect(() => {
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  },[token]);
 
   useEffect(() => {
 
@@ -45,28 +47,24 @@ const NavBar = (props) => {
 
 
 
-  useEffect(() => {
-    if (profile) {
-      const { _id, firstname, lastname, username, email } = profile?.result;
-      const userProfile = {
-        _id,
-        email,
-        username,
-        firstname,
-        lastname
-      };
-      //console.log(userProfile)
-      setUser({ ...userProfile });
-      //setLoaded(true);
-    }
-    // else {
-    //   setUser(null);
-    // }
-  },[profile])
+  // useEffect(() => {
+  //   if (profile) {
+  //     const { _id, firstname, lastname, username, email } = profile?.result;
+  //     const userProfile = {
+  //       _id,
+  //       email,
+  //       username,
+  //       firstname,
+  //       lastname
+  //     };
+
+  //     setUser({ ...userProfile });
+  //   }
+  // },[profile])
 
 
   if (isLoggedIn) {
-    const userData = JSON.parse(localStorage.getItem('profile'));
+    //const userData = JSON.parse(localStorage.getItem('profile'));
     //console.log(userData)
     // setProfile(userData);
     // history.push('/');
@@ -74,7 +72,7 @@ const NavBar = (props) => {
 
     navLinks = (
       <div>
-        <ProfileButton  userData={userData} logout={logout} setIsLoggedIn={setIsLoggedIn} setProfile={setProfile}/>
+        <ProfileButton  user={user} setIsLoggedIn={setIsLoggedIn} setProfile={setProfile}/>
       </div>
     );
   } else {
