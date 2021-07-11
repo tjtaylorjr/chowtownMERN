@@ -57,8 +57,8 @@ const ProfileButton = (props) => {
       </button>
       {!isHidden && (
         <ul>
-          <li>{username}</li>
-          <li>{email}</li>
+          <li>{username.toUpperCase()}</li>
+          <li>{email.toUpperCase()}</li>
           <li>
             <button onClick={endSession}>Log Out</button>
           </li>
