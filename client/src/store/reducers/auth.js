@@ -7,11 +7,14 @@ const initialState = {
 //shape of state:
 // {
 //   user: {
-//     id,
-//     firstname,
-//     lastname,
-//     username,
-//     email
+//       result: {
+           //       id,
+           //       firstname,
+           //       lastname,
+           //       username,
+           //       email
+//       },
+//       token
 //   }
 // }
 

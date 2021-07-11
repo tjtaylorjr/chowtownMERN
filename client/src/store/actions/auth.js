@@ -10,10 +10,7 @@ const setLoginState = (user) => {
 
 export const login = ( userInfo, history, setShowModal ) => async (dispatch) => {
   try {
-    //console.log(formData);
     const user = await authorizeUser(userInfo);
-    console.log(user)
-    //dispatch({ type: SET_USER, data });
     dispatch(setLoginState({...user}));
     setShowModal(false);
     history.push('/');
@@ -29,10 +26,8 @@ export const signup = ( userInfo, history, setShowModal ) => async (dispatch) =>
     if (!res.ok) {
       throw res
     } else {
-      // reuse login function after registration
       const user = await authorizeUser(userInfo);
       dispatch(setLoginState({...user}));
-      //dispatch({ type: SET_USER, user});
       setShowModal(false);
       history.push('/');
     }
@@ -42,10 +37,8 @@ export const signup = ( userInfo, history, setShowModal ) => async (dispatch) =>
 };
 
 export const restore = ( jwt, history ) => async (dispatch) => {
-  //console.log(jwt)
   try {
     const user = await restoreUser(jwt);
-    //console.log(user)
     dispatch(setLoginState({...user}));
     history.push('/')
   } catch(err) {

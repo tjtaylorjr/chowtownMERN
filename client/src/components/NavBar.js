@@ -8,92 +8,37 @@ import logo from '../assets/textless-logo.png';
 import brandName from '../assets/brand.png';
 
 const NavBar = (props) => {
-  // const[profile, setProfile] = useState(JSON.parse(localStorage.getItem('profile')));
-  const[profile, setProfile] = useState(false);
+  const[isLoaded, setIsLoaded] = useState(false);
   const[isLoggedIn, setIsLoggedIn] = useState(false);
-  //const[loaded, setLoaded] = useState(false);
-  const { setUser, logout } = props;
+  const { setUser } = props;
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector(state => state.auth.user);
-  // console.log(user)
-  // if(user) {
-  //   console.log("hi")
-  // } else {
-  //   console.log("nope")
-  // }
   let jwt = JSON.parse(localStorage.getItem('profile'));
-
-
-  //setProfile(JSON.parse(localStorage.getItem('profile')));
-
   let navLinks;
-  //const profile = JSON.parse(localStorage.getItem('profile'));
 
-  // useEffect(() => {
-  //   const { _id, firstname, lastname, username, email } = profile.result;
-  //   const userProfile = {
-  //     _id,
-  //     email,
-  //     username,
-  //     firstname,
-  //     lastname
-  //   };
-  //   setUser(userProfile);
-
-  // }, [profile]);
   useEffect(() => {
     if (jwt) {
-      //console.log(jwt);
       dispatch(restore(jwt, history))
       setIsLoggedIn(true);
+      setUser(jwt.result);
     } else {
       setIsLoggedIn(false);
-      jwt = JSON.parse(localStorage.getItem('profile'));
     }
   },[]);
 
-  // useEffect(() => {
-
-  //   setProfile(JSON.parse(localStorage.getItem('profile')));
-  //   //setLoaded(true);
-  // },[isLoggedIn])
-
-
-
-  // useEffect(() => {
-  //   if (profile) {
-  //     const { _id, firstname, lastname, username, email } = profile?.result;
-  //     const userProfile = {
-  //       _id,
-  //       email,
-  //       username,
-  //       firstname,
-  //       lastname
-  //     };
-
-  //     setUser({ ...userProfile });
-  //   }
-  // },[profile])
-
-
   if (isLoggedIn) {
-    //const userData = JSON.parse(localStorage.getItem('profile'));
-    //console.log(userData)
-    // setProfile(userData);
-    // history.push('/');
-   // const { username, email } = profile?.result;
 
     navLinks = (
       <div>
-        <ProfileButton  user={user} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setProfile={setProfile}/>
+        <ProfileButton  user={user} setIsLoggedIn={setIsLoggedIn} setIsLoaded={setIsLoaded}/>
       </div>
     );
   } else {
     navLinks = (
       <div className="navbar__buttons">
         <div className="navbar__login-button">
-          <AuthForm action={"Login"} setIsLoggedIn={setIsLoggedIn} setProfile={setProfile} />
+          <AuthForm action={"Login"} setIsLoggedIn={setIsLoggedIn} />
         </div>
         <div className="navbar__signup-button">
           <AuthForm action={"Signup"}/>

@@ -19,7 +19,6 @@ const Restaurant = (props) => {
 
   const fetchRestaurant = async (id) => {
     const resInfo = await getRestaurantById(id);
-    //console.log(resInfo);
     if(resInfo) {
       setRestaurantProfile(resInfo);
     };
@@ -62,7 +61,7 @@ const Restaurant = (props) => {
                         </p>
                         {props.user && props.user.id === review.user_id &&
                           <div>
-                            <a onClick={() => removeReview(review._id, i)}>Delete</a>
+                            <a href="#" onClick={() => removeReview(review._id, i)}>Delete</a>
                             <NavLink to={{
                               pathname: "/restaurants/" + props.match.params.id + "/review",
                               state: {

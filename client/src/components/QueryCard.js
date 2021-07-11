@@ -15,7 +15,7 @@ const QueryCard = (props) => {
           <div className="query-card__data-container">
             <div className="query-card__location-details">
               <h5 className="query-card__location-name">{name}</h5>
-              <p className="query-card__location-text">
+              <div className="query-card__location-text">
                 <div>
                   {formattedAddress + ' '}
                   <a
@@ -28,11 +28,11 @@ const QueryCard = (props) => {
               </a>
                 </div>
                 {cuisine}
-              </p>
+              </div>
             </div>
             <div className="query-card__link-container">
               <NavLink
-                to={"/restaurants/" + _id}
+                to={"/restaurant/" + _id}
                 className="query-card__navigation-link"
               >
                 Read Reviews

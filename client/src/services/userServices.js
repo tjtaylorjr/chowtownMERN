@@ -5,7 +5,6 @@ export const authorizeUser = async (formData) => {
       "email": email,
       "password": password
     }
-    //console.log(email,password)
     const res = await fetch(`/api/v1/users/login`,
     {
       method: "POST",
@@ -20,7 +19,7 @@ export const authorizeUser = async (formData) => {
     }
 
     const user = await res.json();
-    console.log(user)
+    //console.log(user)
     return user;
   } catch (err) {
     console.error(err);
@@ -37,7 +36,6 @@ export const registerUser = async (formData) => {
       "lastname": lastname,
       "password": password
     }
-    //console.log(email,password)
     const res = await fetch(`/api/v1/users/signup`,
       {
         method: "POST",
@@ -52,7 +50,6 @@ export const registerUser = async (formData) => {
     }
 
     const payload = await res.json();
-    //console.log(payload)
     return payload;
   } catch (err) {
     console.error(err);
@@ -60,7 +57,6 @@ export const registerUser = async (formData) => {
 }
 
 export const restoreUser = async (jwt) => {
-  //console.log(jwt)
   try {
     const res = await fetch(`/api/v1/users/restore`,
       {
@@ -76,7 +72,6 @@ export const restoreUser = async (jwt) => {
     }
 
     const user = await res.json();
-    //console.log(user)
     return user;
   } catch (err) {
     console.error(err);

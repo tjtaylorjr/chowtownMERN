@@ -5,7 +5,6 @@ import { GoogleLogin } from 'react-google-login';
 import { Modal } from '../context/Modal';
 import { login, signup } from '../store/actions/auth';
 import { FcGoogle } from 'react-icons/fc';
-import { authorizeUser } from '../services/userServices';
 
 
 const AuthForm = (props) => {
@@ -20,7 +19,7 @@ const AuthForm = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [modalState, setModalState] = useState({type: props.action});
   const [userInfo, setUserInfo] = useState(defaultUserState);
-  const { setIsLoggedIn, setProfile } = props;
+  const { setIsLoggedIn } = props;
   const dispatch = useDispatch();
   const history = useHistory();
   const GoogleClientId = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID;
@@ -53,22 +52,14 @@ const AuthForm = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    //props.mockLogin(userInfo);
-    //console.log(userInfo)
     if(modalState.type === "Login") {
-        //const {data} = await authorizeUser(userInfo);
-        //console.log(data)
       try {
         dispatch(login(userInfo, history, setShowModal));
-        //setProfile(JSON.parse(localStorage.getItem('profile')));
         setIsLoggedIn(true);
       }catch(err) {
         console.error(err)
       }
-
-
       history.push('/');
-        //setShowModal(false);
     }
     if(modalState.type === "Signup") {
       dispatch(signup(userInfo, history));
@@ -174,12 +165,6 @@ const AuthForm = (props) => {
                   isLoggedIn={true}
                 />
               )}
-              {/* <button
-                type="submit"
-                className="auth-form__submit-button"
-              >
-                {modalState.type}
-              </button> */}
               {modalState.type === "Login" ? (
                 <div>
                   {`Don't have an account?`}

@@ -1,6 +1,5 @@
-//import express from 'express';
+
 const express = require('express');
-//import cors from 'cors';
 const cors = require('cors');
 const routes = require("./api/routes.js");
 

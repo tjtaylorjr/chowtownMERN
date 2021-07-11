@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { logout } from '../store/actions/auth';
 
 const ProfileButton = (props) => {
@@ -9,9 +9,7 @@ const ProfileButton = (props) => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
 
-  const { user, isLoggedIn, setIsLoggedIn, setProfile } = props;
-  //const user = useSelector(state => state.user);
-  // console.log(user)
+  const { user, setIsLoggedIn, setIsLoaded } = props;
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -22,12 +20,11 @@ const ProfileButton = (props) => {
 
   useEffect(() => {
     if (user) {
-      console.log(user)
       setEmail(user.result.email);
       setUsername(user.result.username);
-      setProfile(true);
+      setIsLoaded(true);
     } else {
-      setProfile(false);
+      setIsLoaded(false);
     }
   },[user]);
 
@@ -48,7 +45,7 @@ const ProfileButton = (props) => {
 
     dispatch(logout());
     setIsLoggedIn(false);
-    setProfile();
+    setIsLoaded(false);
 
     history.push('/');
   };
