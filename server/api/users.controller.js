@@ -71,7 +71,7 @@ class UsersController {
         { expiresIn: "1h"}
       );
 
-      res.status(201).json({ result, token });
+      res.status(201).json({ result: userRecord.user, token });
     } catch (err) {
       console.error(`api, ${err}`);
       res.status(500).json({ error: err });
