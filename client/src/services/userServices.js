@@ -19,8 +19,9 @@ export const authorizeUser = async (formData) => {
       throw res;
     }
 
-    const data = await res.json();
-    return {data: data};
+    const user = await res.json();
+    console.log(user)
+    return user;
   } catch (err) {
     console.error(err);
   }

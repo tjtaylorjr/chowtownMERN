@@ -1,19 +1,19 @@
 import { CLEAR_USER, SET_USER } from '../constants/actionTypes';
-import { authorizeUser } from '../../services/userServices';
+import { authorizeUser, registerUser } from '../../services/userServices';
 
-const setLoginState = (data) => {
+const setLoginState = (user) => {
   return {
     type: SET_USER,
-    data
+    user
   }
 };
 
 export const login = ( userInfo, history, setShowModal ) => async (dispatch) => {
   try {
     //console.log(formData);
-    const { data } = await authorizeUser(userInfo);
+    const { result } = await authorizeUser(userInfo);
     //dispatch({ type: SET_USER, data });
-    dispatch(setLoginState({...data}));
+    dispatch(setLoginState({...result}));
     setShowModal(false);
     history.push('/');
   } catch (err) {
@@ -21,14 +21,27 @@ export const login = ( userInfo, history, setShowModal ) => async (dispatch) => 
   };
 };
 
-export const signup = ( userInfo, history ) => async (dispatch) => {
+export const signup = ( userInfo, history, setShowModal ) => async (dispatch) => {
   try {
+    const res = await registerUser(userInfo);
 
-    // reuse login function after registration
-    const { data } = await authorizeUser(userInfo);
-    dispatch({ type: SET_USER, data});
-    //history.push('/');
+    if (!res.ok) {
+      throw res
+    } else {
+      // reuse login function after registration
+      const { result } = await authorizeUser(userInfo);
+      dispatch(setLoginState({...result}));
+      //dispatch({ type: SET_USER, user});
+      setShowModal(false);
+      history.push('/');
+    }
   } catch (err) {
     console.error(`Registration failure: ${err}`);
+  };
+};
+
+export const logout = () => {
+  return {
+    type: CLEAR_USER
   };
 };
