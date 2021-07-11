@@ -62,7 +62,14 @@ const AuthForm = (props) => {
       history.push('/');
     }
     if(modalState.type === "Signup") {
-      dispatch(signup(userInfo, history));
+      console.log(userInfo)
+      try {
+        dispatch(signup(userInfo, history, setShowModal));
+        setIsLoggedIn(true);
+      } catch(err) {
+        console.error(err)
+      }
+      history.push('/');
     }
   };
 

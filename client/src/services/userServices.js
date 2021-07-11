@@ -27,6 +27,7 @@ export const authorizeUser = async (formData) => {
 }
 
 export const registerUser = async (formData) => {
+  console.log(formData)
   try {
     const { email, username, firstname, lastname, password } = formData;
     const body = {
@@ -50,6 +51,7 @@ export const registerUser = async (formData) => {
     }
 
     const payload = await res.json();
+    //console.log(payload)
     return payload;
   } catch (err) {
     console.error(err);

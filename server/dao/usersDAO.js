@@ -20,9 +20,9 @@ class UsersDAO {
   static async getUserByEmail(email) {
     try {
       const user = await users.findOne({email});
-      const secret = process.env.JWT_SECRET;
+      //const secret = process.env.JWT_SECRET;
       //return await users.findOne({email});
-      return {user, secret}
+      return {user}
 
     } catch (err) {
       console.error(`Unable to find user: ${err}`);
@@ -33,11 +33,11 @@ class UsersDAO {
   static async addUser(firstname, lastname, username, hashedPassword, email) {
     try {
       const userProfile = {
-        email: email,
-        password: hashedPassword,
-        username: username,
         firstname: firstname,
-        lastname: lastname
+        lastname: lastname,
+        username: username,
+        password: hashedPassword,
+        email: email
       };
 
       return await users.insertOne(userProfile)

@@ -22,8 +22,8 @@ export const login = ( userInfo, history, setShowModal ) => async (dispatch) => 
 export const signup = ( userInfo, history, setShowModal ) => async (dispatch) => {
   try {
     const res = await registerUser(userInfo);
-
-    if (!res.ok) {
+    //console.log(res)
+    if (res.message !== "success") {
       throw res
     } else {
       const user = await authorizeUser(userInfo);

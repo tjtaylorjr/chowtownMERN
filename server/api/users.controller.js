@@ -71,40 +71,53 @@ class UsersController {
   }
 
   static async apiPostSignup(req, res, next) {
+    //console.log(req.body)
     try {
       const email = req.body.email;
 
       const userExists = await UsersDAO.getUserByEmail(email);
-
-      if (userExists) {
+      //console.log(userExists.user)
+      if (userExists.user) {
         return res.status(400).json({message: "User already exists"});
       };
 
       const username = req.body.username;
       const firstname = req.body.firstname;
       const lastname = req.body.lastname;
+      const password = req.body.password;
       const hashedPassword = await bcrypt.hashSync(password, 12);
 
       const userResponse = await UsersDAO.addUser(
-        email,
+        firstname,
+        lastname,
         username,
         hashedPassword,
-        firstname,
-        lastname
+        email,
       );
 
       const userRecord = await UsersDAO.getUserByEmail( email);
+      console.log(userRecord)
 
-      const token = jwt.sign(
-        {
-          email: userRecord.email,
-          id: userRecord._id
-        },
-        secret,
-        { expiresIn: "1h"}
-      );
+      // const { _id, username, firstname, lastname } = userRecord.user
 
-      res.status(201).json({ result: userRecord.user, token });
+      // const user = {
+      //   _id,
+      //   email,
+      //   username,
+      //   firstname,
+      //   lastname
+      // }
+
+      // const token = jwt.sign(
+      //   {
+      //     email: userRecord.email,
+      //     id: userRecord._id
+      //   },
+      //   secret,
+      //   { expiresIn: "1h"}
+      // );
+
+      res.status(201).json({ message: "success" });
     } catch (err) {
       console.error(`api, ${err}`);
       res.status(500).json({ error: err });
