@@ -5,7 +5,8 @@ import { GoogleLogin } from 'react-google-login';
 import { Modal } from '../context/Modal';
 import { login, signup } from '../store/actions/auth';
 import { FcGoogle } from 'react-icons/fc';
-import { apiPostSignup } from '../../../server/api/users.controller';
+import { authorizeUser } from '../services/userServices';
+
 
 const AuthForm = (props) => {
   const defaultUserState = {
@@ -19,7 +20,7 @@ const AuthForm = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [modalState, setModalState] = useState({type: props.action});
   const [userInfo, setUserInfo] = useState(defaultUserState);
-
+  const { setIsLoggedIn, setProfile } = props;
   const dispatch = useDispatch();
   const history = useHistory();
   const GoogleClientId = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID;
@@ -50,14 +51,27 @@ const AuthForm = (props) => {
     setUserInfo({ ...userInfo, [name]: value });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     //props.mockLogin(userInfo);
+    //console.log(userInfo)
     if(modalState.type === "Login") {
-      login(userInfo, history);
+        //const {data} = await authorizeUser(userInfo);
+        //console.log(data)
+      try {
+        dispatch(login(userInfo, history, setShowModal));
+        //setProfile(JSON.parse(localStorage.getItem('profile')));
+        setIsLoggedIn(true);
+      }catch(err) {
+        console.error(err)
+      }
+
+
+      history.push('/');
+        //setShowModal(false);
     }
     if(modalState.type === "Signup") {
-      signup(userInfo, history);
+      dispatch(signup(userInfo, history));
     }
   };
 
@@ -133,6 +147,12 @@ const AuthForm = (props) => {
                   name="password"
                 />
               </div>
+              <button
+                type="submit"
+                className="auth-form__submit-button"
+              >
+                {modalState.type}
+              </button>
               {modalState.type === "Login" && (
                 <GoogleLogin
                   clientId={GoogleClientId}
@@ -147,19 +167,19 @@ const AuthForm = (props) => {
                       </span>
                       {`${modalState.type} with Google`}</button>
                     )}
-                  buttonText="Login"
+                  buttonText="Login with Google"
                   onSuccess={googleSuccess}
                   onFailure={googleFailure}
                   cookiePolicy={'single_host_origin'}
                   isLoggedIn={true}
                 />
               )}
-              <button
+              {/* <button
                 type="submit"
                 className="auth-form__submit-button"
               >
                 {modalState.type}
-              </button>
+              </button> */}
               {modalState.type === "Login" ? (
                 <div>
                   {`Don't have an account?`}

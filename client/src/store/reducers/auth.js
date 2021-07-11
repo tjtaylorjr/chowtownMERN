@@ -20,7 +20,9 @@ const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case CLEAR_USER:
       localStorage.removeItem('profile');
-      return state;
+      newState = { ...state };
+      newState.userData = null;
+      return newState;
     case SET_USER:
       localStorage.setItem('profile', JSON.stringify({ ...action?.data }));
       newState = { ...state };

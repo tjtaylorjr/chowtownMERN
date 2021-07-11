@@ -1,5 +1,5 @@
 
-export const getAllRestaurants = async(page=0) => {
+export const getAllRestaurants = async (page=0) => {
   try {
     const res = await fetch(`/api/v1/restaurants?page=${page}`, {
       "Content-type": "application/json",

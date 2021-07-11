@@ -6,7 +6,17 @@ const ProfileButton = (props) => {
 
   const [isHidden, setIsHidden] = useState(true);
 
-  const { logout, user } = props;
+  const { logout, setIsLoggedIn, setProfile } = props;
+  //const { username, email } = props.userData?.result;
+  const username = props.userData ? props.userData.result.username : "";
+  const email = props.userData ? props.userData.result.email : "";
+  //const { username, email } = props.userData;
+  // let username;
+  // let email;
+  // if(userData) {
+  //   username = userData?.result.username;
+  //   email = userData?.result.email;
+  // }
   //console.log(user);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -32,8 +42,10 @@ const ProfileButton = (props) => {
     event.preventDefault();
     //do something to cause logout
     dispatch({ type: 'CLEAR_USER' });
-    logout();
-    history.push('/');
+    setIsLoggedIn(false);
+    setProfile();
+    //logout();
+    //history.push('/');
   };
 
   return (
@@ -43,8 +55,8 @@ const ProfileButton = (props) => {
       </button>
       {!isHidden && (
         <ul>
-          <li>{user.username}</li>
-          <li>{user.email}</li>
+          <li>{username}</li>
+          <li>{email}</li>
           <li>
             <button onClick={endSession}>Log Out</button>
           </li>

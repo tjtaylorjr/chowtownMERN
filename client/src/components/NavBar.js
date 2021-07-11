@@ -1,27 +1,87 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import AuthForm from './AuthForm';
 import logo from '../assets/textless-logo.png';
 import brandName from '../assets/brand.png';
 
 const NavBar = (props) => {
+  // const[profile, setProfile] = useState(JSON.parse(localStorage.getItem('profile')));
+  const[profile, setProfile] = useState();
+  const[isLoggedIn, setIsLoggedIn] = useState(false);
+  //const[loaded, setLoaded] = useState(false);
+  const { setUser, logout } = props;
+  const history = useHistory();
 
-  const { user, logout, mockLogin, login } = props;
+  //setProfile(JSON.parse(localStorage.getItem('profile')));
 
   let navLinks;
+  //const profile = JSON.parse(localStorage.getItem('profile'));
 
-  if(user) {
+  // useEffect(() => {
+  //   const { _id, firstname, lastname, username, email } = profile.result;
+  //   const userProfile = {
+  //     _id,
+  //     email,
+  //     username,
+  //     firstname,
+  //     lastname
+  //   };
+  //   setUser(userProfile);
+
+  // }, [profile]);
+  // useEffect(() => {
+  //   const token = profile?.token;
+
+  // setProfile(JSON.parse(localStorage.getItem('profile')));
+  // },[props.user]);
+
+  useEffect(() => {
+
+    setProfile(JSON.parse(localStorage.getItem('profile')));
+    //setLoaded(true);
+  },[isLoggedIn])
+
+
+
+  useEffect(() => {
+    if (profile) {
+      const { _id, firstname, lastname, username, email } = profile?.result;
+      const userProfile = {
+        _id,
+        email,
+        username,
+        firstname,
+        lastname
+      };
+      //console.log(userProfile)
+      setUser({ ...userProfile });
+      //setLoaded(true);
+    }
+    // else {
+    //   setUser(null);
+    // }
+  },[profile])
+
+
+  if (isLoggedIn) {
+    const userData = JSON.parse(localStorage.getItem('profile'));
+    //console.log(userData)
+    // setProfile(userData);
+    // history.push('/');
+   // const { username, email } = profile?.result;
+
     navLinks = (
       <div>
-        <ProfileButton user={user} logout={logout}/>
+        <ProfileButton  userData={userData} logout={logout} setIsLoggedIn={setIsLoggedIn} setProfile={setProfile}/>
       </div>
     );
   } else {
     navLinks = (
       <div className="navbar__buttons">
         <div className="navbar__login-button">
-          <AuthForm action={"Login"} mockLogin={mockLogin} login={login}/>
+          <AuthForm action={"Login"} setIsLoggedIn={setIsLoggedIn} setProfile={setProfile} />
         </div>
         <div className="navbar__signup-button">
           <AuthForm action={"Signup"}/>
@@ -29,6 +89,7 @@ const NavBar = (props) => {
       </div>
     );
   };
+
 
   return (
     <nav className="navbar">

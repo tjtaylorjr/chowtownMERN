@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route, NavLink } from 'react-router-dom';
+import { Switch, Route, NavLink, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import NavBar from './components/NavBar';
@@ -12,35 +13,22 @@ import TOS from './components/TermsOfService';
 // import { placeholder } from './services/authServices.js';
 
 const App = () => {
-  const [user, setUser] = useState(null);
-  const googleAuthData = JSON.parse(localStorage.getItem('profile'));
-  //console.log(googleAuthData)
 
-  const mockLogin = async(user = null) => {
-    setUser(user);
-  };
+  const [user, setUser] = useState();
 
-  const login = async() => {
-    const googleAuthData = JSON.parse(localStorage.getItem('profile'));
-    //console.log(googleAuthData)
-    if (googleAuthData) {
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-    }
-
-  }
-
-  const signup = async() => {
-    console.log("on TODO list");
-  };
-
-  const logout = async() => {
+  const logout = async () => {
     setUser(null);
+    //history.push('/');
   };
 
   return (
     <div className="app">
-      <NavBar user={user} logout={logout} mockLogin={mockLogin} login={login}/>
+      <NavBar user={user} setUser={setUser} logout={logout} />
       <div className="main-page">
+      <Home />
         <Switch>
           <Route
             path="/restaurants/:id/review"
@@ -68,7 +56,7 @@ const App = () => {
           />
           <Route
             exact path={"/"}
-            component={Home}
+            component={RestaurantsList}
           />
           {/* <Route
             path="/login"

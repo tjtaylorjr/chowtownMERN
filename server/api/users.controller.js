@@ -1,36 +1,35 @@
 const UsersDAO = require('../dao/usersDAO.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const secret = process.env.JWT_SECRET;
+//const secret = process.env.JWT_SECRET;
 
 class UsersController {
   static async apiPostLogin(req, res, next) {
     const { email, password } = req.body;
-    //console.log(secret);
-
     try {
-      const userRecord = await UsersDAO.getUserByEmail( email);
-
-      if(!userRecord) {
+      const userRecord = await UsersDAO.getUserByEmail(email);
+      //console.log(userRecord)
+      if(!userRecord.user) {
         return res.status(404).json({message: "User does not exist"});
       }
 
-      const passwordMatch = await bcrypt.compare(password, userRecord.password);
+      const passwordMatch = await bcrypt.compare(password, userRecord.user.password);
 
       if(!passwordMatch) {
         return res.status(400).json({message: "Invalid credentials"});
       };
-
+      const secret = userRecord.secret;
+      //console.log(email, password, secret);
       const token = jwt.sign(
         {
-          email: userRecord.email,
-          id: userRecord._id
+          email: userRecord.user.email,
+          id: userRecord.user._id
         },
         secret,
         { expiresIn: "1h" }
       );
 
-      res.status(200).json({ result: userRecord, token });
+      res.status(200).json({ result: userRecord.user, token });
 
     } catch (err) {
       console.error(`api, ${err}`);
