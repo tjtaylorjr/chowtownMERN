@@ -19,6 +19,10 @@ const AuthForm = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [modalState, setModalState] = useState({type: props.action});
   const [userInfo, setUserInfo] = useState(defaultUserState);
+  const [demoLogin, setDemoLogin] = useState(false);
+  const [demoEmailIndex, setDemoEmailIndex] = useState(0);
+  const [demoPassIndex, setDemoPassIndex] = useState(0);
+  
   const { setIsLoggedIn } = props;
   const dispatch = useDispatch();
   const history = useHistory();
