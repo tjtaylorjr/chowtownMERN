@@ -50,7 +50,6 @@ const ProfileButton = (props) => {
     history.push('/');
   };
 
-  console.log(user)
   let buttonDisplay;
   if (user?.result.imageUrl) {
     buttonDisplay = (

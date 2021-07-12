@@ -20,14 +20,14 @@ export const login = ( userInfo, history, setShowModal ) => async (dispatch) => 
 };
 
 export const googleLogin = ( userInfo, history, setShowModal, setIsLoggedIn ) => async (dispatch) => {
-  console.log(userInfo)
+  
   const {email} = userInfo.result;
   try {
     const {_id, username} = await authorizeWithGoogle(email);
     //console.log(_id)
     userInfo.result._id = _id;
     userInfo.result.username = username;
-    console.log(userInfo)
+
     dispatch(setLoginState({...userInfo}));
     setShowModal(false);
     setIsLoggedIn(true);

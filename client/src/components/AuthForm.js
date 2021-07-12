@@ -57,7 +57,6 @@ const AuthForm = (props) => {
       }
     }
     if(modalState.type === "Signup") {
-      console.log(userInfo)
       try {
         dispatch(signup(userInfo, history, setShowModal));
         setIsLoggedIn(true);
