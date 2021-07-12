@@ -50,11 +50,25 @@ const ProfileButton = (props) => {
     history.push('/');
   };
 
-  return (
-    <div className="profile-button__container">
+  console.log(user)
+  let buttonDisplay;
+  if (user?.result.imageUrl) {
+    buttonDisplay = (
+      <button onClick={showMenu}>
+        <img className="profile-button__picture" src={user.result.imageUrl} />
+      </button>
+    );
+  } else {
+    buttonDisplay = (
       <button onClick={showMenu}>
         <i className="fas fa-user-circle" />
       </button>
+    )
+  }
+
+  return (
+    <div className="profile-button__container">
+      {buttonDisplay}
       {!isHidden && (
         <ul>
           <li>{username.toUpperCase()}</li>
