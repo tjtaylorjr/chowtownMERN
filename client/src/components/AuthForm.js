@@ -3,7 +3,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 import { Modal } from '../context/Modal';
-import { login, googleLogin, signup, googleSignup } from '../store/actions/auth';
+import { login, googleLogin, signup } from '../store/actions/auth';
 import { FcGoogle } from 'react-icons/fc';
 
 
@@ -25,16 +25,12 @@ const AuthForm = (props) => {
   const GoogleClientId = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID;
 
   const googleSuccess = async (response) => {
-    //console.info(response?.profileObj, response?.tokenId);
     const result = response?.profileObj;
     const token = response?.tokenId;
 
     try {
-      const data = { result, token }
-      //localStorage.setItem('google-profile', JSON.stringify({ ...data }));
+      const data = { result, token };
       dispatch(googleLogin(data, history, setShowModal, setIsLoggedIn));
-      //setShowModal(false);
-      //history.push('/');
     } catch (err) {
       console.error(err);
     }
@@ -59,7 +55,6 @@ const AuthForm = (props) => {
       }catch(err) {
         console.error(err)
       }
-      history.push('/');
     }
     if(modalState.type === "Signup") {
       console.log(userInfo)
@@ -69,7 +64,6 @@ const AuthForm = (props) => {
       } catch(err) {
         console.error(err)
       }
-      //history.push('/');
     }
   };
 
@@ -151,25 +145,6 @@ const AuthForm = (props) => {
               >
                 {modalState.type}
               </button>
-              {/* <GoogleLogin
-                clientId={GoogleClientId}
-                render={renderProps => (
-                  <button
-                    className="auth-form__google-button"
-                    onClick={renderProps.onClick}
-                    disabled={renderProps.disabled}
-                  >
-                    <span>
-                      <FcGoogle className="auth-form__google-icon" />
-                    </span>
-                    {`${modalState.type} with Google`}</button>
-                )}
-                buttonText="Login with Google"
-                onSuccess={googleSuccess}
-                onFailure={googleFailure}
-                cookiePolicy={'single_host_origin'}
-                isLoggedIn={true}
-              /> */}
               {modalState.type === "Login" && (
                 <GoogleLogin
                   clientId={GoogleClientId}
