@@ -10,11 +10,10 @@ const secret = process.env.JWT_SECRET;
 class UsersController {
   static async apiPostGoogleLogin(req, res, next) {
     const { email } = req.body;
-    //console.log(email);
 
     try {
       const userRecord = await UsersDAO.getUserByEmail(email);
-      //console.log(userRecord)
+
       if (!userRecord.user) {
         return res.status(404).json({ message: "User does not exist" });
       }
@@ -29,11 +28,11 @@ class UsersController {
   }
 
   static async apiPostLogin(req, res, next) {
-    //console.log(req.body)
+
     const { email, password } = req.body;
     try {
       const userRecord = await UsersDAO.getUserByEmail(email);
-      //console.log(userRecord)
+
       if(!userRecord.user) {
         return res.status(404).json({message: "User does not exist"});
       }
@@ -43,8 +42,7 @@ class UsersController {
       if(!passwordMatch) {
         return res.status(400).json({message: "Invalid credentials"});
       };
-      // const secret = userRecord.secret;
-      //console.log(secret);
+
       const { _id, username, givenName, familyName, name, imageUrl } = userRecord.user
 
       const user = {
@@ -78,8 +76,6 @@ class UsersController {
     console.log(req.body)
     try {
       const jwtdata = req.body;
-      //console.log(JSON.parse(jwtdata))
-      //console.log(jwtdata.token)
       const isGoogleToken = jwtdata.token.length > 500;
 
       if (isGoogleToken) {
@@ -105,12 +101,9 @@ class UsersController {
   }
 
   static async apiPostSignup(req, res, next) {
-    //console.log(req.body)
     try {
       const email = req.body.email;
-
       const userExists = await UsersDAO.getUserByEmail(email);
-      //console.log(userExists.user)
       if (userExists.user) {
         return res.status(400).json({message: "User already exists"});
       };
@@ -135,25 +128,6 @@ class UsersController {
 
       const userRecord = await UsersDAO.getUserByEmail( email);
       console.log(userRecord)
-
-      // const { _id, username, firstname, lastname } = userRecord.user
-
-      // const user = {
-      //   _id,
-      //   email,
-      //   username,
-      //   firstname,
-      //   lastname
-      // }
-
-      // const token = jwt.sign(
-      //   {
-      //     email: userRecord.email,
-      //     id: userRecord._id
-      //   },
-      //   secret,
-      //   { expiresIn: "1h"}
-      // );
 
       res.status(201).json({ message: "success" });
     } catch (err) {
