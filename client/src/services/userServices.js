@@ -41,7 +41,7 @@ export const authorizeWithGoogle = async (email) => {
     }
 
     const { _id, username } = await res.json();
-    console.log(_id)
+    
     return { _id, username };
   } catch (err) {
     console.error(err);
@@ -62,7 +62,7 @@ export const registerUser = async (formData) => {
       "name": `${givenName} ${familyName}`,
       "imageUrl": imageUrl
     }
-    console.log(body)
+
     const res = await fetch(`/api/v1/users/signup`,
       {
         method: "POST",
