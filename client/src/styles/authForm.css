@@ -73,6 +73,7 @@
   cursor: pointer;
   line-height: 3rem;
   width: 100%;
+  margin-bottom: 2px;
 }
 
 .auth-form__swap-link {

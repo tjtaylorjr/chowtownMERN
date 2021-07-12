@@ -1,17 +1,20 @@
 import { CLEAR_USER, SET_USER } from '../constants/actionTypes';
 
 const initialState = {
-  userData: null,
+  user: null,
 }
 
 //shape of state:
 // {
-//   userData: {
-//     id,
-//     firstname,
-//     lastname,
-//     username,
-//     email
+//   user: {
+//       result: {
+           //       id,
+           //       firstname,
+           //       lastname,
+           //       username,
+           //       email
+//       },
+//       token
 //   }
 // }
 
@@ -19,11 +22,14 @@ const authReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case CLEAR_USER:
-      return state;
-    case SET_USER:
-      localStorage.setItem('profile', JSON.stringify({ ...action?.data }));
+      localStorage.removeItem('profile');
       newState = { ...state };
-      newState.userData = action?.data;
+      newState.user = null;
+      return newState;
+    case SET_USER:
+      localStorage.setItem('profile', JSON.stringify({ ...action?.user }));
+      newState = { ...state };
+      newState.user = action?.user;
       return newState;
     default:
       return state;

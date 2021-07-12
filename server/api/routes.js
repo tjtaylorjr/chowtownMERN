@@ -7,6 +7,8 @@ const router = express.Router();
 
 router.route("/users/login").post(UsersCtrl.apiPostLogin);
 router.route("/users/signup").post(UsersCtrl.apiPostSignup);
+router.route("/users/restore").post(UsersCtrl.apiPostRestore);
+router.route("/users").post(UsersCtrl.apiPostGoogleLogin);
 
 router.route("/restaurants").get(RestaurantsCtrl.apiGetRestaurants);
 router.route("/restaurants/id/:id").get(RestaurantsCtrl.apiGetRestaurantById);

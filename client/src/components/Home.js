@@ -6,7 +6,9 @@ const Home = () => {
       <div className="home__header">
         <div className="home__header-image"/>
       </div>
-      <section className="home__content-body"></section>
+      <section className="home__content-body">
+        
+      </section>
     </>
   );
 };
