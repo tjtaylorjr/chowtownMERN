@@ -19,14 +19,53 @@ const AuthForm = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [modalState, setModalState] = useState({type: props.action});
   const [userInfo, setUserInfo] = useState(defaultUserState);
-  const [demoLogin, setDemoLogin] = useState(false);
-  const [demoEmailIndex, setDemoEmailIndex] = useState(0);
-  const [demoPassIndex, setDemoPassIndex] = useState(0);
-  
+
   const { setIsLoggedIn } = props;
   const dispatch = useDispatch();
   const history = useHistory();
   const GoogleClientId = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID;
+
+  const demoEmail = "demo@chowtown.io";
+  let emailIndex = 0;
+  const demoPass = "password";
+  let passIndex = 0;
+
+  const logInDemo = async (e) => {
+    e.preventDefault();
+    demoAutomation();
+  }
+
+  const demoAutomation = async () => {
+    const emailField = document.querySelector(".email");
+    const passwordField = document.querySelector(".password");
+    if (emailIndex < demoEmail.length) {
+      setTimeout(() => {
+        setUserInfo({ ...userInfo, ["email"]: demoEmail.substr(0, emailIndex + 1)});
+        emailIndex++
+        demoAutomation();
+      }, 125)
+    } else if (passIndex < demoPass.length) {
+      setTimeout(() => {
+        setUserInfo({ ...userInfo, ["email"]: demoEmail, ["password"]: demoPass.substr(0, passIndex + 1) });
+        passIndex++
+        demoAutomation();
+      }, 125)
+    } else {
+      try {
+        const demoInfo = {
+          email: "demo@chowtown.io",
+          givenName: "",
+          familyName: "",
+          username: "",
+          password: "password",
+        }
+        dispatch(login(demoInfo, history, setShowModal));
+        setIsLoggedIn(true);
+      } catch (err) {
+        console.error(err)
+      }
+    }
+  }
 
   const googleSuccess = async (response) => {
     const result = response?.profileObj;
@@ -120,9 +159,9 @@ const AuthForm = (props) => {
                   </div>
                 </>
               )}
-              <div className="auth-form__input">
+              <div className="auth-form__input email">
                 <input
-                  type="text"
+                  type="email"
                   id="email"
                   placeholder="Enter Email"
                   required
@@ -131,7 +170,7 @@ const AuthForm = (props) => {
                   name="email"
                 />
               </div>
-              <div className="auth-form__input">
+              <div className="auth-form__input password">
                 <input
                   type="password"
                   id="password"
@@ -194,20 +233,31 @@ const AuthForm = (props) => {
                     >Login.</NavLink>
                   </div>
               )}
-              <NavLink
-                to={"/tos"}
-                className="auth-form__terms-link"
-                onClick={() => setShowModal(false)}
-              >
-                Terms of Service
-              </NavLink>
-              <NavLink
-                to={"/privacy"}
-                className="auth-form__terms-link"
-                onClick={() => setShowModal(false)}
-              >
-                Privacy Policy
-              </NavLink>
+              <div>
+                <NavLink
+                  to={"/tos"}
+                  className="auth-form__terms-link"
+                  onClick={() => setShowModal(false)}
+                >
+                  Terms of Service
+                </NavLink>
+                <NavLink
+                  to={"/privacy"}
+                  className="auth-form__terms-link"
+                  onClick={() => setShowModal(false)}
+                >
+                  Privacy Policy
+                </NavLink>
+              </div>
+              {modalState.type === "Login" && (
+                <button
+                  className="auth-form__demo-button"
+                  type="submit"
+                  onClick={logInDemo}
+                >
+                  Demo
+                </button>
+              )}
             </form>
           </div>
         </Modal>
