@@ -19,7 +19,6 @@ export const authorizeUser = async (formData) => {
     }
 
     const user = await res.json();
-    //console.log(user)
     return user;
   } catch (err) {
     console.error(err);
@@ -37,7 +36,6 @@ export const authorizeWithGoogle = async (email) => {
       body: JSON.stringify({email}),
     });
 
-    //console.log(res);
     if(!res.ok) {
       throw res;
     }
@@ -79,7 +77,6 @@ export const registerUser = async (formData) => {
     }
 
     const payload = await res.json();
-    //console.log(payload)
     return payload;
   } catch (err) {
     console.error(err);
@@ -87,7 +84,6 @@ export const registerUser = async (formData) => {
 }
 
 export const restoreUser = async (jwt) => {
-  console.log(jwt)
   try {
     const res = await fetch(`/api/v1/users/restore`,
       {
