@@ -3,15 +3,15 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 import { Modal } from '../context/Modal';
-import { login, signup } from '../store/actions/auth';
+import { login, googleLogin, signup, googleSignup } from '../store/actions/auth';
 import { FcGoogle } from 'react-icons/fc';
 
 
 const AuthForm = (props) => {
   const defaultUserState = {
     email: "",
-    firstname: "",
-    lastname: "",
+    givenName: "",
+    familyName: "",
     username: "",
     password: "",
   };
@@ -31,10 +31,10 @@ const AuthForm = (props) => {
 
     try {
       const data = { result, token }
-      //localStorage.setItem('profile', JSON.stringify({ ...data }));
-      dispatch({ type: 'SET_USER', data });
-      setShowModal(false);
-      history.push('/');
+      //localStorage.setItem('google-profile', JSON.stringify({ ...data }));
+      dispatch(googleLogin(data, history, setShowModal, setIsLoggedIn));
+      //setShowModal(false);
+      //history.push('/');
     } catch (err) {
       console.error(err);
     }
@@ -69,7 +69,7 @@ const AuthForm = (props) => {
       } catch(err) {
         console.error(err)
       }
-      history.push('/');
+      //history.push('/');
     }
   };
 
@@ -91,23 +91,23 @@ const AuthForm = (props) => {
                   <div className="auth-form__input">
                     <input
                       type="text"
-                      id="firstname"
+                      id="givenName"
                       placeholder="Enter First Name"
                       required
-                      value={userInfo.firstname}
+                      value={userInfo.givenName}
                       onChange={handleInputChange}
-                      name="firstname"
+                      name="givenName"
                     />
                   </div>
                   <div className="auth-form__input">
                     <input
                       type="text"
-                      id="lastname"
+                      id="familyName"
                       placeholder="Enter Last Name"
                       required
-                      value={userInfo.lastname}
+                      value={userInfo.familyName}
                       onChange={handleInputChange}
-                      name="lastname"
+                      name="familyName"
                     />
                   </div>
                   <div className="auth-form__input">
@@ -151,6 +151,25 @@ const AuthForm = (props) => {
               >
                 {modalState.type}
               </button>
+              {/* <GoogleLogin
+                clientId={GoogleClientId}
+                render={renderProps => (
+                  <button
+                    className="auth-form__google-button"
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                  >
+                    <span>
+                      <FcGoogle className="auth-form__google-icon" />
+                    </span>
+                    {`${modalState.type} with Google`}</button>
+                )}
+                buttonText="Login with Google"
+                onSuccess={googleSuccess}
+                onFailure={googleFailure}
+                cookiePolicy={'single_host_origin'}
+                isLoggedIn={true}
+              /> */}
               {modalState.type === "Login" && (
                 <GoogleLogin
                   clientId={GoogleClientId}
@@ -163,7 +182,7 @@ const AuthForm = (props) => {
                       <span>
                         <FcGoogle className="auth-form__google-icon" />
                       </span>
-                      {`${modalState.type} with Google`}</button>
+                      {`Login with Google`}</button>
                     )}
                   buttonText="Login with Google"
                   onSuccess={googleSuccess}

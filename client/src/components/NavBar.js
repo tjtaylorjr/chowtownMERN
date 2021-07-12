@@ -41,7 +41,7 @@ const NavBar = (props) => {
           <AuthForm action={"Login"} setIsLoggedIn={setIsLoggedIn} />
         </div>
         <div className="navbar__signup-button">
-          <AuthForm action={"Signup"}/>
+          <AuthForm action={"Signup"} setIsLoggedIn={setIsLoggedIn} />
         </div>
       </div>
     );

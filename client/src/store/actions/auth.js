@@ -1,5 +1,5 @@
 import { CLEAR_USER, SET_USER } from '../constants/actionTypes';
-import { authorizeUser, registerUser, restoreUser} from '../../services/userServices';
+import { authorizeUser, authorizeWithGoogle, registerUser, restoreUser} from '../../services/userServices';
 
 const setLoginState = (user) => {
   return {
@@ -19,6 +19,24 @@ export const login = ( userInfo, history, setShowModal ) => async (dispatch) => 
   };
 };
 
+export const googleLogin = ( userInfo, history, setShowModal, setIsLoggedIn ) => async (dispatch) => {
+  console.log(userInfo)
+  const {email} = userInfo.result;
+  try {
+    const {_id, username} = await authorizeWithGoogle(email);
+    //console.log(_id)
+    userInfo.result._id = _id;
+    userInfo.result.username = username;
+    console.log(userInfo)
+    dispatch(setLoginState({...userInfo}));
+    setShowModal(false);
+    setIsLoggedIn(true);
+    history.push('/');
+  } catch (err) {
+    console.error(`Authentication failure: ${err}`);
+  };
+}
+
 export const signup = ( userInfo, history, setShowModal ) => async (dispatch) => {
   try {
     const res = await registerUser(userInfo);
@@ -36,6 +54,14 @@ export const signup = ( userInfo, history, setShowModal ) => async (dispatch) =>
   };
 };
 
+export const googleSignup = ( userInfo, history, setShowModal ) => async (dispatch) => {
+  console.log(userInfo.result)
+  try {
+    const res = await registerUser(userInfo.result);
+  } catch (err) {
+    console.error(`Authentication failure: ${err}`);
+  };
+}
 export const restore = ( jwt, history ) => async (dispatch) => {
   try {
     const user = await restoreUser(jwt);

@@ -26,17 +26,45 @@ export const authorizeUser = async (formData) => {
   }
 }
 
+export const authorizeWithGoogle = async (email) => {
+  try {
+    const res = await fetch(`/api/v1/users`,
+    {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify({email}),
+    });
+
+    //console.log(res);
+    if(!res.ok) {
+      throw res;
+    }
+
+    const { _id, username } = await res.json();
+    console.log(_id)
+    return { _id, username };
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 export const registerUser = async (formData) => {
   console.log(formData)
   try {
-    const { email, username, firstname, lastname, password } = formData;
+    const { email, username, givenName, familyName, password } = formData;
+    const imageUrl = formData.imageUrl ? formData.imageUrl : null;
     const body = {
       "email": email,
+      "password": password,
       "username": username,
-      "firstname": firstname,
-      "lastname": lastname,
-      "password": password
+      "givenName": givenName,
+      "familyName": familyName,
+      "name": `${givenName} ${familyName}`,
+      "imageUrl": imageUrl
     }
+    console.log(body)
     const res = await fetch(`/api/v1/users/signup`,
       {
         method: "POST",
@@ -59,6 +87,7 @@ export const registerUser = async (formData) => {
 }
 
 export const restoreUser = async (jwt) => {
+  console.log(jwt)
   try {
     const res = await fetch(`/api/v1/users/restore`,
       {

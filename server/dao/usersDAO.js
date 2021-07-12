@@ -18,10 +18,12 @@ class UsersDAO {
   };
 
   static async getUserByEmail(email) {
+    //console.log(email)
     try {
       const user = await users.findOne({email});
       //const secret = process.env.JWT_SECRET;
       //return await users.findOne({email});
+      //console.log(user)
       return {user}
 
     } catch (err) {
@@ -30,14 +32,16 @@ class UsersDAO {
     };
   };
 
-  static async addUser(firstname, lastname, username, hashedPassword, email) {
+  static async addUser(givenName, familyName, name, username, imageUrl, email, hashedPassword) {
     try {
       const userProfile = {
-        firstname: firstname,
-        lastname: lastname,
-        username: username,
-        password: hashedPassword,
-        email: email
+        givenName,
+        familyName,
+        name,
+        username,
+        imageUrl,
+        email,
+        password: hashedPassword
       };
 
       return await users.insertOne(userProfile)

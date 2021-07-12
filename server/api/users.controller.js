@@ -8,6 +8,26 @@ const secret = process.env.JWT_SECRET;
 
 
 class UsersController {
+  static async apiPostGoogleLogin(req, res, next) {
+    const { email } = req.body;
+    //console.log(email);
+
+    try {
+      const userRecord = await UsersDAO.getUserByEmail(email);
+      //console.log(userRecord)
+      if (!userRecord.user) {
+        return res.status(404).json({ message: "User does not exist" });
+      }
+
+      const { _id, username } = userRecord.user;
+
+      res.status(200).json({ _id, username });
+    } catch (err) {
+      console.error(`api, ${err}`);
+      res.status(500).json({ error: err });
+    }
+  }
+
   static async apiPostLogin(req, res, next) {
     //console.log(req.body)
     const { email, password } = req.body;
@@ -25,14 +45,16 @@ class UsersController {
       };
       // const secret = userRecord.secret;
       //console.log(secret);
-      const { _id, username, firstname, lastname } = userRecord.user
+      const { _id, username, givenName, familyName, name, imageUrl } = userRecord.user
 
       const user = {
         _id,
         email,
         username,
-        firstname,
-        lastname
+        givenName,
+        familyName,
+        name,
+        imageUrl
       }
 
       const token = jwt.sign(
@@ -53,16 +75,28 @@ class UsersController {
   }
 
   static async apiPostRestore(req, res, next) {
-    //console.log(req.body)
+    console.log(req.body)
     try {
       const jwtdata = req.body;
       //console.log(JSON.parse(jwtdata))
       //console.log(jwtdata.token)
-      const verified = jwt.verify(jwtdata.token, secret);
-      if (verified) {
-        res.status(200).json(jwtdata);
+      const isGoogleToken = jwtdata.token.length > 500;
+
+      if (isGoogleToken) {
+        const decodedToken = jwt.decode(jwtdata.token);
+        console.log(decodedToken)
+        if (jwtdata.result.googleId === decodedToken.sub) {
+          res.status(200).json(jwtdata);
+        } else {
+          res.status(401).json({message: "Unauthorized"})
+        }
       } else {
-        res.status(401).json({message: "Unauthorized"})
+        const verified = jwt.verify(jwtdata.token, secret);
+        if (verified) {
+          res.status(200).json(jwtdata);
+        } else {
+          res.status(401).json({message: "Unauthorized"})
+        }
       }
     } catch (err) {
       console.error(`api, ${err}`);
@@ -82,17 +116,21 @@ class UsersController {
       };
 
       const username = req.body.username;
-      const firstname = req.body.firstname;
-      const lastname = req.body.lastname;
+      const givenName = req.body.givenName;
+      const familyName = req.body.familyName;
+      const name = req.body.name;
+      const imageUrl = req.body.imageUrl;
       const password = req.body.password;
       const hashedPassword = await bcrypt.hashSync(password, 12);
 
       const userResponse = await UsersDAO.addUser(
-        firstname,
-        lastname,
+        givenName,
+        familyName,
+        name,
         username,
-        hashedPassword,
+        imageUrl,
         email,
+        hashedPassword
       );
 
       const userRecord = await UsersDAO.getUserByEmail( email);
