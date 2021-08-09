@@ -114,7 +114,7 @@ const AuthForm = (props) => {
       <button
         type="button"
         className="auth__button"
-        onClick={() => setShowModal(true)}
+        onClick={() => {setShowModal(true); setModalState({type: props.action});}}
       >
         {props.action}
       </button>

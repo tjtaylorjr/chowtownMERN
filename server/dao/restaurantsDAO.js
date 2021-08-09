@@ -1,4 +1,6 @@
 const mongodb = require('mongodb');
+const yelp = require('yelp-fusion');
+const client = yelp.client(process.env.API_KEY);
 
 const ObjectId = mongodb.ObjectID;
 
@@ -15,6 +17,10 @@ class RestaurantsDAO {
       console.error(`Unable to establish a collection handle in restaurantsDAO: ${err}`);
     };
   };
+
+  static async postRestaurants({
+
+  }){};
 
   static async getRestaurants({
     filters = null,

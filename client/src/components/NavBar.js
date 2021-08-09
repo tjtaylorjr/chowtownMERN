@@ -10,6 +10,7 @@ import brandName from '../assets/brand.png';
 const NavBar = (props) => {
   const[isLoaded, setIsLoaded] = useState(false);
   const[isLoggedIn, setIsLoggedIn] = useState(false);
+  //const[modalState, setModalState] = useState({type: "Login"})
   const { setUser } = props;
   const dispatch = useDispatch();
   const history = useHistory();
