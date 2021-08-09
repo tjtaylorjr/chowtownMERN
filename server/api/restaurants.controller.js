@@ -1,6 +1,62 @@
 const RestaurantsDAO = require('../dao/restaurantsDAO.js');
+const api = require('yelp-fusion');
+const dotenv = require('dotenv');
+const { query } = require('express');
+dotenv.config()
+const apiKey = process.env.API_KEY;
+const client = api.client(apiKey);
+
+
 
 class RestaurantsController {
+
+  static async apiGetYelpRestaurants(req, res, next) {
+    const restaurantsPerPage = req.query.restaurantsPerPage ? parseInt(req.query.restaurantsPerPage, 10) : 20;
+    const page = req.query.page ? parseInt(req.query.page, 10) : 0;
+    let filters = {}
+    if(req.query.q) {
+      filters.query = req.query.q;
+    }
+    if(req.query.lat) {
+      filters.latitude = req.query.lat;
+    }
+    if(req.query.lon) {
+      filters.longitude = req.query.lon;
+    }
+
+    const searchRequest = {
+      term: filters?.query,
+      categories: "restaurants",
+      latitude: filters?.latitude,
+      longitude: filters?.longitude,
+      limit: "50"
+    }
+    let restaurantsList;
+    let totalNumRestaurants;
+
+    client.search(
+      searchRequest
+    ).then((response) => {
+      restaurantsList = response.jsonBody.businesses;
+      totalNumRestaurants = restaurantsList.length;
+
+      let result = {
+        restaurants: restaurantsList,
+        page: page,
+        filters: filters,
+        entries_per_page: restaurantsPerPage,
+        total_results: totalNumRestaurants,
+      };
+
+      return res.json(result);
+
+    }).catch((err) => {
+      console.error(`Unable to find restaurants, ${err}`);
+      return { restaurantsList: [], totalNumRestaurants: 0 };
+    })
+
+  };
+
   static async apiGetRestaurants(req, res, next) {
     const restaurantsPerPage = req.query.restaurantsPerPage ? parseInt(req.query.restaurantsPerPage, 10) : 20;
     const page = req.query.page ? parseInt(req.query.page, 10) : 0;

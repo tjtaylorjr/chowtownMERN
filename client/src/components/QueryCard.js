@@ -3,15 +3,24 @@ import { NavLink } from 'react-router-dom';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
 const QueryCard = (props) => {
-  const { address, cuisine, name, _id } = props.restaurant;
-  const { building, street, zipcode } = address;
-  const formattedAddress = `${building} ${street}, ${zipcode}`;
+  const { location, categories, name, image_url } = props.restaurant;
+  const { display_address } = location;
+  const formattedAddress = display_address.filter(i => i !== undefined).join(', ');
+
+
+  const IDPLACEHOLDER = "IDPLACEHOLDER";
+
+  const offerings = categories.map(object => {
+      return object.title
+     }).filter(i => i !== undefined).join(', ');
 
   return (
     <>
       <div className="query-card">
         <div className="query-card__wrapper">
-          <div className="query-card__image-container"></div>
+          <div className="query-card__image-container">
+            <img className="query-card__image" src={image_url}/>
+          </div>
           <div className="query-card__data-container">
             <div className="query-card__location-details">
               <h5 className="query-card__location-name">{name}</h5>
@@ -25,26 +34,22 @@ const QueryCard = (props) => {
                     className="query-card__map-link2"
                   >
                     <FaMapMarkerAlt />
-              </a>
+                  </a>
                 </div>
-                {cuisine}
+                <div>
+                  {categories.map(object => {
+                      return object.title
+                    }).filter(i => i !== undefined).join(', ')}
+                </div>
               </div>
             </div>
             <div className="query-card__link-container">
               <NavLink
-                to={"/restaurant/" + _id}
+                to={"/restaurant/" + IDPLACEHOLDER}
                 className="query-card__navigation-link"
               >
                 Read Reviews
               </NavLink>
-              {/* <a
-                target="_blank"
-                rel="noreferrer"
-                href={"http://www.google.com/maps/place/" + formattedAddress}
-                className="query-card__map-link"
-              >
-                View Map
-              </a> */}
             </div>
           </div>
         </div>
