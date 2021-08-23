@@ -36,6 +36,7 @@ const RestaurantsList = (props) => {
     const payload = await findYelpRestaurants(searchInput, lat, lon);
     if (payload) {
       console.log(payload);
+      setSearchInput("");
       setRestaurants(payload);
     };
   };
@@ -47,7 +48,7 @@ const RestaurantsList = (props) => {
           <input
             type="text"
             className="search-form__input"
-            placeholder="find Restaurants"
+            placeholder="Search by Name or Cuisine"
             value={searchInput}
             onChange={onChangeSearchQuery}
           />
