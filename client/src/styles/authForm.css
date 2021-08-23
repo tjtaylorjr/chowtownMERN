@@ -43,7 +43,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  border: 2px solid #FF0800;
+  border: 2px solid #B21807;
   background-color: transparent;
   line-height: 3rem;
   margin-bottom: 2px;
@@ -65,10 +65,10 @@
 
 .auth-form__submit-button {
   color: #FFFBF1;
-  background-color: #FF0800;
+  background-color: #B21807;
   font-size: 16px;
   padding: 0 5px;
-  border: 2px solid #FF0800;
+  border: 2px solid #B21807;
   border-radius: 4px;
   cursor: pointer;
   line-height: 3rem;
@@ -92,7 +92,7 @@
 .auth-form__swap-link {
   text-decoration: none;
   margin: 0 5px;
-  color: #FF0800;
+  color: #B21807;
 }
 
 .auth-form__terms-link {

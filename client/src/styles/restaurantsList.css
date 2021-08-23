@@ -33,6 +33,22 @@
 
 .search-form__submit-button {
   height: 26px;
+  width: 60px;
+  color: #FFFFFF;
+  background-color: #00483D;
+  border: 2px solid #00483D;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.search-form__clear-button {
+  height: 26px;
+  width: 60px;
+  color: #FFFFFF;
+  background-color: #B21807;
+  border: 2px solid #B21807;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 .restaurants-list__results-wrapper {

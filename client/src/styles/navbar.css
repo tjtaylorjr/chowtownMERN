@@ -69,10 +69,10 @@
 
 .navbar__signup-button button {
   color: #FFFBF1;
-  background-color: #FF0800;
+  background-color: #B21807;
   font-size: 16px;
   padding: 0 5px;
-  border: 2px solid #FF0800;
+  border: 2px solid #B21807;
   border-radius: 4px;
   cursor: pointer;
   line-height: 1.75rem;
@@ -123,7 +123,7 @@
 }
 
 .profile-button__container li > button {
-  background-color: #FF0800;
+  background-color: #B21807;
   color: #FFFBF1;
   border-radius: 4px;
   height: 30px;

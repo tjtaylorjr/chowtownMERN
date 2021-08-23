@@ -36,9 +36,13 @@ const RestaurantsList = (props) => {
     const payload = await findYelpRestaurants(searchInput, lat, lon);
     if (payload) {
       console.log(payload);
-      setSearchInput("");
       setRestaurants(payload);
     };
+  };
+
+  const clear = () => {
+    setSearchInput("");
+    setLocation("");
   };
 
   return (
@@ -66,6 +70,15 @@ const RestaurantsList = (props) => {
               onClick={search}
             >
               Search
+            </button>
+          </div>
+          <div className="search-form__clear-button-container">
+            <button
+              className="search-form__clear-button"
+              type="button"
+              onClick={clear}
+            >
+              Clear
             </button>
           </div>
         </form>
