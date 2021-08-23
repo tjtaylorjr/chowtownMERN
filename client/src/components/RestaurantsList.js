@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAllRestaurants, getCuisines, findRestaurants, findYelpRestaurants } from '../services/restaurantServices.js';
 import QueryCard from './QueryCard';
+import BusinessCard from './BusinessCard';
 
 const RestaurantsList = (props) => {
   const [restaurants, setRestaurants] = useState([]);
