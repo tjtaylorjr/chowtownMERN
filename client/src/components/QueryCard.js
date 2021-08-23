@@ -57,17 +57,17 @@ const QueryCard = (props) => {
                       return object.title
                     }).filter(i => i !== undefined).join(', ')}
                 </div>
-                <div className="rating-stars">
-                  <div className="rating-stars__fill"  ref={starRef}></div>
-                </div>
               </div>
             </div>
             <div className="query-card__link-container">
+              <div className="rating-stars">
+                <div className="rating-stars__fill" ref={starRef}></div>
+              </div>
               <NavLink
                 to={"/restaurant/" + IDPLACEHOLDER}
                 className="query-card__navigation-link"
               >
-                Read Reviews
+                Reviews
               </NavLink>
             </div>
           </div>
