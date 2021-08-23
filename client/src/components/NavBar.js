@@ -52,7 +52,7 @@ const NavBar = (props) => {
   return (
     <nav className="navbar">
       <div className="navbar__site-brand">
-        <NavLink exact to="/" className="navbar__site-brand-link">
+        <a href="/" className="navbar__site-brand-link">
           <img
             className="navbar__site-brand-logo"
             src={logo}
@@ -63,7 +63,7 @@ const NavBar = (props) => {
             src={brandName}
             alt="ChowTown"
           />
-        </NavLink>
+        </a>
       </div>
       <div className="navbar__links">
         {/* <li className="navbar__item">
