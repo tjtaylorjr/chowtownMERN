@@ -7,8 +7,8 @@ const RestaurantsList = (props) => {
   const [restaurants, setRestaurants] = useState([]);
   const [sortedRestaurants, setSortedRestaurants] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const [isDistanceChecked, setIsDistanceChecked] = useState(false);
-  const [isNameChecked, setIsNameChecked] = useState(true);
+  const [isDistanceChecked, setIsDistanceChecked] = useState(true);
+  const [isNameChecked, setIsNameChecked] = useState(false);
   const [location, setLocation] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
   const geoApi = process.env.REACT_APP_GEO_API;
