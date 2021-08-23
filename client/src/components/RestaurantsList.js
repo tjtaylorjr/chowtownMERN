@@ -5,7 +5,10 @@ import BusinessCard from './BusinessCard';
 
 const RestaurantsList = (props) => {
   const [restaurants, setRestaurants] = useState([]);
+  const [sortedRestaurants, setSortedRestaurants] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const [isDistanceChecked, setIsDistanceChecked] = useState(false);
+  const [isNameChecked, setIsNameChecked] = useState(true);
   const [location, setLocation] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
   const geoApi = process.env.REACT_APP_GEO_API;
@@ -45,6 +48,29 @@ const RestaurantsList = (props) => {
     setLocation("");
   };
 
+  const distanceSort = () => {
+    setIsLoaded(false);
+    setIsDistanceChecked(true);
+    setIsNameChecked(false);
+  };
+
+  const nameSort = () => {
+    setIsLoaded(false);
+    setIsNameChecked(true);
+    setIsDistanceChecked(false);
+  }
+
+  useEffect(() => {
+    if(isNameChecked && !isDistanceChecked) {
+      setSortedRestaurants(restaurants.sort((a, b) => (a.name > b.name ? 1 : -1)));
+      setIsLoaded(true);
+    } else if (isDistanceChecked && !isNameChecked) {
+      setSortedRestaurants(restaurants.sort((a, b) => (a.distance > b.distance ? 1 : -1)));
+      setIsLoaded(true);
+    }
+
+  },[restaurants, isDistanceChecked, isNameChecked]);
+
   return (
     <div className="restaurants-list">
       <div className="restaurant-list__search-bar">
@@ -83,9 +109,14 @@ const RestaurantsList = (props) => {
           </div>
         </form>
       </div>
+      <div>
+        Sort by:
+        <input type="radio" id="radio-distance" value="Distance" name="Distance" checked={isDistanceChecked} onClick={distanceSort}/> Distance
+        <input type="radio" id="radio-name" value="Name" checked={isNameChecked} name="Name" onClick={nameSort}/> Name
+      </div>
       <div className="restaurants-list__results-wrapper">
         <div className="restaurants-list__results-container">
-          {isLoaded && restaurants.map((restaurant, i) =>
+          {isLoaded && sortedRestaurants.map((restaurant, i) =>
             <QueryCard restaurant={restaurant} key={i} />
           )}
         </div>

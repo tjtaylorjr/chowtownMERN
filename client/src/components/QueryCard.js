@@ -3,7 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
 const QueryCard = (props) => {
-  const { location, categories, name, image_url } = props.restaurant;
+  const { location, categories, display_phone, distance, name, image_url } = props.restaurant;
+  const convertedDistance = distance * .000621371
   const { display_address } = location;
   const formattedAddress = display_address.filter(i => i !== undefined).join(', ');
 
@@ -35,6 +36,12 @@ const QueryCard = (props) => {
                   >
                     <FaMapMarkerAlt />
                   </a>
+                </div>
+                <div>
+                  {`${convertedDistance.toFixed(1)} miles`}
+                </div>
+                <div>
+                  {display_phone}
                 </div>
                 <div>
                   {categories.map(object => {
