@@ -80,7 +80,7 @@
 @media screen and (min-width: 1056px) {
   .modal-content {
     width: 40%;
-    height: 90%;
+    height: 50%;
     padding-top: 10px;
     max-height: none;
   }
