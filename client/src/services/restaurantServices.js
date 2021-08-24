@@ -14,7 +14,7 @@ export const getAllRestaurants = async (page=0) => {
   };
 }
 
-export const getRestaurantByApiId = async (api_id) => {
+export const getRestaurantId = async (api_id) => {
   try {
     const res = await fetch(`/api/v1/restaurants/api_id/${api_id}`, {
       "Content-Type": "application/json",
@@ -80,6 +80,7 @@ export const addRestaurant = async (data) => {
     const {
       api_id,
       address,
+      phone,
       cuisine,
       rating,
       name
@@ -88,6 +89,7 @@ export const addRestaurant = async (data) => {
     const body = {
       name,
       address,
+      phone,
       rating,
       cuisine,
       api_id

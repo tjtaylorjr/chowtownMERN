@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { FaMapMarkerAlt } from 'react-icons/fa';
-import { getRestaurantByApiId, addRestaurant } from '../services/restaurantServices.js';
+import { getRestaurantId, addRestaurant } from '../services/restaurantServices.js';
 
 const QueryCard = (props) => {
-  const [DB_ID, setDB_ID] = useState("000000000000");
+  //const [DB_ID, setDB_ID] = useState("000000000000");
   const { location, categories, display_phone, distance, id, name, image_url, rating } = props.restaurant;
   const starRef = useRef(null);
+  const history = useHistory();
   const convertedDistance = distance * .000621371
   const { display_address } = location;
   const formattedAddress = display_address.filter(i => i !== undefined).join(', ');
@@ -26,12 +28,14 @@ const QueryCard = (props) => {
   },[props.restaurant])
 
   const checkRecord = async () => {
+    let DB_ID;
     try {
-      const payload = await getRestaurantByApiId(api_id);
+      const payload = await getRestaurantId(api_id);
       if (payload.message === "Please Create Record") {
         const data = {
           api_id,
           address: formattedAddress,
+          phone: display_phone,
           cuisine: offerings,
           rating,
           name
@@ -39,21 +43,58 @@ const QueryCard = (props) => {
 
         const res = await addRestaurant(data);
         if(res.status === "success") {
-          const newPayload = await getRestaurantByApiId(api_id);
+          const newPayload = await getRestaurantId(api_id);
           console.log(newPayload);
-          setDB_ID(newPayload._id);
+          DB_ID = newPayload._id;
+          // history.push({
+          //   pathname: `/restaurant/${DB_ID}`,
+          //   state: {
+          //     DB_ID,
+          //     formattedAddress,
+          //     offerings,
+          //     rating,
+          //     name,
+          //     display_phone
+          //   }
+          // })
+          //istory.push(`/restaurant/${DB_ID}`);
         };
 
       } else {
         console.log(payload)
-        setDB_ID(payload._id);
+        DB_ID = payload._id;
+        // history.push({
+        //   pathname: `/restaurant/${DB_ID}`,
+        //   state: {
+        //     DB_ID,
+        //     formattedAddress,
+        //     offerings,
+        //     rating,
+        //     name,
+        //     display_phone,
+        //   }
+        // })
       }
+      history.push(`/restaurant/${DB_ID}`);
     } catch (err) {
       console.error(`Unable to check records: ${err}`);
     }
   };
 
-  console.log(DB_ID);
+  // useEffect(() => {
+  //   history.push({
+  //     pathname: `/restaurant/${DB_ID}`,
+  //     state: {
+  //       DB_ID,
+  //       formattedAddress,
+  //       offerings,
+  //       rating,
+  //       name,
+  //       display_phone,
+  //     }
+  //   })
+  // },[DB_ID])
+  // console.log(DB_ID);
 
   return (
     <>
@@ -92,13 +133,13 @@ const QueryCard = (props) => {
               <div className="rating-stars">
                 <div className="rating-stars__fill" ref={starRef}></div>
               </div>
-              <NavLink
+              <button
+                type="button"
                 onClick={checkRecord}
-                to={"/restaurant/" + DB_ID}
-                className="query-card__navigation-link"
+                className="query-card__review-button"
               >
                 Reviews
-              </NavLink>
+              </button>
             </div>
           </div>
         </div>

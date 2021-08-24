@@ -104,10 +104,10 @@ class RestaurantsController {
     };
   };
 
-  static async apiGetRestaurantByApiId(req, res, next) {
+  static async apiGetRestaurantId(req, res, next) {
     try {
       const api_id = req.params.api_id || {};
-      const restaurant = await RestaurantsDAO.getRestaurantByApiID(api_id);
+      const restaurant = await RestaurantsDAO.getRestaurantID(api_id);
 
 
       if(!restaurant) {
@@ -137,6 +137,7 @@ class RestaurantsController {
     try {
       const api_id = req.body.api_id;
       const address = req.body.address;
+      const phone = req.body.phone;
       const name = req.body.name;
       const cuisine = req.body.cuisine;
       const rating = req.body.rating;
@@ -144,6 +145,7 @@ class RestaurantsController {
       const reviewResponse = await RestaurantsDAO.postRestaurant(
         api_id,
         address,
+        phone,
         cuisine,
         rating,
         name

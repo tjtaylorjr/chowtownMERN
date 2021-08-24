@@ -6,7 +6,7 @@ const Restaurant = (props) => {
   const defaultState = {
     id: null,
     name: "",
-    address: {},
+    address: "",
     cuisine: "",
     reviews: []
   };

@@ -18,11 +18,12 @@ class RestaurantsDAO {
     };
   };
 
-  static async postRestaurant(api_id, address, cuisine, rating, name){
+  static async postRestaurant(api_id, address, phone, cuisine, rating, name){
     try {
       const restaurantProfile = {
         name,
         address,
+        phone,
         rating,
         cuisine,
         api_id
@@ -133,7 +134,7 @@ class RestaurantsDAO {
     };
   };
 
-  static async getRestaurantByApiID(api_id) {
+  static async getRestaurantID(api_id) {
     try {
       const pipeline =
         [
@@ -142,46 +143,7 @@ class RestaurantsDAO {
             {
               api_id,
             },
-          },
-          {
-            $lookup:
-            {
-              from: "reviews",
-              let:
-              {
-                id: "$_id",
-              },
-              pipeline:
-                [
-                  {
-                    $match:
-                    {
-                      $expr:
-                      {
-                        $eq:
-                          [
-                            "$restaurant_id",
-                            "$$id"
-                          ],
-                      },
-                    },
-                  },
-                  {
-                    $sort:
-                    {
-                      date: -1,
-                    },
-                  },
-                ],
-              as: "reviews",
-            },
-          },
-          {
-            $addFields:
-            {
-              reviews: "$reviews",
-            },
-          },
+          }
         ];
 
       return await restaurants.aggregate(pipeline).next();
