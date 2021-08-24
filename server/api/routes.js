@@ -12,7 +12,9 @@ router.route("/users/restore").post(UsersCtrl.apiPostRestore);
 router.route("/users").post(UsersCtrl.apiPostGoogleLogin);
 
 router.route("/restaurants").get(RestaurantsCtrl.apiGetRestaurants);
+router.route("/restaurants/post").post(RestaurantsCtrl.apiPostRestaurant);
 router.route("/restaurants/id/:id").get(RestaurantsCtrl.apiGetRestaurantById);
+router.route("/restaurants/api_id/:api_id").get(RestaurantsCtrl.apiGetRestaurantByApiId);
 router.route("/restaurants/cuisines").get(RestaurantsCtrl.apiGetRestaurantCuisines);
 router.route("/restaurants/search").get(RestaurantsCtrl.apiGetYelpRestaurants);
 

@@ -104,6 +104,24 @@ class RestaurantsController {
     };
   };
 
+  static async apiGetRestaurantByApiId(req, res, next) {
+    try {
+      const api_id = req.params.api_id || {};
+      const restaurant = await RestaurantsDAO.getRestaurantByApiID(api_id);
+
+
+      if(!restaurant) {
+        res.status(404).json({error: "Not found"});
+        return;
+      }
+
+      res.json(restaurant);
+    } catch (err) {
+    console.error(`api, ${err}`);
+    res.status(500).json({ error: err });
+    };
+  };
+
   static async apiGetRestaurantCuisines(req, res, next) {
     try {
       const cuisines = await RestaurantsDAO.getCuisines();
@@ -114,6 +132,29 @@ class RestaurantsController {
       res.status(500).json({ error: err });
     };
   };
+
+  static async apiPostRestaurant(req, res, next) {
+    try {
+      const api_id = req.body.api_id;
+      const address = req.body.address;
+      const name = req.body.name;
+      const cuisine = req.body.cuisine;
+      const rating = req.body.rating;
+
+      const reviewResponse = await RestaurantsDAO.postRestaurant(
+        api_id,
+        address,
+        cuisine,
+        rating,
+        name
+      );
+
+      res.json({ status: "success" });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    };
+  };
+
 };
 
 module.exports = RestaurantsController;

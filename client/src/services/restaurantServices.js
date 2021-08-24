@@ -14,6 +14,22 @@ export const getAllRestaurants = async (page=0) => {
   };
 }
 
+export const getRestaurantByApiId = async (api_id) => {
+  try {
+    const res = await fetch(`/api/v1/restaurants/api_id/${api_id}`, {
+      "Content-Type": "application/json",
+    });
+    if(!res.ok) {
+      throw res
+    }
+    const payload = await res.json();
+    return payload;
+  } catch (err) {
+    console.log(`No record found. ${err}`);
+    return {message: 'Please Create Record'}
+  };
+}
+
 export const getRestaurantById = async (id) => {
   try {
     const res = await fetch(`/api/v1/restaurants/id/${id}`, {
@@ -58,6 +74,42 @@ export const findYelpRestaurants = async (searchInput, lat, lon, page = 0) => {
     console.error(err);
   };
 }
+
+export const addRestaurant = async (data) => {
+  try {
+    const {
+      api_id,
+      address,
+      cuisine,
+      rating,
+      name
+    } = data;
+
+    const body = {
+      name,
+      address,
+      rating,
+      cuisine,
+      api_id
+    };
+    const res = await fetch(`/api/v1/restaurants/post`,{
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) {
+      throw res;
+    }
+    const payload = await res.json();
+    return payload;
+  } catch (err) {
+    console.error(`Unable to post restaurant profile: ${err}`);
+    return { error: err };
+  }
+};
+
 export const addReview = async (data) => {
   try {
     const {

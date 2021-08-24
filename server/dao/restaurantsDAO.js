@@ -18,9 +18,22 @@ class RestaurantsDAO {
     };
   };
 
-  static async postRestaurants({
+  static async postRestaurant(api_id, address, cuisine, rating, name){
+    try {
+      const restaurantProfile = {
+        name,
+        address,
+        rating,
+        cuisine,
+        api_id
+      };
 
-  }){};
+      return await restaurants.insertOne(restaurantProfile);
+    } catch (err) {
+      console.error(`Unable to post restaurant profile: ${err}`);
+      return { error: err };
+    }
+  };
 
   static async getRestaurants({
     filters = null,
@@ -116,6 +129,64 @@ class RestaurantsDAO {
       return await restaurants.aggregate(pipeline).next();
     } catch (err) {
       console.error(`Something went wrong in getRestaurantByID: ${err}`);
+      throw err;
+    };
+  };
+
+  static async getRestaurantByApiID(api_id) {
+    try {
+      const pipeline =
+        [
+          {
+            $match:
+            {
+              api_id,
+            },
+          },
+          {
+            $lookup:
+            {
+              from: "reviews",
+              let:
+              {
+                id: "$_id",
+              },
+              pipeline:
+                [
+                  {
+                    $match:
+                    {
+                      $expr:
+                      {
+                        $eq:
+                          [
+                            "$restaurant_id",
+                            "$$id"
+                          ],
+                      },
+                    },
+                  },
+                  {
+                    $sort:
+                    {
+                      date: -1,
+                    },
+                  },
+                ],
+              as: "reviews",
+            },
+          },
+          {
+            $addFields:
+            {
+              reviews: "$reviews",
+            },
+          },
+        ];
+
+      return await restaurants.aggregate(pipeline).next();
+    } catch (err) {
+      console.error(`Something went wrong in getRestaurantByApiID: ${err}`);
       throw err;
     };
   };

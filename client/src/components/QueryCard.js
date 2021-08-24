@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaMapMarkerAlt } from 'react-icons/fa';
+import { getRestaurantByApiId, addRestaurant } from '../services/restaurantServices.js';
 
 const QueryCard = (props) => {
-  const { location, categories, display_phone, distance, name, image_url, rating } = props.restaurant;
+  const [DB_ID, setDB_ID] = useState("000000000000");
+  const { location, categories, display_phone, distance, id, name, image_url, rating } = props.restaurant;
   const starRef = useRef(null);
   const convertedDistance = distance * .000621371
   const { display_address } = location;
   const formattedAddress = display_address.filter(i => i !== undefined).join(', ');
 
+  const api_id = id;
 
-  const IDPLACEHOLDER = "IDPLACEHOLDER";
 
   const offerings = categories.map(object => {
       return object.title
@@ -20,11 +22,38 @@ const QueryCard = (props) => {
   useEffect(() => {
     const starPercentage = (rating / 5) * 100;
     const roundedStarPercentage = `${(Math.round(starPercentage / 10) * 10)}%`;
-    console.log(roundedStarPercentage)
     starRef.current.style.width = roundedStarPercentage;
   },[props.restaurant])
 
+  const checkRecord = async () => {
+    try {
+      const payload = await getRestaurantByApiId(api_id);
+      if (payload.message === "Please Create Record") {
+        const data = {
+          api_id,
+          address: formattedAddress,
+          cuisine: offerings,
+          rating,
+          name
+        }
 
+        const res = await addRestaurant(data);
+        if(res.status === "success") {
+          const newPayload = await getRestaurantByApiId(api_id);
+          console.log(newPayload);
+          setDB_ID(newPayload._id);
+        };
+
+      } else {
+        console.log(payload)
+        setDB_ID(payload._id);
+      }
+    } catch (err) {
+      console.error(`Unable to check records: ${err}`);
+    }
+  };
+
+  console.log(DB_ID);
 
   return (
     <>
@@ -64,7 +93,8 @@ const QueryCard = (props) => {
                 <div className="rating-stars__fill" ref={starRef}></div>
               </div>
               <NavLink
-                to={"/restaurant/" + IDPLACEHOLDER}
+                onClick={checkRecord}
+                to={"/restaurant/" + DB_ID}
                 className="query-card__navigation-link"
               >
                 Reviews
