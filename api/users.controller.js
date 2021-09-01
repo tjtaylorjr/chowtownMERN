@@ -4,10 +4,28 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 dotenv.config()
 const secret = process.env.JWT_SECRET;
+const OAuth_client = process.env.GOOGLE_OAUTH_CLIENT_ID;
+const OAuth_secret = process.env.GOOGLE_OAUTH_CLIENT_SECRET;
+const geo_api = process.env.GEO_API;
 
 
 
 class UsersController {
+
+  static async apiGetGeoApi(req, res, next) {
+    console.log(geo_api)
+    //return res.json({key: geo_api});
+    res.json({key: geo_api});
+  };
+
+  static async apiGetOAuthClient(req, res, next) {
+    return OAuth_client;
+  };
+
+  static async apiGetOAuthSecret(req, res, next) {
+    return OAuth_secret;
+  };
+
   static async apiPostGoogleLogin(req, res, next) {
     const { email } = req.body;
 

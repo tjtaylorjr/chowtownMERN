@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getAllRestaurants, getCuisines, findRestaurants, findYelpRestaurants } from '../services/restaurantServices.js';
+import { getGeoApi } from '../services/userServices.js';
 import QueryCard from './QueryCard';
 import BusinessCard from './BusinessCard';
 
@@ -11,7 +12,10 @@ const RestaurantsList = (props) => {
   const [isNameChecked, setIsNameChecked] = useState(false);
   const [location, setLocation] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
-  const geoApi = process.env.REACT_APP_GEO_API;
+
+  // const geoApi = process.env.REACT_APP_GEO_API;
+  const geoApi = getGeoApi();
+  //console.log(geoApi)
 
   useEffect(() => {
     if(restaurants.length > 0) {

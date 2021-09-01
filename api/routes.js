@@ -9,6 +9,9 @@ const router = express.Router();
 router.route("/users/login").post(UsersCtrl.apiPostLogin);
 router.route("/users/signup").post(UsersCtrl.apiPostSignup);
 router.route("/users/restore").post(UsersCtrl.apiPostRestore);
+router.route("/users/OAuth_client").get(UsersCtrl.apiGetOAuthClient);
+router.route("/users/OAuth_secret").get(UsersCtrl.apiGetOAuthSecret);
+router.route("/users/geo_api").get(UsersCtrl.apiGetGeoApi);
 router.route("/users").post(UsersCtrl.apiPostGoogleLogin);
 
 router.route("/restaurants").get(RestaurantsCtrl.apiGetRestaurants);

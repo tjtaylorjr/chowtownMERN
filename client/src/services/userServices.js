@@ -41,7 +41,7 @@ export const authorizeWithGoogle = async (email) => {
     }
 
     const { _id, username } = await res.json();
-    
+
     return { _id, username };
   } catch (err) {
     console.error(err);
@@ -100,6 +100,26 @@ export const restoreUser = async (jwt) => {
 
     const user = await res.json();
     return user;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export const getGeoApi = async () => {
+  try {
+    const res = await fetch(`/api/v1/users/geo_api`);
+    //console.log(res.json());
+    console.log(res);
+    if (!res.ok) {
+      throw res;
+    }
+
+    //const api = await res.json();
+    //console.log(`This is the api: ${api}`);
+    //console.log(api.key);
+    //console.log(res);
+    const key = await res.json();
+    return res;
   } catch (err) {
     console.error(err);
   }
