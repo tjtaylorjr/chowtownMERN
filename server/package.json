@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "server:debug": "nodemon --inspect index.js"
+    "server:debug": "nodemon --inspect index.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "keywords": [],
   "author": "TJ Taylor",
