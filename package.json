@@ -7,7 +7,9 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "server:debug": "nodemon --inspect index.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "client-install": "npm install --prefix client",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "TJ Taylor",

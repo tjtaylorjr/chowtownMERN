@@ -15,7 +15,8 @@ class UsersController {
   static async apiGetGeoApi(req, res, next) {
     console.log(geo_api)
     //return res.json({key: geo_api});
-    res.json({key: geo_api});
+    //res.json({key: geo_api});
+    return res.json(geo_api);
   };
 
   static async apiGetOAuthClient(req, res, next) {

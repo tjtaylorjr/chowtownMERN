@@ -109,7 +109,7 @@ export const getGeoApi = async () => {
   try {
     const res = await fetch(`/api/v1/users/geo_api`);
     //console.log(res.json());
-    console.log(res);
+    //console.log(res);
     if (!res.ok) {
       throw res;
     }
@@ -118,8 +118,9 @@ export const getGeoApi = async () => {
     //console.log(`This is the api: ${api}`);
     //console.log(api.key);
     //console.log(res);
-    const key = await res.json();
-    return res;
+    const api = await res.json();
+    //console.log(api);
+    return api;
   } catch (err) {
     console.error(err);
   }

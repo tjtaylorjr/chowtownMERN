@@ -14,9 +14,18 @@ const RestaurantsList = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   // const geoApi = process.env.REACT_APP_GEO_API;
-  const geoApi = getGeoApi();
-  //console.log(geoApi)
-
+  // const geoApi = (async () => {
+  //   try {
+  //     const api = await getGeoApi();
+  //     if(!api.ok) {
+  //       throw api;
+  //     }
+  //     return api;
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // })();
+  // console.log(geoApi);
   useEffect(() => {
     if(restaurants.length > 0) {
       setIsLoaded(true);
@@ -34,6 +43,7 @@ const RestaurantsList = (props) => {
   };
 
   const search = async () => {
+    const geoApi = await getGeoApi();
     const geoInfo = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location},us&limit=1&appid=${geoApi}`);
     if (!geoInfo.ok) {
       throw geoInfo
