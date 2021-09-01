@@ -1,4 +1,5 @@
 import React from 'react';
+import RestaurantsList from './RestaurantsList';
 
 const Home = () => {
   return (
@@ -7,7 +8,7 @@ const Home = () => {
         <div className="home__header-image"/>
       </div>
       <section className="home__content-body">
-        
+        <RestaurantsList />
       </section>
     </>
   );

@@ -57,7 +57,7 @@ const QueryCard = (props) => {
           //     display_phone
           //   }
           // })
-          //istory.push(`/restaurant/${DB_ID}`);
+          //history.push(`/restaurant/${DB_ID}`);
         };
 
       } else {

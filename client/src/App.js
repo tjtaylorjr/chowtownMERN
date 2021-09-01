@@ -17,7 +17,6 @@ const App = () => {
     <div className="app">
       <NavBar setUser={setUser} />
       <div className="main-page">
-      <Home />
         <Switch>
           <Route
             path="/restaurant/:id/review"
@@ -41,7 +40,7 @@ const App = () => {
           />
           <Route
             exact path={"/"}
-            component={RestaurantsList}
+            component={Home}
           />
         </Switch>
       </div>
