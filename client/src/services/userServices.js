@@ -108,19 +108,44 @@ export const restoreUser = async (jwt) => {
 export const getGeoApi = async () => {
   try {
     const res = await fetch(`/api/v1/users/geo_api`);
-    //console.log(res.json());
-    //console.log(res);
+
     if (!res.ok) {
       throw res;
     }
 
-    //const api = await res.json();
-    //console.log(`This is the api: ${api}`);
-    //console.log(api.key);
-    //console.log(res);
     const api = await res.json();
-    //console.log(api);
     return api;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+
+export const getOAuthClient = async () => {
+  try {
+    const res = await fetch(`/api/v1/users/OAuth_client`);
+
+    if (!res.ok) {
+      throw res;
+    }
+
+    const OAuthClient = await res.json();
+    return OAuthClient;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export const getOAuthSecret = async () => {
+  try {
+    const res = await fetch(`/api/v1/users/OAuth_secret`);
+
+    if (!res.ok) {
+      throw res;
+    }
+
+    const OAuthSecret = await res.json();
+    return OAuthSecret;
   } catch (err) {
     console.error(err);
   }

@@ -13,18 +13,15 @@ const geo_api = process.env.GEO_API;
 class UsersController {
 
   static async apiGetGeoApi(req, res, next) {
-    console.log(geo_api)
-    //return res.json({key: geo_api});
-    //res.json({key: geo_api});
     return res.json(geo_api);
   };
 
   static async apiGetOAuthClient(req, res, next) {
-    return OAuth_client;
+    return res.json(OAuth_client);
   };
 
   static async apiGetOAuthSecret(req, res, next) {
-    return OAuth_secret;
+    return res.json(OAuth_secret);
   };
 
   static async apiPostGoogleLogin(req, res, next) {
