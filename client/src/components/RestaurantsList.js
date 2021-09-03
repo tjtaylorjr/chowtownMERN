@@ -44,7 +44,7 @@ const RestaurantsList = (props) => {
 
   const search = async () => {
     const geoApi = await getGeoApi();
-    const geoInfo = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location},us&limit=1&appid=${geoApi}`);
+    const geoInfo = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${location},us&limit=1&appid=${geoApi}`);
     if (!geoInfo.ok) {
       throw geoInfo
     }
