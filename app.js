@@ -8,8 +8,6 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use("/api/v1", routes);
-app.use("*", (req, res) => res.status(404).json({error: "not found"}));
 
 if(process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
@@ -17,5 +15,8 @@ if(process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   })
 }
+
+app.use("/api/v1", routes);
+app.use("*", (req, res) => res.status(404).json({ error: "not found" }));
 
 module.exports = app;
