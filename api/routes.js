@@ -23,6 +23,7 @@ router.route("/restaurants/search").get(RestaurantsCtrl.apiGetYelpRestaurants);
 
 router
   .route("/restaurants/review")
+  .get(ReviewsCtrl.apiGetS3Url)
   .post(ReviewsCtrl.apiPostReview)
   .put(ReviewsCtrl.apiUpdateReview)
   .delete(ReviewsCtrl.apiDeleteReview)

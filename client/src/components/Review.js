@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { updateReview, addReview } from '../services/restaurantServices';
 import { NavLink } from 'react-router-dom';
+import S3 from 'react-aws-s3';
 
 const Review = (props) => {
   let defaultReviewState = "";

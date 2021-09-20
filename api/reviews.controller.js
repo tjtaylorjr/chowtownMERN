@@ -1,6 +1,47 @@
 const ReviewsDAO = require('../dao/reviewsDAO.js');
+const aws = require('aws-sdk');
+const crypto = require('crypto');
+const util = require('util');
+const random = util.promisify(crypto.randomBytes);
 
 class ReviewsController {
+  static async apiGetS3Url(req, res, next) {
+    try {
+      const region = 'us-east-1';
+      const bucketName = process.env.AWS_BUCKET_NAME;
+      const accessKeyId = process.env.AWS_KEY_ID;
+      const secretAccessKey = process.env.AWS_SECRET_KEY;
+
+
+      const s3 = new aws.S3({
+        region,
+        accessKeyId,
+        secretAccessKey,
+        signatureVersion: 'v4'
+      })
+
+      const generateSecureUrl = async () => {
+        const randomBytes = await random(16);
+        const imageKey = randomBytes.toString('hex');
+
+        const params = ({
+          Bucket: bucketName,
+          Key: imageKey,
+          Expires: 60
+        })
+
+        const upload = await s3.getSignedUrlPromise('putObject', params);
+        return upload;
+      }
+
+      const s3Url = await generateSecureUrl();
+      res.send({s3Url});
+      
+    } catch (err) {
+      res.status(500).json({error: err.message});
+    }
+  }
+
   static async apiPostReview(req, res, next) {
     try {
       const restaurantId = req.body.restaurant_id;

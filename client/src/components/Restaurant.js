@@ -43,7 +43,7 @@ const Restaurant = (props) => {
             <strong>Cuisine: </strong>{restaurantProfile.cuisine}<br/>
             <strong>Address: </strong>{restaurantProfile.address.building} {restaurantProfile.address.street}, {restaurantProfile.address.zipcode}
           </p>
-          <NavLink to={"/restaurants/" + props.match.params.id + "/review"}>
+          <NavLink to={"/restaurant/" + props.match.params.id + "/review"}>
             Add Review
           </NavLink>
           <h4>Reviews</h4>
@@ -63,7 +63,7 @@ const Restaurant = (props) => {
                           <div>
                             <a href="#" onClick={() => removeReview(review._id, i)}>Delete</a>
                             <NavLink to={{
-                              pathname: "/restaurants/" + props.match.params.id + "/review",
+                              pathname: "/restaurant/" + props.match.params.id + "/review",
                               state: {
                                 currentReview: review
                               }
