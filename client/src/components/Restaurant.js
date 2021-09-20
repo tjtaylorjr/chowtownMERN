@@ -54,6 +54,7 @@ const Restaurant = (props) => {
                   <div key={i}>
                     <div>
                       <div>
+                        <img src={review.url}/>
                         <p>
                           {review.text}<br/>
                           <strong>User: </strong>{review.name}<br/>

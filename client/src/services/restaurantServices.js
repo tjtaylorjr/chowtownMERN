@@ -114,18 +114,36 @@ export const addRestaurant = async (data) => {
 
 export const addReview = async (data) => {
   try {
+    console.log(data);
     const {
       text,
       name,
       user_id,
-      restaurant_id
+      restaurant_id,
+      imageName,
+      imageFile,
+      postUrl
     } = data;
+
+    const directUrl = postUrl.split('?')[0];
+
+    await fetch(postUrl, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "multipart/form-data"
+      },
+      body: imageFile
+    });
+
     const body = {
       "restaurant_id": restaurant_id,
       "name": name,
       "user_id": user_id,
-      "text": text
+      "text": text,
+      "image": imageName,
+      "url": directUrl
     };
+
     const res = await fetch(`/api/v1/restaurants/review`, {
       method: "POST",
       headers: {
@@ -149,13 +167,21 @@ export const updateReview = async (data) => {
       text,
       name,
       user_id,
-      review_id
+      review_id,
+      imageName,
+      imageFile,
+      postUrl
     } = data;
+
+    const directUrl = postUrl.split('?')[0];
+
     const body = {
       "review_id": review_id,
       "name": name,
       "user_id": user_id,
-      "text": text
+      "text": text,
+      "image": imageName,
+      "url": directUrl
     };
     const res = await fetch(`/api/v1/restaurants/review`, {
       method: "PUT",

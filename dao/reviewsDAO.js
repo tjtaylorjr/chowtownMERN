@@ -17,13 +17,15 @@ class ReviewsDAO {
     };
   };
 
-  static async addReview(restaurantId, name, user_id, review, date) {
+  static async addReview(restaurantId, name, user_id, review, image, url, date) {
     try {
       const reviewDoc = {
         name: name,
         user_id: user_id,
         date: date,
         text: review,
+        image: image,
+        url: url,
         restaurant_id: ObjectId(restaurantId)
       };
 
@@ -34,7 +36,7 @@ class ReviewsDAO {
     };
   };
 
-  static async updateReview(reviewId, userId, text, date) {
+  static async updateReview(reviewId, userId, text, image, url, date) {
     try {
       const updateResponse = await reviews.updateOne(
         {
@@ -45,6 +47,8 @@ class ReviewsDAO {
           $set:
             {
               text: text,
+              image: image,
+              url: url,
               date: date,
             },
         },

@@ -36,7 +36,7 @@ class ReviewsController {
 
       const s3Url = await generateSecureUrl();
       res.send({s3Url});
-      
+
     } catch (err) {
       res.status(500).json({error: err.message});
     }
@@ -49,12 +49,16 @@ class ReviewsController {
       const name = req.body.name;
       const user_id = req.body.user_id;
       const date = new Date();
+      const image = req.body.image;
+      const url = req.body.url;
 
       const reviewResponse = await ReviewsDAO.addReview(
         restaurantId,
         name,
         user_id,
         review,
+        image,
+        url,
         date
       );
 
@@ -70,11 +74,15 @@ class ReviewsController {
       const user_id = req.body.user_id;
       const text = req.body.text;
       const date = new Date();
+      const image = req.body.image;
+      const url = req.body.url;
 
       const reviewResponse = await ReviewsDAO.updateReview(
         reviewId,
         user_id,
         text,
+        image,
+        url,
         date,
       );
 
