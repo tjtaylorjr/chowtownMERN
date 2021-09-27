@@ -1,21 +1,42 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { updateReview, addReview } from '../services/restaurantServices';
 import { NavLink } from 'react-router-dom';
+//import S3 from 'react-aws-s3';
 
 const Review = (props) => {
   let defaultReviewState = "";
+  let defaultImageState = "";
   let editing = false;
+  const fileInput = useRef(null);
 
   if (props.location.state && props.location.state.currentReview) {
     editing = true;
     defaultReviewState = props.location.state.currentReview.text
+    defaultImageState = props.location.state.currentReview.image
   }
 
   const [review, setReview] = useState(defaultReviewState);
+  const [image, setImage] = useState([]);
   const [submitted, setSubmitted] = useState(false);
+  const [postUrl, setPostUrl] = useState("");
 
   const handleInputChange = (event) => {
     setReview(event.target.value);
+  };
+
+  const handleFileChange = async (event) => {
+    //console.log(event.target.files[0]);
+    setImage(event.target.files);
+    console.log(image[0]);
+    const res = await fetch(`/api/v1/restaurants/review`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json"
+      }
+    });
+    const {s3Url} = await res.json();
+    console.log(s3Url);
+    setPostUrl(s3Url);
   };
 
   const saveReview = async () => {
@@ -23,7 +44,11 @@ const Review = (props) => {
       text: review,
       name: props.user.name,
       user_id: props.user.id,
-      restaurant_id: props.match.params.id
+      restaurant_id: props.match.params.id,
+      imageName: image[0].name,
+      imageFile: image[0],
+      postUrl
+
     }
 
     if (editing) {
@@ -54,15 +79,35 @@ const Review = (props) => {
                 <label htmlFor="description">
                   {editing ? "Edit" : "Create"} Review
                 </label>
-                <input
+                <br></br>
+                <textarea
                   type="text"
                   id="text"
                   required
                   value={review}
                   onChange={handleInputChange}
                   name="text"
+                  rows="10"
+                  cols="50"
                 />
               </div>
+              {editing ? (
+                  <div>
+                    <label htmlFor="description" Edit Photo />
+                    {defaultImageState}
+                    <button>Edit</button>
+                  </div>
+              ) : (
+                <div>
+                  <label htmlFor="description"Add Photo />
+                  <input
+                  id="imageFile"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  />
+                </div>
+              )}
               <button onClick={saveReview}>
                 Submit
               </button>
