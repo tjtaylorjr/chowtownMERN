@@ -37,11 +37,11 @@ const NavBar = (props) => {
     );
   } else {
     navLinks = (
-      <div className="navbar__buttons">
-        <div className="navbar__login-button">
+      <div className="navbar__auth-container">
+        <div className="navbar__login">
           <AuthForm action={"Login"} setIsLoggedIn={setIsLoggedIn} />
         </div>
-        <div className="navbar__signup-button">
+        <div className="navbar__signup">
           <AuthForm action={"Signup"} setIsLoggedIn={setIsLoggedIn} />
         </div>
       </div>

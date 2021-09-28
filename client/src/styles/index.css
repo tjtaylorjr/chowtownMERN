@@ -6,7 +6,9 @@
 @import "navbar.css";
 @import "modal.css";
 @import "queryCard.css";
+@import "restaurant.css";
 @import "restaurantsList.css";
+@import "review.css";
 
 
 html {
@@ -33,5 +35,3 @@ code {
   background-color: #FFFBF1;
   color: #2D333F;
 }
-
-

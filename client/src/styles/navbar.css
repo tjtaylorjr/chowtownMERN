@@ -46,17 +46,17 @@
   color: #2D333F;
 }
 
-.navbar__buttons {
+.navbar__auth-container {
   display: flex;
   flex-direction: row;
 
 }
-.navbar__login-button,
-.navbar__signup-button {
+.navbar__login,
+.navbar__signup {
   margin: 0 5px;
 }
 
-.navbar__login-button button{
+.navbar__login button{
   color: #2D333F;
   background-color: transparent;
   border: 2px solid #2D333F;
@@ -67,7 +67,7 @@
   border-radius: 4px;
 }
 
-.navbar__signup-button button {
+.navbar__signup button {
   color: #FFFBF1;
   background-color: #B21807;
   font-size: 16px;

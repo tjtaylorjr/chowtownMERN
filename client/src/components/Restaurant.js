@@ -4,9 +4,11 @@ import { NavLink } from 'react-router-dom';
 
 const Restaurant = (props) => {
   const defaultState = {
-    id: null,
+    _id: null,
     name: "",
     address: "",
+    phone: "",
+    rating: 0,
     cuisine: "",
     reviews: []
   };
@@ -37,11 +39,13 @@ const Restaurant = (props) => {
   return (
     <div className="restaurant">
       {restaurantProfile ? (
-        <div>
-          <h5>{restaurantProfile.name}</h5>
+        <div className="restaurant-container">
+          <div className="restaurant__name">{restaurantProfile.name}</div>
           <p>
             <strong>Cuisine: </strong>{restaurantProfile.cuisine}<br/>
-            <strong>Address: </strong>{restaurantProfile.address.building} {restaurantProfile.address.street}, {restaurantProfile.address.zipcode}
+            {/* <strong>Address: </strong>{restaurantProfile.address.building} {restaurantProfile.address.street}, {restaurantProfile.address.zipcode} */}
+            <strong>Address: </strong>{restaurantProfile.address}<br/>
+            <strong>Phone: </strong>{restaurantProfile.phone}
           </p>
           <NavLink to={"/restaurant/" + props.match.params.id + "/review"}>
             Add Review

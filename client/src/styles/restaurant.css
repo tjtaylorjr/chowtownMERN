@@ -1,0 +1,13 @@
+
+.restaurant-container {
+  margin: 0 1rem;
+}
+
+.restaurant__name {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 56px;
+  padding-bottom: 1rem;
+  margin: 0 1rem;
+  border-bottom: 1px solid #CDCDCD;
+}
