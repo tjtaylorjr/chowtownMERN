@@ -48,7 +48,6 @@ const Review = (props) => {
       imageName: image[0].name,
       imageFile: image[0],
       postUrl
-
     }
 
     if (editing) {
@@ -59,7 +58,6 @@ const Review = (props) => {
       await addReview(data);
       setSubmitted(true);
     }
-
   }
 
   return (
