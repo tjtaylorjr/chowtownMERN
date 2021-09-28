@@ -65,7 +65,7 @@ const Restaurant = (props) => {
                           src={review.url}
                         />
                         <p>
-                          {review.text}<br/>
+                          <div className="review-text">{review.text}</div><br/>
                           <strong>User: </strong>{review.name}<br/>
                           <strong>Date: </strong>{new Date(review.date).toLocaleString()}<br/>
                         </p>
