@@ -52,7 +52,7 @@ const Restaurant = (props) => {
             to={"/restaurant/" + props.match.params.id + "/review"}>
             Add Review
           </NavLink>
-          <h4>Reviews</h4>
+          <h3>What people are saying</h3>
           <div>
             {restaurantProfile.reviews.length > 0 ? (
               restaurantProfile.reviews.map((review, i) => {
@@ -60,14 +60,15 @@ const Restaurant = (props) => {
                   <div key={i}>
                     <div>
                       <div>
+                        <h4>{review.title}</h4>
                         <img
                           className="review-image"
                           src={review.url}
                         />
                         <p>
+                          <strong>User: </strong>{review.name}<br />
+                          <strong>Date: </strong>{new Date(review.date).toLocaleString()}<br />
                           <div className="review-text">{review.text}</div><br/>
-                          <strong>User: </strong>{review.name}<br/>
-                          <strong>Date: </strong>{new Date(review.date).toLocaleString()}<br/>
                         </p>
                         {props.user && props.user.id === review.user_id &&
                           <div>

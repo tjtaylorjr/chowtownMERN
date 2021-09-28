@@ -1,0 +1,27 @@
+.review__title-field,
+.review__text-field,
+.review__photo-upload-button {
+  margin-bottom: .5rem;
+  font-family: inherit;
+  font-size: 14px;
+  width: 30rem;
+}
+
+.review__title-field {
+  width: 29.875rem;
+}
+
+/* .review__photo-upload-button {
+  display: none;
+  margin-bottom: .5rem;
+} */
+
+.review__submit-button {
+  text-decoration: none;
+  border: 2px solid #B21807;
+  border-radius: 4px;
+  padding: 3px 5px;
+  margin: 0 5px;
+  color: #FFFBF1;
+  background-color: #B21807;
+}

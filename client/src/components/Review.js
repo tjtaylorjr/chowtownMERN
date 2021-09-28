@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 const Review = (props) => {
   let defaultReviewState = "";
+  let defaultReviewTitleState = "";
   let defaultImageState = "";
   let editing = false;
   const fileInput = useRef(null);
@@ -12,16 +13,22 @@ const Review = (props) => {
   if (props.location.state && props.location.state.currentReview) {
     editing = true;
     defaultReviewState = props.location.state.currentReview.text
+    defaultReviewTitleState = props.location.state.currentReview.title
     defaultImageState = props.location.state.currentReview.image
   }
 
   const [review, setReview] = useState(defaultReviewState);
+  const [reviewTitle, setReviewTitle] = useState(defaultReviewTitleState);
   const [image, setImage] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [postUrl, setPostUrl] = useState("");
 
   const handleInputChange = (event) => {
     setReview(event.target.value);
+  };
+
+  const handleTitleChange = (event) => {
+    setReviewTitle(event.target.value);
   };
 
   const handleFileChange = async (event) => {
@@ -41,6 +48,7 @@ const Review = (props) => {
 
   const saveReview = async () => {
     let data = {
+      title: reviewTitle,
       text: review,
       name: props.user.name,
       user_id: props.user.id,
@@ -77,36 +85,55 @@ const Review = (props) => {
                 <label htmlFor="description">
                   {editing ? "Edit" : "Create"} Review
                 </label>
-                <br></br>
+                <br/>
+                <input
+                  type="text"
+                  id="review-title"
+                  className="review__title-field"
+                  required
+                  value={reviewTitle}
+                  onChange={handleTitleChange}
+                  name="review-title"
+
+                  placeholder="Enter title or description"
+                />
+                <br/>
                 <textarea
                   type="text"
                   id="text"
+                  className="review__text-field"
                   required
                   value={review}
                   onChange={handleInputChange}
                   name="text"
                   rows="10"
-                  cols="50"
+                  // cols="50"
+                  placeholder="Add review text here"
                 />
               </div>
               {editing ? (
                   <div>
-                    <label htmlFor="description" Edit Photo />
+                    <label htmlFor="description">Edit Photo</label>
                     {defaultImageState}
                     <button>Edit</button>
                   </div>
               ) : (
                 <div>
-                  <label htmlFor="description"Add Photo />
+                  <label htmlFor="description">Add Photo</label>
+                  <br/>
                   <input
                   id="imageFile"
+                  className="review__photo-upload-button"
                   type="file"
                   accept="image/*"
                   onChange={handleFileChange}
                   />
                 </div>
               )}
-              <button onClick={saveReview}>
+              <button
+                className="review__submit-button"
+                onClick={saveReview}
+              >
                 Submit
               </button>
             </div>
