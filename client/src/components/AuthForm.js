@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 import { Modal } from '../context/Modal';
 import { login, googleLogin, signup } from '../store/actions/auth';
 import { FcGoogle } from 'react-icons/fc';
+import { getOAuthClient } from '../services/userServices';
 
 
 const AuthForm = (props) => {
@@ -19,16 +20,23 @@ const AuthForm = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [modalState, setModalState] = useState({type: props.action});
   const [userInfo, setUserInfo] = useState(defaultUserState);
+  const [GoogleClientId, setGoogleClientId] = useState("");
 
   const { setIsLoggedIn } = props;
   const dispatch = useDispatch();
   const history = useHistory();
-  const GoogleClientId = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID;
 
   const demoEmail = "demo@chowtown.io";
   let emailIndex = 0;
   const demoPass = "password";
   let passIndex = 0;
+
+  useEffect(() => {
+    (async () => {
+      const OAuthClient = await getOAuthClient();
+      setGoogleClientId(OAuthClient);
+    })()
+  },[])
 
   const logInDemo = async (e) => {
     e.preventDefault();
