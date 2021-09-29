@@ -27,7 +27,7 @@ const Restaurant = (props) => {
   };
 
   const removeReview = async (reviewId, i) => {
-    await deleteReview(reviewId, props.user.id);
+    await deleteReview(reviewId, props.user._id);
     setRestaurantProfile((prevState) => {
       prevState.reviews.splice(i, 1)
       return({
@@ -63,14 +63,14 @@ const Restaurant = (props) => {
                         <h4>{review.title}</h4>
                         <img
                           className="review-image"
-                          src={review.url}
+                          src={review.imageUrl}
                         />
                         <p>
                           <strong>User: </strong>{review.name}<br />
                           <strong>Date: </strong>{new Date(review.date).toLocaleString()}<br />
                           <div className="review-text">{review.text}</div><br/>
                         </p>
-                        {props.user && props.user.id === review.user_id &&
+                        {props.user && props.user._id === review.user_id &&
                           <div>
                             <a href="#" onClick={() => removeReview(review._id, i)}>Delete</a>
                             <NavLink to={{

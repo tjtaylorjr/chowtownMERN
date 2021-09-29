@@ -1,6 +1,5 @@
 .review__title-field,
-.review__text-field,
-.review__photo-upload-button {
+.review__text-field {
   margin-bottom: .5rem;
   font-family: inherit;
   font-size: 14px;
@@ -12,6 +11,10 @@
 }
 
 /* .review__photo-upload-button {
+  display: inline-block;
+}
+
+.review__photo-upload-button input[type=file]{
   display: none;
   margin-bottom: .5rem;
 } */

@@ -17,15 +17,26 @@ class ReviewsDAO {
     };
   };
 
-  static async addReview(restaurantId, name, user_id, review, image, url, date) {
+  static async addReview(restaurantId, name, user_id, title, text, imageName, imageUrl, date) {
     try {
+      // const reviewDoc = {
+      //   name: name,
+      //   user_id: user_id,
+      //   date: date,
+      //   title: title,
+      //   text: text,
+      //   imageName: imageName,
+      //   imageUrl: imageUrl,
+      //   restaurant_id: ObjectId(restaurantId)
+      // };
       const reviewDoc = {
-        name: name,
-        user_id: user_id,
-        date: date,
-        text: review,
-        image: image,
-        url: url,
+        name,
+        user_id,
+        date,
+        title,
+        text,
+        imageName,
+        imageUrl,
         restaurant_id: ObjectId(restaurantId)
       };
 

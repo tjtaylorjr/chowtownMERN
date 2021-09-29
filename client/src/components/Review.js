@@ -14,14 +14,14 @@ const Review = (props) => {
     editing = true;
     defaultReviewState = props.location.state.currentReview.text
     defaultReviewTitleState = props.location.state.currentReview.title
-    defaultImageState = props.location.state.currentReview.image
+    defaultImageState = props.location.state.currentReview.imageName
   }
 
   const [review, setReview] = useState(defaultReviewState);
   const [reviewTitle, setReviewTitle] = useState(defaultReviewTitleState);
   const [image, setImage] = useState([]);
   const [submitted, setSubmitted] = useState(false);
-  const [postUrl, setPostUrl] = useState("");
+  const [AWSUploadUrl, setAWSUploadUrl] = useState("");
 
   const handleInputChange = (event) => {
     setReview(event.target.value);
@@ -43,7 +43,7 @@ const Review = (props) => {
     });
     const {s3Url} = await res.json();
     console.log(s3Url);
-    setPostUrl(s3Url);
+    setAWSUploadUrl(s3Url);
   };
 
   const saveReview = async () => {
@@ -51,11 +51,12 @@ const Review = (props) => {
       title: reviewTitle,
       text: review,
       name: props.user.name,
-      user_id: props.user.id,
+      user_id: props.user._id,
       restaurant_id: props.match.params.id,
+      AWSUploadUrl,
       imageName: image[0].name,
       imageFile: image[0],
-      postUrl
+      imageUrl: AWSUploadUrl.split('?')[0],
     }
 
     if (editing) {
@@ -75,7 +76,7 @@ const Review = (props) => {
           {submitted ? (
             <div>
               <h4>Review Submitted.</h4>
-              <NavLink to={"/restaurants/" + props.match.params.id}>
+              <NavLink to={"/restaurant/" + props.match.params.id}>
                 Back
               </NavLink>
             </div>

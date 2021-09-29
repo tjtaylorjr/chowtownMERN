@@ -45,20 +45,22 @@ class ReviewsController {
   static async apiPostReview(req, res, next) {
     try {
       const restaurantId = req.body.restaurant_id;
-      const review = req.body.text;
+      const title = req.body.title;
+      const text = req.body.text;
       const name = req.body.name;
       const user_id = req.body.user_id;
       const date = new Date();
-      const image = req.body.image;
-      const url = req.body.url;
+      const imageName = req.body.imageName;
+      const imageUrl = req.body.imageUrl;
 
       const reviewResponse = await ReviewsDAO.addReview(
         restaurantId,
         name,
         user_id,
-        review,
-        image,
-        url,
+        title,
+        text,
+        imageName,
+        imageUrl,
         date
       );
 
@@ -74,15 +76,15 @@ class ReviewsController {
       const user_id = req.body.user_id;
       const text = req.body.text;
       const date = new Date();
-      const image = req.body.image;
-      const url = req.body.url;
+      const imageName = req.body.imageName;
+      const imageUrl = req.body.imageUrl;
 
       const reviewResponse = await ReviewsDAO.updateReview(
         reviewId,
         user_id,
         text,
-        image,
-        url,
+        imageName,
+        imageUrl,
         date,
       );
 
