@@ -12,23 +12,29 @@ const Review = (props) => {
   const fileInput = useRef(null);
 
   if (props.location.state && props.location.state.currentReview) {
-    editing = true;
     defaultReviewState = props.location.state.currentReview.text
     defaultReviewTitleState = props.location.state.currentReview.title
     defaultImageNameState = props.location.state.currentReview.imageName
     defaultImageState = props.location.state.currentReview.imageUrl
+    editing = true;
   }
 
   const [review, setReview] = useState(defaultReviewState);
   const [reviewTitle, setReviewTitle] = useState(defaultReviewTitleState);
   const [image, setImage] = useState([]);
-  const [imagePreview, setImagePreview] = useState([]);
+  const [imagePreview, setImagePreview] = useState(defaultImageState);
   const [submitted, setSubmitted] = useState(false);
   const [AWSUploadUrl, setAWSUploadUrl] = useState("");
 
+  // useEffect(() => {
+  //   if(editing) {
+  //     setImagePreview(defaultImageState)
+  //   }
+  // },[editing])
+
   useEffect(() => {
     if(!image || image.length === 0) {
-      setImagePreview([]);
+      setImagePreview(undefined);
       return;
     };
 
@@ -73,7 +79,7 @@ const Review = (props) => {
       user_id: props.user._id,
       restaurant_id: props.match.params.id,
       AWSUploadUrl,
-      imageName: image[0].name,
+      imageName: image[0]?.name,
       imageFile: image[0],
       imageUrl: AWSUploadUrl.split('?')[0],
     }
@@ -133,8 +139,12 @@ const Review = (props) => {
               </div>
               {editing ? (
                   <div>
-                    <label htmlFor="description">Edit Photo</label><br/>
+                    <label htmlFor="description">Edit Photo</label>
+                    <br/>
+                    {imagePreview ? (<img className="review__image-preview" src={imagePreview} />) : (<img className="review__image-preview" src={defaultImageState} />)}
+                    <br/>
                     {defaultImageNameState}
+                    <br/>
                     <button>Edit</button>
                   </div>
               ) : (

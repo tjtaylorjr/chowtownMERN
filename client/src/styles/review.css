@@ -22,12 +22,28 @@
   margin-bottom: .5rem;
 } */
 
-.review__submit-button {
+
+
+.review__submit-button,
+.review__edit-link,
+.review__delete-link {
   text-decoration: none;
   border: 2px solid #B21807;
   border-radius: 4px;
-  padding: 3px 5px;
   margin: 0 5px;
+  padding: 3px 5px;
   color: #FFFBF1;
   background-color: #B21807;
+  font-size: 16px;
+  /* width: 2rem; */
+}
+
+.review__edit-link {
+  padding: 3px 14.415px;
+}
+
+
+
+.review-text {
+  margin: 0 1rem;
 }

@@ -61,24 +61,29 @@ const Restaurant = (props) => {
                     <div>
                       <div>
                         <h4>{review.title}</h4>
-                        <img
+                        {review.imageUrl && <img
                           className="review-image"
                           src={review.imageUrl}
-                        />
+                        />}
                         <p>
-                          <strong>User: </strong>{review.name}<br />
-                          <strong>Date: </strong>{new Date(review.date).toLocaleString()}<br />
-                          <div className="review-text">{review.text}</div><br/>
+                          <strong>User: </strong>{review.name}
+                          <br/>
+                          <strong>Date: </strong>{new Date(review.date).toLocaleString()}
+                          <br/>
+                          <strong><u>Review</u></strong>
+                          <div className="review-text">{review.text}</div>
+                          <br/>
                         </p>
                         {props.user && props.user._id === review.user_id &&
                           <div>
-                            <a href="#" onClick={() => removeReview(review._id, i)}>Delete</a>
-                            <NavLink to={{
-                              pathname: "/restaurant/" + props.match.params.id + "/review",
+                            <a className="review__delete-link" href="#" onClick={() => removeReview(review._id, i)}>Delete</a>
+                          <NavLink
+                            className="review__edit-link"
+                            to={{pathname: "/restaurant/" + props.match.params.id + "/review",
                               state: {
                                 currentReview: review
                               }
-                            }} >Edit</NavLink>
+                            }}>Edit</NavLink>
                           </div>
                         }
                       </div>
