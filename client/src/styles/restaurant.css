@@ -12,6 +12,15 @@
   border-bottom: 1px solid #CDCDCD;
 }
 
+.restaurant-review{
+  border-bottom: 1px solid #CDCDCD;
+  width: 100vh;
+}
+
+.review__links-container {
+  margin-bottom: 20px;
+}
+
 .restaurant-review__add-link,
 .restaurant-review__edit-link {
   text-decoration: none;

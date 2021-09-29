@@ -57,7 +57,7 @@ const Restaurant = (props) => {
             {restaurantProfile.reviews.length > 0 ? (
               restaurantProfile.reviews.map((review, i) => {
                 return (
-                  <div key={i}>
+                  <div className="restaurant-review" key={i}>
                     <div>
                       <div>
                         <h4>{review.title}</h4>
@@ -75,7 +75,7 @@ const Restaurant = (props) => {
                           <br/>
                         </p>
                         {props.user && props.user._id === review.user_id &&
-                          <div>
+                          <div className="review__links-container">
                             <a className="review__delete-link" href="#" onClick={() => removeReview(review._id, i)}>Delete</a>
                           <NavLink
                             className="review__edit-link"
