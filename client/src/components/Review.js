@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { updateReview, addReview } from '../services/restaurantServices';
 import { NavLink } from 'react-router-dom';
 //import S3 from 'react-aws-s3';
@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 const Review = (props) => {
   let defaultReviewState = "";
   let defaultReviewTitleState = "";
+  let defaultImageNameState = "";
   let defaultImageState = "";
   let editing = false;
   const fileInput = useRef(null);
@@ -14,14 +15,28 @@ const Review = (props) => {
     editing = true;
     defaultReviewState = props.location.state.currentReview.text
     defaultReviewTitleState = props.location.state.currentReview.title
-    defaultImageState = props.location.state.currentReview.imageName
+    defaultImageNameState = props.location.state.currentReview.imageName
+    defaultImageState = props.location.state.currentReview.imageUrl
   }
 
   const [review, setReview] = useState(defaultReviewState);
   const [reviewTitle, setReviewTitle] = useState(defaultReviewTitleState);
   const [image, setImage] = useState([]);
+  const [imagePreview, setImagePreview] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [AWSUploadUrl, setAWSUploadUrl] = useState("");
+
+  useEffect(() => {
+    if(!image || image.length === 0) {
+      setImagePreview([]);
+      return;
+    };
+
+    const previewUrl = URL.createObjectURL(image[0]);
+    setImagePreview(previewUrl)
+
+    return () => URL.revokeObjectURL(previewUrl)
+  },[image])
 
   const handleInputChange = (event) => {
     setReview(event.target.value);
@@ -33,6 +48,10 @@ const Review = (props) => {
 
   const handleFileChange = async (event) => {
     //console.log(event.target.files[0]);
+    if (!event.target.files || event.target.files.length === 0) {
+      setImage([])
+    }
+
     setImage(event.target.files);
     console.log(image[0]);
     const res = await fetch(`/api/v1/restaurants/review`, {
@@ -114,13 +133,15 @@ const Review = (props) => {
               </div>
               {editing ? (
                   <div>
-                    <label htmlFor="description">Edit Photo</label>
-                    {defaultImageState}
+                    <label htmlFor="description">Edit Photo</label><br/>
+                    {defaultImageNameState}
                     <button>Edit</button>
                   </div>
               ) : (
                 <div>
                   <label htmlFor="description">Add Photo</label>
+                  <br/>
+                  {image && <img className="review__image-preview" src={imagePreview} />}
                   <br/>
                   <input
                   id="imageFile"

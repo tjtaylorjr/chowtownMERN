@@ -10,6 +10,9 @@
   width: 29.875rem;
 }
 
+.review__image-preview {
+  width: 10rem;
+}
 /* .review__photo-upload-button {
   display: inline-block;
 }
