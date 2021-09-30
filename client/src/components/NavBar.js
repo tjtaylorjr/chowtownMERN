@@ -53,7 +53,6 @@ const NavBar = (props) => {
     <nav className="navbar">
       <div className="navbar__site-brand" onClick={() => history.push('/')}>
         <div className="navbar__site-brank-link">
-          {/* <a href="/" className="navbar__site-brand-link"> */}
             <img
               className="navbar__site-brand-logo"
               src={logo}
@@ -64,8 +63,6 @@ const NavBar = (props) => {
               src={brandName}
               alt="ChowTown"
             />
-          {/* </a> */}
-
         </div>
       </div>
       <div className="navbar__links">
