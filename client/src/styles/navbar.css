@@ -9,7 +9,7 @@
 
 .navbar__site-brand {
   height: 100%;
-  width: 30%;
+  width: 15%;
 }
 
 .navbar__site-brand-link {
@@ -21,13 +21,14 @@
 }
 
 .navbar__site-brand-logo {
-  height: 75%;
-
+  width: 32%;
+  cursor: pointer;
 }
 
 .navbar__site-brand-name {
-  height: 225%;
-  padding-top: 3px;
+  width: 68%;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .navbar__links {

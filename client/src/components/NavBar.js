@@ -51,19 +51,22 @@ const NavBar = (props) => {
 
   return (
     <nav className="navbar">
-      <div className="navbar__site-brand">
-        <a href="/" className="navbar__site-brand-link">
-          <img
-            className="navbar__site-brand-logo"
-            src={logo}
-            alt="logo"
-          />
-          <img
-            className="navbar__site-brand-name"
-            src={brandName}
-            alt="ChowTown"
-          />
-        </a>
+      <div className="navbar__site-brand" onClick={() => history.push('/')}>
+        <div className="navbar__site-brank-link">
+          {/* <a href="/" className="navbar__site-brand-link"> */}
+            <img
+              className="navbar__site-brand-logo"
+              src={logo}
+              alt="logo"
+            />
+            <img
+              className="navbar__site-brand-name"
+              src={brandName}
+              alt="ChowTown"
+            />
+          {/* </a> */}
+
+        </div>
       </div>
       <div className="navbar__links">
         {/* <li className="navbar__item">
