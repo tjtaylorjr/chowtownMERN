@@ -47,7 +47,7 @@ class ReviewsDAO {
     };
   };
 
-  static async updateReview(reviewId, userId, text, image, url, date) {
+  static async updateReview(reviewId, userId, title, text, imageName, imageUrl, date) {
     try {
       const updateResponse = await reviews.updateOne(
         {
@@ -57,9 +57,10 @@ class ReviewsDAO {
         {
           $set:
             {
+              title: title,
               text: text,
-              image: image,
-              url: url,
+              imageName: imageName,
+              imageUrl: imageUrl,
               date: date,
             },
         },

@@ -53,13 +53,13 @@ const Review = (props) => {
   };
 
   const handleFileChange = async (event) => {
-    //console.log(event.target.files[0]);
+    console.log(event.target.files[0]);
     if (!event.target.files || event.target.files.length === 0) {
       setImage([])
     }
 
     setImage(event.target.files);
-    console.log(image[0]);
+    //console.log(image[0]);
     const res = await fetch(`/api/v1/restaurants/review`, {
       method: "GET",
       headers: {
@@ -83,6 +83,8 @@ const Review = (props) => {
       imageFile: image[0],
       imageUrl: AWSUploadUrl.split('?')[0],
     }
+
+    console.log(data);
 
     if (editing) {
       data.review_id = props.location.state.currentReview._id;
@@ -146,41 +148,54 @@ const Review = (props) => {
                     {imagePreview ? image[0]?.name : defaultImageNameState}
                     {/* {defaultImageNameState} */}
                     <br/>
-                    <div className="upload__edit-button">
+                    <br/>
+                    <div className="review__photo-upload-button">
                       <label>
                         <input
                           id="imageFile"
-                          className="review__photo-upload-button"
                           type="file"
                           accept="image/*"
                           onChange={handleFileChange}
                         />
-                        <span className="upload__edit-button-text">Change</span>
+                        <span>Change Photo</span>
                       </label>
                     </div>
                     <br/>
+                    <br/>
                   </div>
               ) : (
-                <div>
-                  <label htmlFor="description">Add Photo</label>
+                <div className="review__photo-upload-button">
                   <br/>
                   {image && <img className="review__image-preview" src={imagePreview} />}
                   <br/>
-                  <input
-                  id="imageFile"
-                  className="review__photo-upload-button"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                  />
+                  {image && image[0]?.name}
+                  <br/>
+                  <br/>
+                  <label>
+                    <input
+                    id="imageFile"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    />
+                    <span>Add Photo</span>
+                  </label>
+                  <br/>
+                  <br/>
                 </div>
               )}
+              <br/>
               <button
                 className="review__submit-button"
                 onClick={saveReview}
               >
                 Submit
               </button>
+              <NavLink
+                className="review__cancel-button"
+                to={"/restaurant/" + props.match.params.id}>
+                  Cancel
+              </NavLink>
             </div>
           )}
         </div>

@@ -74,6 +74,7 @@ class ReviewsController {
     try {
       const reviewId = req.body.review_id;
       const user_id = req.body.user_id;
+      const title = req.body.title;
       const text = req.body.text;
       const date = new Date();
       const imageName = req.body.imageName;
@@ -82,6 +83,7 @@ class ReviewsController {
       const reviewResponse = await ReviewsDAO.updateReview(
         reviewId,
         user_id,
+        title,
         text,
         imageName,
         imageUrl,

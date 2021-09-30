@@ -180,6 +180,14 @@ export const updateReview = async (data) => {
 
     //const directUrl = postUrl.split('?')[0];
 
+    await fetch(AWSUploadUrl, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "multipart/form-data"
+      },
+      body: imageFile
+    });
+
     const body = {
       review_id,
       name,

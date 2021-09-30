@@ -13,18 +13,32 @@
 .review__image-preview {
   width: 10rem;
 }
-/* .review__photo-upload-button {
+
+.review__photo-upload-button {
   display: inline-block;
 }
 
 .review__photo-upload-button input[type=file]{
   display: none;
   margin-bottom: .5rem;
-} */
+}
+
+.review__photo-upload-button label {
+  text-decoration: none;
+  border: 2px solid #00483D;
+  border-radius: 4px;
+  margin: 0 5px;
+  padding: 3px 5px;
+  color: #FFFBF1;
+  background-color: #00483D;
+  font-size: 16px;
+  cursor: pointer;
+}
 
 .review__submit-button,
 .review__edit-link,
-.review__delete-link {
+.review__delete-link,
+.review__cancel-button {
   text-decoration: none;
   border: 2px solid #B21807;
   border-radius: 4px;
@@ -32,7 +46,9 @@
   padding: 3px 5px;
   color: #FFFBF1;
   background-color: #B21807;
+  font-family: inherit;
   font-size: 16px;
+  cursor: pointer;
   /* width: 2rem; */
 }
 
@@ -40,7 +56,15 @@
   padding: 3px 14.415px;
 }
 
+/* .review__submit-button {
+  padding: 6px
+} */
 
+.review__cancel-button {
+  padding-left: 6.65px;
+  padding-right: 6.65px;
+
+}
 
 .review-text {
   margin: 0 1rem;
