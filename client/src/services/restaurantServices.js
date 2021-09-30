@@ -127,8 +127,6 @@ export const addReview = async (data) => {
       imageUrl
     } = data;
 
-    //const directUrl = postUrl.split('?')[0];
-
     await fetch(AWSUploadUrl, {
       method: "PUT",
       headers: {
@@ -166,6 +164,14 @@ export const addReview = async (data) => {
 
 export const updateReview = async (data) => {
   try {
+    let imageName;
+    let imageUrl;
+
+    ({
+      imageName,
+      imageUrl
+    } = data);
+
     const {
       title,
       text,
@@ -173,20 +179,38 @@ export const updateReview = async (data) => {
       user_id,
       review_id,
       AWSUploadUrl,
-      imageName,
       imageFile,
-      imageUrl
+      originalImageUrl,
+      originalImageName,
     } = data;
 
-    //const directUrl = postUrl.split('?')[0];
+    if(imageFile) {
 
-    await fetch(AWSUploadUrl, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "multipart/form-data"
-      },
-      body: imageFile
-    });
+      const imageKey = originalImageUrl.split('/')[3];
+
+      try {
+        await fetch(`/api/v1/restaurants/review/image/${imageKey}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+      } catch (err) {
+        console.error(err);
+      }
+
+      await fetch(AWSUploadUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
+        body: imageFile
+      });
+    } else {
+      imageName = originalImageName;
+      imageUrl = originalImageUrl;
+    }
+
 
     const body = {
       review_id,

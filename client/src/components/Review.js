@@ -88,6 +88,8 @@ const Review = (props) => {
 
     if (editing) {
       data.review_id = props.location.state.currentReview._id;
+      data.originalImageUrl = defaultImageState;
+      data.originalImageName = defaultImageNameState;
       await updateReview(data);
       setSubmitted(true);
     } else {

@@ -28,4 +28,8 @@ router
   .put(ReviewsCtrl.apiUpdateReview)
   .delete(ReviewsCtrl.apiDeleteReview)
 
+router
+  .route("/restaurants/review/image/:imageKey")
+  .delete(ReviewsCtrl.apiDeleteAWSImage)
+
 module.exports = router;

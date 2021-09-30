@@ -2,6 +2,7 @@ const ReviewsDAO = require('../dao/reviewsDAO.js');
 const aws = require('aws-sdk');
 const crypto = require('crypto');
 const util = require('util');
+const { json } = require('express');
 const random = util.promisify(crypto.randomBytes);
 
 class ReviewsController {
@@ -39,6 +40,42 @@ class ReviewsController {
 
     } catch (err) {
       res.status(500).json({error: err.message});
+    }
+  }
+
+  static async apiDeleteAWSImage(req, res, next) {
+    try {
+      const region = 'us-east-1';
+      const bucketName = process.env.AWS_BUCKET_NAME;
+      const accessKeyId = process.env.AWS_KEY_ID;
+      const secretAccessKey = process.env.AWS_SECRET_KEY;
+      const imageKey = req.params.imageKey
+
+
+      const s3 = new aws.S3({
+        region,
+        accessKeyId,
+        secretAccessKey,
+        signatureVersion: 'v4'
+      })
+
+      const params = ({
+        Bucket: bucketName,
+        Key: imageKey
+      })
+
+      await s3.headObject(params).promise()
+
+      try {
+        await s3.deleteObject(params).promise()
+
+      } catch (err) {
+        res.status(500).json({ error: err.message })
+      }
+
+      res.json({ status: "success" });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
     }
   }
 
