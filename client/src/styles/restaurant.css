@@ -12,9 +12,12 @@
   border-bottom: 1px solid #CDCDCD;
 }
 
-.restaurant-review{
-  border-bottom: 1px solid #CDCDCD;
+.user-review,
+.restaurant-review {
   width: 100vh;
+}
+.restaurant-review {
+  border-bottom: 1px solid #CDCDCD;
 }
 
 .review__links-container {

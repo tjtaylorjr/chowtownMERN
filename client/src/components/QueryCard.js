@@ -44,7 +44,7 @@ const QueryCard = (props) => {
         const res = await addRestaurant(data);
         if(res.status === "success") {
           const newPayload = await getRestaurantId(api_id);
-          console.log(newPayload);
+          //console.log(newPayload);
           DB_ID = newPayload._id;
           // history.push({
           //   pathname: `/restaurant/${DB_ID}`,
@@ -61,7 +61,7 @@ const QueryCard = (props) => {
         };
 
       } else {
-        console.log(payload)
+        //console.log(payload)
         DB_ID = payload._id;
         // history.push({
         //   pathname: `/restaurant/${DB_ID}`,
