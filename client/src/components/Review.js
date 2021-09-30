@@ -139,13 +139,26 @@ const Review = (props) => {
               </div>
               {editing ? (
                   <div>
-                    <label htmlFor="description">Edit Photo</label>
+                    <label htmlFor="description">Current Photo</label>
                     <br/>
                     {imagePreview ? (<img className="review__image-preview" src={imagePreview} />) : (<img className="review__image-preview" src={defaultImageState} />)}
                     <br/>
-                    {defaultImageNameState}
+                    {imagePreview ? image[0]?.name : defaultImageNameState}
+                    {/* {defaultImageNameState} */}
                     <br/>
-                    <button>Edit</button>
+                    <div className="upload__edit-button">
+                      <label>
+                        <input
+                          id="imageFile"
+                          className="review__photo-upload-button"
+                          type="file"
+                          accept="image/*"
+                          onChange={handleFileChange}
+                        />
+                        <span className="upload__edit-button-text">Change</span>
+                      </label>
+                    </div>
+                    <br/>
                   </div>
               ) : (
                 <div>
