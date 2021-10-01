@@ -256,16 +256,18 @@ const AuthForm = (props) => {
                 >
                   Privacy Policy
                 </NavLink>
-                  <p style={{fontSize: "10px"}}>*Google login requires registered account</p>
               </div>
               {modalState.type === "Login" && (
-                <button
-                  className="auth-form__demo-button"
-                  type="submit"
-                  onClick={logInDemo}
-                >
-                  Demo
-                </button>
+                <>
+                  <p style={{fontSize: "10px"}}>*Google login requires registered account</p>
+                  <button
+                    className="auth-form__demo-button"
+                    type="submit"
+                    onClick={logInDemo}
+                  >
+                    Demo
+                  </button>
+                </>
               )}
             </form>
           </div>
