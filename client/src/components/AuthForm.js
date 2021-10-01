@@ -256,6 +256,7 @@ const AuthForm = (props) => {
                 >
                   Privacy Policy
                 </NavLink>
+                  <p style={{fontSize: "10px"}}>*Google login requires registered account</p>
               </div>
               {modalState.type === "Login" && (
                 <button

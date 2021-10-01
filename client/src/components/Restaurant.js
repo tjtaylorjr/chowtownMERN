@@ -30,13 +30,7 @@ const Restaurant = (props) => {
       if(review.user_id === props.user?._id) return review
     });
 
-    setCurrentReview(findUserReview)
-    // isReviewed = (() => {
-    //    return reviewList.some(function(review) {
-    //      return review.user_id === props.user._id;
-    //    });
-    // })();
-    //console.log(isReviewed)
+    setCurrentReview(findUserReview);
   }, [restaurantProfile])
 
   useEffect(() => {
@@ -73,7 +67,6 @@ const Restaurant = (props) => {
           <div className="restaurant__name">{restaurantProfile.name}</div>
           <p>
             <strong>Cuisine: </strong>{restaurantProfile.cuisine}<br/>
-            {/* <strong>Address: </strong>{restaurantProfile.address.building} {restaurantProfile.address.street}, {restaurantProfile.address.zipcode} */}
             <strong>Address: </strong>{restaurantProfile.address}<br/>
             <strong>Phone: </strong>{restaurantProfile.phone}
           </p>
@@ -123,19 +116,14 @@ const Restaurant = (props) => {
               Add Review
             </NavLink>
           }
-          {/* <NavLink
-            className="restaurant-review__add-link"
-            to={"/restaurant/" + props.match.params.id + "/review"}>
-            Add Review
-          </NavLink> */}
           {
-            restaurantProfile.reviews.length > 1 ?
-              currentReview ?
-                <h3>What others are saying</h3>
+            restaurantProfile.reviews.length >= 1 ?
+              currentReview && restaurantProfile.reviews.length === 1 ?
+                <></>
               :
                 <h3>What people are saying</h3>
             :
-              <></>
+              <h3>What people are saying</h3>
           }
           <div>
             {restaurantProfile.reviews.length > 0 ? (
@@ -161,24 +149,8 @@ const Restaurant = (props) => {
                         />}
                         <br/>
                         <br/>
-                        {/* <p>
-                          <strong><u>Review</u></strong>
-                        </p> */}
                         <div className="review-text">{review.text}</div>
                         <br/>
-
-                        {/* {props.user && props.user._id === review.user_id &&
-                          <div className="review__links-container">
-                            <a className="review__delete-link" href="#" onClick={() => removeReview(review._id, i)}>Delete</a>
-                          <NavLink
-                            className="review__edit-link"
-                            to={{pathname: "/restaurant/" + props.match.params.id + "/review",
-                              state: {
-                                currentReview: review
-                              }
-                            }}>Edit</NavLink>
-                          </div>
-                        } */}
                       </div>
                     </div>
                   </div>
