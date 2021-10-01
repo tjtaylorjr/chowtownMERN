@@ -9,7 +9,7 @@ const Restaurant = (props) => {
     name: "",
     address: "",
     phone: "",
-    rating: 0,
+    avgRating: 0,
     cuisine: "",
     reviews: []
   };
@@ -37,14 +37,14 @@ const Restaurant = (props) => {
     if (currentReview) {
       isReviewed = true;
     }
-    console.log(currentReview)
-    console.log(isReviewed)
+    //console.log(currentReview)
+    //console.log(isReviewed)
   },[currentReview])
 
   const fetchRestaurant = async (id) => {
     const resInfo = await getRestaurantById(id);
     if(resInfo) {
-      console.log(resInfo)
+      //console.log(resInfo)
       setRestaurantProfile(resInfo);
     };
   };
@@ -65,7 +65,18 @@ const Restaurant = (props) => {
     <div className="restaurant">
       {restaurantProfile ? (
         <div className="restaurant-container">
-          <div className="restaurant__name">{restaurantProfile.name}</div>
+          <div className="restaurant__name">
+            {restaurantProfile.name}
+            <span> </span>
+            <br/>
+            <div style={{fontSize: "14px"}}>Average User Rating:
+              <span> </span>
+              <StarRatingDisplay rating={restaurantProfile.avgRating} />
+              <span> </span>
+              {`(${restaurantProfile.avgRating ? restaurantProfile.avgRating : 0} stars)`}
+            </div>
+          </div>
+          {/* <br/> */}
           <p>
             <strong>Cuisine: </strong>{restaurantProfile.cuisine}<br/>
             <strong>Address: </strong>{restaurantProfile.address}<br/>
