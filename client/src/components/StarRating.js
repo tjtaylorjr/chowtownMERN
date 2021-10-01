@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { BsStar } from 'react-icons/bs';
 
 const StarRating = () => {
   const [score, setScore] = useState(0);
 
   return (
-    <div>
+    <div className="star-rating">
       {[...Array(5)].map((star, i) => {
 
         i += 1;
@@ -17,7 +16,6 @@ const StarRating = () => {
             className={i <= score ? "on" : "off"}
             onClick={() => setScore(i)}
           >
-            <BsStar />
           </button>
         );
       })}

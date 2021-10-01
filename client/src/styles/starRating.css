@@ -1,0 +1,23 @@
+.star-rating button {
+  display: inline-block;
+  position: relative;
+  font-family: "Font Awesome 5 Free";
+  font-size: 22px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+
+}
+
+.on::before {
+  content: "\f005";
+  color: #B21807;
+  font-weight: 900;
+}
+
+.off::before {
+  content: "\f005";
+  color: lightgrey;
+}
