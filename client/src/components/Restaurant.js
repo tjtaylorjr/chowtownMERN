@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { deleteReview, getRestaurantById } from '../services/restaurantServices.js';
 import { NavLink } from 'react-router-dom';
-import StarRating from './StarRatingSelection';
+import StarRatingDisplay from './StarRatingDisplay';
 
 const Restaurant = (props) => {
   const defaultState = {
@@ -84,6 +84,7 @@ const Restaurant = (props) => {
                 <div>
                   <div>
                     <h4>{currentReview.title}</h4>
+                    <StarRatingDisplay rating={currentReview.rating}/>
                     {currentReview.rating}
                     <br/>
                     <br/>
@@ -144,21 +145,25 @@ const Restaurant = (props) => {
                   <div className="restaurant-review" key={i}>
                     <div>
                       <div>
+                        <p>
+                          <strong>User: </strong>{review.name}
+                          <br />
+                          <strong>Date: </strong>{new Date(review.date).toLocaleString()}
+                          <br />
+                        </p>
                         <h4>{review.title}</h4>
-                        {review.rating}
+                        <StarRatingDisplay rating={review.rating}/>
                         <br/>
                         <br/>
                         {review.imageUrl && <img
                           className="review-image"
                           src={review.imageUrl}
                         />}
-                        <p>
-                          <strong>User: </strong>{review.name}
-                          <br/>
-                          <strong>Date: </strong>{new Date(review.date).toLocaleString()}
-                          <br/>
+                        <br/>
+                        <br/>
+                        {/* <p>
                           <strong><u>Review</u></strong>
-                        </p>
+                        </p> */}
                         <div className="review-text">{review.text}</div>
                         <br/>
 
