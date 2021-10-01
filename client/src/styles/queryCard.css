@@ -3,7 +3,6 @@
   background-color: #FFFFFF;
   margin: 2px;
   border: 1px solid #D8D9DB;
-  /* text-align: center; */
 }
 
 .query-card__wrapper {
@@ -54,50 +53,6 @@
   font-weight: 500;
   font-size: 18px;
 }
-
-.rating-stars {
-  display: inline-block;
-  position: relative;
-  font-family: "Font Awesome 5 Free";
-  font-size: 22px;
-  width: 123.75px;
-}
-
-.rating-stars::before {
-  content: "\f005 \f005 \f005 \f005 \f005";
-  color: lightgray;
-}
-
-.rating-stars__fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 0;
-}
-
-.rating-stars__fill::before {
-  content: "\f005 \f005 \f005 \f005 \f005";
-  color: #B21807;
-  font-weight: 900;
-
-}
-
-/* .query-card__navigation-link,
-.query-card__map-link {
-  text-decoration: none;
-  border: 1px solid #CDCDCD;
-  border-radius: 5px;
-  padding: 8px;
-  margin: 0 5px;
-  color: #333333;
-  background-color: green;
-}
-
-.query-card__map-link {
-  padding: 8px 20.5px;
-} */
 
 .query-card__review-button {
   text-decoration: none;
