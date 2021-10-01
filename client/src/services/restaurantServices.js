@@ -45,22 +45,22 @@ export const getRestaurantById = async (id) => {
   };
 }
 
-export const findRestaurants = async (query, by, page = 0) => {
-  try {
-    const res = await fetch(`/api/v1/restaurants?${by}=${query}&page=${page}`, {
-      "Content-type": "application/json",
-    });
-    if (!res.ok) {
-      throw res;
-    }
-    const payload = await res.json();
-    return payload.restaurants;
-  } catch (err) {
-    console.error(err);
-  };
-}
+// export const findRestaurants = async (query, by, page = 0) => {
+//   try {
+//     const res = await fetch(`/api/v1/restaurants?${by}=${query}&page=${page}`, {
+//       "Content-type": "application/json",
+//     });
+//     if (!res.ok) {
+//       throw res;
+//     }
+//     const payload = await res.json();
+//     return payload.restaurants;
+//   } catch (err) {
+//     console.error(err);
+//   };
+// }
 
-export const findYelpRestaurants = async (searchInput, lat, lon, page = 0) => {
+export const findRestaurants = async (searchInput, lat, lon, page = 0) => {
   try {
     const res = await fetch(`/api/v1/restaurants/search?q=${searchInput}&lat=${lat}&lon=${lon}&page=${page}`, {
       "Content-type": "application/json",

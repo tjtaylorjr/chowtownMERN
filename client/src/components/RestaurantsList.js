@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAllRestaurants, getCuisines, findRestaurants, findYelpRestaurants } from '../services/restaurantServices.js';
+import { findRestaurants } from '../services/restaurantServices.js';
 import { getGeoApi } from '../services/userServices.js';
 import QueryCard from './QueryCard';
 import BusinessCard from './BusinessCard';
@@ -51,7 +51,7 @@ const RestaurantsList = (props) => {
     }
     const result = await geoInfo.json();
     const {lat, lon} = result[0];
-    const payload = await findYelpRestaurants(searchInput, lat, lon);
+    const payload = await findRestaurants(searchInput, lat, lon);
     if (payload) {
       console.log(payload);
       setRestaurants(payload);
