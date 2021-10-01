@@ -84,6 +84,9 @@ const Restaurant = (props) => {
                 <div>
                   <div>
                     <h4>{currentReview.title}</h4>
+                    {currentReview.rating}
+                    <br/>
+                    <br/>
                     {currentReview.imageUrl && <img
                       className="review-image"
                       src={currentReview.imageUrl}
@@ -142,6 +145,9 @@ const Restaurant = (props) => {
                     <div>
                       <div>
                         <h4>{review.title}</h4>
+                        {review.rating}
+                        <br/>
+                        <br/>
                         {review.imageUrl && <img
                           className="review-image"
                           src={review.imageUrl}

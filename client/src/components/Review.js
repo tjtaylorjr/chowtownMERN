@@ -9,6 +9,7 @@ const Review = (props) => {
   let defaultReviewTitleState = "";
   let defaultImageNameState = "";
   let defaultImageState = "";
+  let defaultRating = 0;
   let editing = false;
   const fileInput = useRef(null);
 
@@ -17,6 +18,7 @@ const Review = (props) => {
     defaultReviewTitleState = props.location.state.currentReview.title
     defaultImageNameState = props.location.state.currentReview.imageName
     defaultImageState = props.location.state.currentReview.imageUrl
+    defaultRating = props.location.state.currentReview.rating
     editing = true;
   }
 
@@ -26,7 +28,7 @@ const Review = (props) => {
   const [imagePreview, setImagePreview] = useState(defaultImageState);
   const [submitted, setSubmitted] = useState(false);
   const [AWSUploadUrl, setAWSUploadUrl] = useState("");
-  const [score, setScore] =useState(0);
+  const [rating, setRating] = useState(defaultRating);
 
   // useEffect(() => {
   //   if(editing) {
@@ -84,7 +86,7 @@ const Review = (props) => {
       imageName: image[0]?.name,
       imageFile: image[0],
       imageUrl: AWSUploadUrl.split('?')[0],
-      score
+      rating: parseInt(rating)
     }
 
     console.log(data);
@@ -144,7 +146,7 @@ const Review = (props) => {
                   placeholder="Add review text here"
                 />
               </div>
-              <StarRatingSelection score={score} setScore={setScore}/>
+              <StarRatingSelection rating={rating} setRating={setRating}/>
               {editing ? (
                   <div>
                     <label htmlFor="description">Current Photo</label>

@@ -124,7 +124,8 @@ export const addReview = async (data) => {
       AWSUploadUrl,
       imageName,
       imageFile,
-      imageUrl
+      imageUrl,
+      rating
     } = data;
 
     await fetch(AWSUploadUrl, {
@@ -142,7 +143,8 @@ export const addReview = async (data) => {
       title,
       text,
       imageName,
-      imageUrl
+      imageUrl,
+      rating
     };
 
     const res = await fetch(`/api/v1/restaurants/review`, {
@@ -180,6 +182,7 @@ export const updateReview = async (data) => {
       review_id,
       AWSUploadUrl,
       imageFile,
+      rating,
       originalImageUrl,
       originalImageName,
     } = data;
@@ -219,7 +222,8 @@ export const updateReview = async (data) => {
       title,
       text,
       imageName,
-      imageUrl
+      imageUrl,
+      rating
     };
     const res = await fetch(`/api/v1/restaurants/review`, {
       method: "PUT",

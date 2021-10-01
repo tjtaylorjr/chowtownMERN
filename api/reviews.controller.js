@@ -89,6 +89,7 @@ class ReviewsController {
       const date = new Date();
       const imageName = req.body.imageName;
       const imageUrl = req.body.imageUrl;
+      const rating = req.body.rating;
 
       const reviewResponse = await ReviewsDAO.addReview(
         restaurantId,
@@ -98,6 +99,7 @@ class ReviewsController {
         text,
         imageName,
         imageUrl,
+        rating,
         date
       );
 
@@ -116,6 +118,7 @@ class ReviewsController {
       const date = new Date();
       const imageName = req.body.imageName;
       const imageUrl = req.body.imageUrl;
+      const rating = req.body.rating;
 
       const reviewResponse = await ReviewsDAO.updateReview(
         reviewId,
@@ -124,6 +127,7 @@ class ReviewsController {
         text,
         imageName,
         imageUrl,
+        rating,
         date,
       );
 

@@ -17,7 +17,7 @@ class ReviewsDAO {
     };
   };
 
-  static async addReview(restaurantId, name, user_id, title, text, imageName, imageUrl, date) {
+  static async addReview(restaurantId, name, user_id, title, text, imageName, imageUrl, rating, date) {
     try {
       // const reviewDoc = {
       //   name: name,
@@ -37,6 +37,7 @@ class ReviewsDAO {
         text,
         imageName,
         imageUrl,
+        rating,
         restaurant_id: ObjectId(restaurantId)
       };
 
@@ -47,7 +48,7 @@ class ReviewsDAO {
     };
   };
 
-  static async updateReview(reviewId, userId, title, text, imageName, imageUrl, date) {
+  static async updateReview(reviewId, userId, title, text, imageName, imageUrl, rating, date) {
     try {
       const updateResponse = await reviews.updateOne(
         {
@@ -61,6 +62,7 @@ class ReviewsDAO {
               text: text,
               imageName: imageName,
               imageUrl: imageUrl,
+              rating: rating,
               date: date,
             },
         },

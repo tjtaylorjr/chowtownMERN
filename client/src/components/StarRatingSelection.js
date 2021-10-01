@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 
-const StarRatingSelection = ({score, setScore}) => {
-  // const [score, setScore] = useState(0);
+const StarRatingSelection = ({rating, setRating}) => {
   const [hover, setHover] = useState(0);
 
   const assignScore = (event) => {
-    const rating = event.target.value;
-    if(rating === score && score !== 0 ) {
-      setScore(score - 1);
+    const starRating = event.target.value;
+    if(starRating === rating && rating !== 0 ) {
+      setRating(rating - 1);
     } else {
-      setScore(rating);
+      setRating(starRating);
     }
   }
 
@@ -24,10 +23,10 @@ const StarRatingSelection = ({score, setScore}) => {
             type="button"
             key={i}
             value={i}
-            className={i <= (hover || score) ? "on" : "off"}
+            className={i <= (hover || rating) ? "on" : "off"}
             onClick={assignScore}
             onMouseEnter={() => setHover(i)}
-            onMouseLeave={() => setHover(score)}
+            onMouseLeave={() => setHover(rating)}
           >
           </button>
         );
