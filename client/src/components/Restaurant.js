@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { deleteReview, getRestaurantById } from '../services/restaurantServices.js';
 import { NavLink } from 'react-router-dom';
-import StarRating from './StarRating';
+import StarRating from './StarRatingSelection';
 
 const Restaurant = (props) => {
   const defaultState = {
@@ -68,7 +68,6 @@ const Restaurant = (props) => {
 
   return (
     <div className="restaurant">
-      <StarRating />
       {restaurantProfile ? (
         <div className="restaurant-container">
           <div className="restaurant__name">{restaurantProfile.name}</div>

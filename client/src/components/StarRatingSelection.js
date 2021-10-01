@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const StarRating = () => {
+const StarRatingSelection = () => {
   const [score, setScore] = useState(0);
   const [hover, setHover] = useState(0);
 
@@ -14,7 +14,7 @@ const StarRating = () => {
   }
 
   return (
-    <div className="star-rating">
+    <div className="star-rating-selection">
       {[...Array(5)].map((star, i) => {
 
         i += 1;
@@ -36,4 +36,4 @@ const StarRating = () => {
   );
 };
 
-export default StarRating;
+export default StarRatingSelection;
