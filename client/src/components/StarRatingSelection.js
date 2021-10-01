@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const StarRatingSelection = () => {
-  const [score, setScore] = useState(0);
+const StarRatingSelection = ({score, setScore}) => {
+  // const [score, setScore] = useState(0);
   const [hover, setHover] = useState(0);
 
   const assignScore = (event) => {
@@ -9,7 +9,7 @@ const StarRatingSelection = () => {
     if(rating === score && score !== 0 ) {
       setScore(score - 1);
     } else {
-      setScore(rating)
+      setScore(rating);
     }
   }
 

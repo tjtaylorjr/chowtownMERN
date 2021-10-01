@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { updateReview, addReview } from '../services/restaurantServices';
 import { NavLink } from 'react-router-dom';
+import StarRatingSelection from './StarRatingSelection';
 //import S3 from 'react-aws-s3';
 
 const Review = (props) => {
@@ -25,6 +26,7 @@ const Review = (props) => {
   const [imagePreview, setImagePreview] = useState(defaultImageState);
   const [submitted, setSubmitted] = useState(false);
   const [AWSUploadUrl, setAWSUploadUrl] = useState("");
+  const [score, setScore] =useState(0);
 
   // useEffect(() => {
   //   if(editing) {
@@ -82,6 +84,7 @@ const Review = (props) => {
       imageName: image[0]?.name,
       imageFile: image[0],
       imageUrl: AWSUploadUrl.split('?')[0],
+      score
     }
 
     console.log(data);
@@ -141,6 +144,7 @@ const Review = (props) => {
                   placeholder="Add review text here"
                 />
               </div>
+              <StarRatingSelection score={score} setScore={setScore}/>
               {editing ? (
                   <div>
                     <label htmlFor="description">Current Photo</label>
