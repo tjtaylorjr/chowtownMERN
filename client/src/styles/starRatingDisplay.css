@@ -1,0 +1,28 @@
+.star-rating-display {
+  display: inline-block;
+  position: relative;
+  font-family: "Font Awesome 5 Free";
+  font-size: 22px;
+  width: 123.75px;
+}
+
+.star-rating-display::before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  color: lightgray;
+}
+
+.star-rating-display__fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.star-rating-display__fill::before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  color: #B21807;
+  font-weight: 900;
+
+}

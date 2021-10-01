@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import StarRatingDisplay from './StarRatingDisplay';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { getRestaurantId, addRestaurant } from '../services/restaurantServices.js';
 
@@ -21,11 +22,11 @@ const QueryCard = (props) => {
      }).filter(i => i !== undefined).join(', ');
 
 
-  useEffect(() => {
-    const starPercentage = (rating / 5) * 100;
-    const roundedStarPercentage = `${(Math.round(starPercentage / 10) * 10)}%`;
-    starRef.current.style.width = roundedStarPercentage;
-  },[props.restaurant])
+  // useEffect(() => {
+  //   const starPercentage = (rating / 5) * 100;
+  //   const roundedStarPercentage = `${(Math.round(starPercentage / 10) * 10)}%`;
+  //   starRef.current.style.width = roundedStarPercentage;
+  // },[props.restaurant])
 
   const checkRecord = async () => {
     let DB_ID;
@@ -130,9 +131,10 @@ const QueryCard = (props) => {
               </div>
             </div>
             <div className="query-card__link-container">
-              <div className="rating-stars">
+              {/* <div className="rating-stars">
                 <div className="rating-stars__fill" ref={starRef}></div>
-              </div>
+              </div> */}
+              <StarRatingDisplay rating={rating}/>
               <button
                 type="button"
                 onClick={checkRecord}
