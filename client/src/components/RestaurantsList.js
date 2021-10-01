@@ -42,7 +42,8 @@ const RestaurantsList = (props) => {
     setSearchInput(input);
   };
 
-  const search = async () => {
+  const search = async (event) => {
+    event.preventDefault()
     const geoApi = await getGeoApi();
     const geoInfo = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${location},us&limit=1&appid=${geoApi}`);
     if (!geoInfo.ok) {
@@ -88,7 +89,9 @@ const RestaurantsList = (props) => {
   return (
     <div className="restaurants-list">
       <div className="restaurant-list__search-bar">
-        <form className="search-form" >
+        <form
+          className="search-form"
+          onSubmit={search}>
           <input
             type="text"
             className="search-form__input"
@@ -106,8 +109,7 @@ const RestaurantsList = (props) => {
           <div className="search-form__submit-button-container">
             <button
               className="search-form__submit-button"
-              type="button"
-              onClick={search}
+              type="submit"
             >
               Search
             </button>
