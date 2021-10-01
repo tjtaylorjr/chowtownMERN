@@ -6,7 +6,6 @@ import { FaMapMarkerAlt } from 'react-icons/fa';
 import { getRestaurantId, addRestaurant } from '../services/restaurantServices.js';
 
 const QueryCard = (props) => {
-  //const [DB_ID, setDB_ID] = useState("000000000000");
   const { location, categories, display_phone, distance, id, name, image_url, rating } = props.restaurant;
   const starRef = useRef(null);
   const history = useHistory();
@@ -20,13 +19,6 @@ const QueryCard = (props) => {
   const offerings = categories.map(object => {
       return object.title
      }).filter(i => i !== undefined).join(', ');
-
-
-  // useEffect(() => {
-  //   const starPercentage = (rating / 5) * 100;
-  //   const roundedStarPercentage = `${(Math.round(starPercentage / 10) * 10)}%`;
-  //   starRef.current.style.width = roundedStarPercentage;
-  // },[props.restaurant])
 
   const checkRecord = async () => {
     let DB_ID;
@@ -45,57 +37,18 @@ const QueryCard = (props) => {
         const res = await addRestaurant(data);
         if(res.status === "success") {
           const newPayload = await getRestaurantId(api_id);
-          //console.log(newPayload);
           DB_ID = newPayload._id;
-          // history.push({
-          //   pathname: `/restaurant/${DB_ID}`,
-          //   state: {
-          //     DB_ID,
-          //     formattedAddress,
-          //     offerings,
-          //     rating,
-          //     name,
-          //     display_phone
-          //   }
-          // })
-          //history.push(`/restaurant/${DB_ID}`);
         };
 
       } else {
-        //console.log(payload)
         DB_ID = payload._id;
-        // history.push({
-        //   pathname: `/restaurant/${DB_ID}`,
-        //   state: {
-        //     DB_ID,
-        //     formattedAddress,
-        //     offerings,
-        //     rating,
-        //     name,
-        //     display_phone,
-        //   }
-        // })
       }
+
       history.push(`/restaurant/${DB_ID}`);
     } catch (err) {
       console.error(`Unable to check records: ${err}`);
     }
   };
-
-  // useEffect(() => {
-  //   history.push({
-  //     pathname: `/restaurant/${DB_ID}`,
-  //     state: {
-  //       DB_ID,
-  //       formattedAddress,
-  //       offerings,
-  //       rating,
-  //       name,
-  //       display_phone,
-  //     }
-  //   })
-  // },[DB_ID])
-  // console.log(DB_ID);
 
   return (
     <>
@@ -131,9 +84,6 @@ const QueryCard = (props) => {
               </div>
             </div>
             <div className="query-card__link-container">
-              {/* <div className="rating-stars">
-                <div className="rating-stars__fill" ref={starRef}></div>
-              </div> */}
               <StarRatingDisplay rating={rating}/>
               <button
                 type="button"
