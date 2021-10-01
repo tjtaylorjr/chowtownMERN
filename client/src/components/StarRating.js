@@ -1,7 +1,15 @@
 import React, { useState } from "react";
-
+import { BsStar } from 'react-icons/bs';
 const StarRating = () => {
-  return (<p>This is a star rating component</p>);
+  return (
+    <div>
+      {[...Array(5)].map((star) => {
+        return (
+          <BsStar />
+        );
+      })}
+    </div>
+  );
 };
 
 export default StarRating;
