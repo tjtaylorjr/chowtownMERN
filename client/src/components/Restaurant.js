@@ -44,6 +44,7 @@ const Restaurant = (props) => {
   const fetchRestaurant = async (id) => {
     const resInfo = await getRestaurantById(id);
     if(resInfo) {
+      console.log(resInfo)
       setRestaurantProfile(resInfo);
     };
   };

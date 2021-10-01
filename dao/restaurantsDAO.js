@@ -125,6 +125,13 @@ class RestaurantsDAO {
                 reviews: "$reviews",
               },
           },
+          {
+            $addFields:
+              {
+                avgRating:
+                  { $avg: "$reviews.rating"}
+              }
+          }
         ];
 
       return await restaurants.aggregate(pipeline).next();
