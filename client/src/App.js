@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Footer from './components/Footer';
 import Home from './components/Home';
@@ -12,10 +12,19 @@ import TOS from './components/TermsOfService';
 const App = () => {
 
   const [user, setUser] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if(user) {
+      setIsLoggedIn(true)
+    } else {
+      setIsLoggedIn(false)
+    }
+  },[user])
 
   return (
     <div className="app">
-      <NavBar setUser={setUser} />
+      <NavBar setUser={setUser} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
       <div className="main-page">
         <Switch>
           <Route

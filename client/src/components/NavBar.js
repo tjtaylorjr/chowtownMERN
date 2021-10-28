@@ -9,9 +9,9 @@ import brandName from '../assets/brand.png';
 
 const NavBar = (props) => {
   const[isLoaded, setIsLoaded] = useState(false);
-  const[isLoggedIn, setIsLoggedIn] = useState(false);
+  // const[isLoggedIn, setIsLoggedIn] = useState(false);
   //const[modalState, setModalState] = useState({type: "Login"})
-  const { setUser } = props;
+  const { setUser, isLoggedIn, setIsLoggedIn } = props;
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector(state => state.auth.user);
@@ -21,12 +21,12 @@ const NavBar = (props) => {
   useEffect(() => {
     if (jwt) {
       dispatch(restore(jwt, history))
-      setIsLoggedIn(true);
       setUser(jwt.result);
+      // setIsLoggedIn(true);
     } else {
-      setIsLoggedIn(false);
+      // setIsLoggedIn(false);
     }
-  },[]);
+  },[isLoggedIn]);
 
   if (isLoggedIn) {
 
