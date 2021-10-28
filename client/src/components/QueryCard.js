@@ -84,7 +84,7 @@ const QueryCard = (props) => {
               </div>
             </div>
             <div className="query-card__link-container">
-              {/* <StarRatingDisplay rating={rating}/> */}
+              <StarRatingDisplay rating={rating}/>
               <button
                 type="button"
                 onClick={checkRecord}
