@@ -8,11 +8,12 @@ const setLoginState = (user) => {
   }
 };
 
-export const login = ( userInfo, history, setShowModal ) => async (dispatch) => {
+export const login = ( userInfo, history, setShowModal, setIsLoggedIn ) => async (dispatch) => {
   try {
     const user = await authorizeUser(userInfo);
     dispatch(setLoginState({...user}));
     setShowModal(false);
+    setIsLoggedIn(true);
     history.push('/');
   } catch (err) {
     console.error(`Authentication failure: ${err}`);
@@ -37,7 +38,7 @@ export const googleLogin = ( userInfo, history, setShowModal, setIsLoggedIn ) =>
   };
 }
 
-export const signup = ( userInfo, history, setShowModal ) => async (dispatch) => {
+export const signup = ( userInfo, history, setShowModal, setIsLoggedIn ) => async (dispatch) => {
   try {
     const res = await registerUser(userInfo);
     //console.log(res)
@@ -47,6 +48,7 @@ export const signup = ( userInfo, history, setShowModal ) => async (dispatch) =>
       const user = await authorizeUser(userInfo);
       dispatch(setLoginState({...user}));
       setShowModal(false);
+      setIsLoggedIn(true);
       history.push('/');
     }
   } catch (err) {

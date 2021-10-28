@@ -67,8 +67,8 @@ const AuthForm = (props) => {
           username: "",
           password: "password",
         }
-        dispatch(login(demoInfo, history, setShowModal));
-        setIsLoggedIn(true);
+        dispatch(login(demoInfo, history, setShowModal, setIsLoggedIn));
+        // setIsLoggedIn(true);
       } catch (err) {
         console.error(err)
       }
@@ -101,16 +101,16 @@ const AuthForm = (props) => {
     event.preventDefault();
     if(modalState.type === "Login") {
       try {
-        dispatch(login(userInfo, history, setShowModal));
-        setIsLoggedIn(true);
+        dispatch(login(userInfo, history, setShowModal, setIsLoggedIn));
+        // setIsLoggedIn(true);
       }catch(err) {
         console.error(err)
       }
     }
     if(modalState.type === "Signup") {
       try {
-        dispatch(signup(userInfo, history, setShowModal));
-        setIsLoggedIn(true);
+        dispatch(signup(userInfo, history, setShowModal, setIsLoggedIn));
+        // setIsLoggedIn(true);
       } catch(err) {
         console.error(err)
       }
