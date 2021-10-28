@@ -102,7 +102,7 @@ const RestaurantsList = (props) => {
           <input
             type="text"
             className="search-form__input"
-            placeholder="City, State Code"
+            placeholder="New York, NY OR 10001"
             value={location}
             onChange={onChangeQueryLocation}
           />
