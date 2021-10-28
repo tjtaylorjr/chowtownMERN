@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { deleteReview, getRestaurantById } from '../services/restaurantServices.js';
+import { deleteReview, getExternalReviews, getRestaurantById } from '../services/restaurantServices.js';
 import { NavLink } from 'react-router-dom';
 import StarRatingDisplay from './StarRatingDisplay';
+
 
 const Restaurant = (props) => {
   const defaultState = {
@@ -19,6 +20,11 @@ const Restaurant = (props) => {
 
   const [restaurantProfile, setRestaurantProfile] = useState(defaultState);
   const [currentReview, setCurrentReview] = useState();
+
+  useEffect(() => {
+    fetchExternalReviews(props.location.state.api_id)
+    // console.log(props.location.state.api_id)
+  }, [props.location.state.api_id])
 
   useEffect(() => {
     fetchRestaurant(props.match.params.id);
@@ -48,6 +54,12 @@ const Restaurant = (props) => {
       setRestaurantProfile(resInfo);
     };
   };
+
+  const fetchExternalReviews = async (api_id) => {
+    const externalReviewCheck = await getExternalReviews(api_id);
+    
+
+  }
 
   const removeReview = async (reviewId) => {
     const i = restaurantProfile.reviews.findIndex((review) => review._id === reviewId);

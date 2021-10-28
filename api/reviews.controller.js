@@ -2,8 +2,13 @@ const ReviewsDAO = require('../dao/reviewsDAO.js');
 const aws = require('aws-sdk');
 const crypto = require('crypto');
 const util = require('util');
+const api = require('yelp-fusion');
+const dotenv = require('dotenv');
 const { json } = require('express');
+dotenv.config()
 const random = util.promisify(crypto.randomBytes);
+const apiKey = process.env.API_KEY;
+const client = api.client(apiKey);
 
 class ReviewsController {
   static async apiGetS3Url(req, res, next) {
@@ -74,6 +79,23 @@ class ReviewsController {
       }
 
       res.json({ status: "success" });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+
+  static async apiGetExternalReviews(req, res, next) {
+    try {
+      const api_id = req.params.api_id;
+
+      client.reviews(api_id).then(response => {
+        console.log(response.jsonBody.reviews);
+        console.log(response.jsonBody.reviews[0].text);
+        res.json({ status: "success"});
+      }).catch(e => {
+        console.log(e);
+      });
+
     } catch (err) {
       res.status(500).json({ error: err.message });
     }

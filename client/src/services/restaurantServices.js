@@ -112,6 +112,23 @@ export const addRestaurant = async (data) => {
   }
 };
 
+export const getExternalReviews = async (api_id) => {
+  try {
+    const res = await fetch(`/api/v1/restaurants/review/external/${api_id}`, {
+      "Content-Type": "application/json",
+    });
+
+    if (!res.ok) {
+      throw res;
+    }
+    const payload = await res.json();
+    return payload;
+  } catch (err) {
+    console.error(`Unable to check external reviews: ${err}`);
+  };
+
+}
+
 export const addReview = async (data) => {
   try {
     console.log(data);

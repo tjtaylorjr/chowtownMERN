@@ -28,6 +28,10 @@ router
   .delete(ReviewsCtrl.apiDeleteReview)
 
 router
+  .route("/restaurants/review/external/:api_id")
+  .get(ReviewsCtrl.apiGetExternalReviews)
+
+router
   .route("/restaurants/review/image/:imageKey")
   .delete(ReviewsCtrl.apiDeleteAWSImage)
 

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import StarRatingDisplay from './StarRatingDisplay';
 import { FaMapMarkerAlt } from 'react-icons/fa';
-import { getRestaurantId, addRestaurant } from '../services/restaurantServices.js';
+import { getRestaurantId, getRestaurantById, addRestaurant } from '../services/restaurantServices.js';
 
 const QueryCard = (props) => {
   const { location, categories, display_phone, distance, id, name, image_url, rating } = props.restaurant;
@@ -44,7 +44,10 @@ const QueryCard = (props) => {
         DB_ID = payload._id;
       }
 
-      history.push(`/restaurant/${DB_ID}`);
+      history.push({
+        pathname: `/restaurant/${DB_ID}`,
+        state: {api_id}
+      });
     } catch (err) {
       console.error(`Unable to check records: ${err}`);
     }
